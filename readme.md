@@ -1,3 +1,3 @@
 # Wikiditor
 
-## test
+## Ce document explique le fonctionnement du site.
