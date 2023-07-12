@@ -17,13 +17,13 @@ class File
     #[MongoDB\Field(type: 'string')]
     private string $content;
 
-    #[MongoDB\Field(type: 'datetime')]
+    #[MongoDB\Field(type: 'date')]
     private \DateTime $creationDate;
 
-    #[MongoDB\Field(type: 'datetime')]
+    #[MongoDB\Field(type: 'date')]
     private \DateTime $saveDate;
 
-    #[MongoDB\Id]
+    #[MongoDB\UserId]
     private string $userId;
 
     public function getId(): string
