@@ -23,7 +23,7 @@ class File
     #[MongoDB\Field(type: 'date')]
     private \DateTime $saveDate;
 
-    #[MongoDB\UserId]
+    // #[MongoDB\UserId]
     private string $userId;
 
     public function getId(): string
@@ -36,6 +36,9 @@ class File
 
         return $this;
     }
+
+  
+
 
 
     public function getTitle(): string
