@@ -19,13 +19,17 @@
 </div>
 
 {# charge le contenu de l'article récupéré via l'api#}
-<div>
-    <h1> {{ title }}  </h1>
-    <p>  
+<section>
+    <article>
+        <h1> {{ title }}  </h1>
         {{ extract }}  
-    </p>    
 
-</div>
+    </article>
+
+    <aside>
+        <textarea name="" id="" cols="30" rows="10"></textarea>
+    </aside>
+</section>
 
 
 {% endblock %}

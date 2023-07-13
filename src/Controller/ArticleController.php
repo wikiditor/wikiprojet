@@ -7,6 +7,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpClient\HttpClient;
 
+
+
 class ArticleController extends AbstractController
 {
        
@@ -40,7 +42,6 @@ class ArticleController extends AbstractController
         return $this->render('article/index.html.twig', [
             'title' => $title,            
             'extract' => $extract,
-            
         ]);
     }
 }
