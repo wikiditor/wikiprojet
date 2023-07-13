@@ -9,7 +9,7 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+  
 
     This friendly message is coming from:
     <ul>
@@ -17,4 +17,15 @@
         <li>Your template at <code><a href="{{ '/Applications/MAMP/htdocs/public/wikiprojet/templates/article/index.html.twig'|file_link(0) }}">templates/article/index.html.twig</a></code></li>
     </ul>
 </div>
+
+{# charge le contenu de l'article récupéré via l'api#}
+<div>
+    <h1> {{ title }}  </h1>
+    <p>  
+        {{ extract }}  
+    </p>    
+
+</div>
+
+
 {% endblock %}
