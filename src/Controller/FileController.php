@@ -10,19 +10,27 @@ use Symfony\Component\Routing\Annotation\Route;
 class FileController extends AbstractController
 {
     #[Route('/', name: 'app_file')]
+    /**
+     * affiche le wikiditor
+     *
+     * @return Response
+     */
     public function index(): Response
     {
         return $this->render('file/index.html.twig', [
             'controller_name' => 'FileController',
         ]);
+    }    
+ 
+
+    #[Route('/list', name: 'app_file_list')]
+    public function getListFiles(): Response
+    {
+        return $this->render('file/list.html.twig', [
+            'controller_name' => 'Liste des fichiers',
+        ]);
     }
 
-    // #[Route('/file/list', name: 'app_file_list')]
-    // public function getListFiles(): Response
-    // {
-    //     return $this->render('file/index.html.twig', [
-    //         'controller_name' => 'FileController',
-    //     ]);
-    // }
-
+    
+   
 }
