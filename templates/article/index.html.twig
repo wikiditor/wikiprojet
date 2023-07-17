@@ -43,8 +43,15 @@ document.addEventListener("DOMContentLoaded", (e) => {
         const language = document.getElementById('language').value;
 
         // redirection vers la page demandée
-        window.location.replace(`/article/${searchTerm}/${language}`);
-
+       // window.location.replace(`/article/${searchTerm}/${language}`);
+        window.fetch('https://'+ language +'.wikipedia.org/w/api.php?action=query&titles=' + searchTerm + 
+        '&prop=extracts|pageimages|info&pithumbsize=400&inprop=url&redirects=&format=json&origin=*')
+            .then(httpResponse => httpResponse.json())
+            .then(data => {
+                const content = data.query.pages[Object.keys(data.query.pages)[0]].extract;
+                const contentDisplay = document.getElementById('content');
+                contentDisplay.innerHTML = content;
+            })
     });
 });
 </script>
@@ -68,7 +75,8 @@ document.addEventListener("DOMContentLoaded", (e) => {
 <section>
     <article>
         <h1> {{ title }}  </h1>
-        {{ extract }}  
+        <div id="content">{{ extract }} </div>
+         
 
     </article>
 
@@ -76,6 +84,8 @@ document.addEventListener("DOMContentLoaded", (e) => {
         <textarea name="" id="" cols="30" rows="10"></textarea>
     </aside>
 </section>
+
+<!--<iframe src="https://fr.wikipedia.org/" frameborder="0"></iframe>-->
 
 
 {% endblock %}
