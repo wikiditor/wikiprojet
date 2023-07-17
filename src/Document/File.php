@@ -45,7 +45,7 @@ class File
     {
         return $this->title;
     }
-    public function settitle(string $title): File
+    public function setTitle(string $title): File
     {
         $this->title = $title;
 
