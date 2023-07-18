@@ -15,7 +15,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[MongoDB\Id]    
-    private ?int $id = null;
+    private ?string $id = null;
 
     #[MongoDB\Field(type: 'string')]
     private ?string $email = null;
