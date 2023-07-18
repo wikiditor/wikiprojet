@@ -21,10 +21,12 @@ class File
     private \DateTime $creationDate;
 
     #[MongoDB\Field(type: 'date')]
-    private \DateTime $saveDate;
+    private \DateTime $lastUpdate;
 
     // #[MongoDB\UserId]
     private string $userId;
+
+
 
     public function getId(): string
     {
@@ -37,11 +39,8 @@ class File
         return $this;
     }
 
-  
 
-
-
-    public function getTitle(): string
+      public function getTitle(): string
     {
         return $this->title;
     }
@@ -62,6 +61,7 @@ class File
 
         return $this;
     }
+    
 
     public function getCreationDate(): \DateTime
     {
@@ -75,13 +75,13 @@ class File
     }
 
 
-    public function getSaveDate(): \DateTime
+    public function getLastUpdate(): \DateTime
     {
-        return $this->saveDate;
+        return $this->lastUpdate;
     }
-    public function setSaveDate(\DateTime $saveDate): File
+    public function setLastUpdate(\DateTime $lastUpdate): File
     {
-        $this->saveDate = $saveDate;
+        $this->lastUpdate = $lastUpdate;
 
         return $this;
     }
