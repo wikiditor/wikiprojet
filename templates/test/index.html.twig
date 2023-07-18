@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello TestController!{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="./assets/styles/app.css">
+{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+
+</style>
+
+<div class="example-wrapper">
+    <h1>Hello {{ controller_name }}! ✅</h1>
+
+    This friendly message is coming from:
+    <div class="draggable">
+        <ul>
+            <li>Your controller at <code><a href="{{ '/Users/moussaillon/Documents/GitHub/wikiprojet/src/Controller/TestController.php'|file_link(0) }}">src/Controller/TestController.php</a></code></li>
+            <li>Your template at <code><a href="{{ '/Users/moussaillon/Documents/GitHub/wikiprojet/templates/test/index.html.twig'|file_link(0) }}">templates/test/index.html.twig</a></code></li>
+        </ul>
+    </div>
+</div>
+{# <div id="draggable" draggable="true">Je peux être déplacé !</div>
+<div id="dropzone">déposez ici !</div> #}
+<div class="droptarget" ondrop="drop(event)" ondragover="allowDrop(event)">
+  <p ondragstart="dragStart(event)" ondragend="dragEnd(event)" draggable="true" id="dragtarget">deplacez moi!</p>
+</div>
+
+<p id="demo"></p>
+
+<div class="droptarget" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+
+<script src="../assets.js"></script>
+
+{% endblock %}
