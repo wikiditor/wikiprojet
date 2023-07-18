@@ -26,10 +26,11 @@ class ArticleController extends AbstractController
         $httpClient = HttpClient::create();
 
         // Envoie une requête GET à l'API
-        $response = $httpClient->request('GET', 'https://fr.wikipedia.org/w/api.php?action=query&titles=france&prop=extracts|pageimages|info&pithumbsize=400&inprop=url&redirects=&format=json&origin=*');
+        $response = $httpClient->request('GET', 'https://en.wikipedia.org/w/api.php?action=query&titles=belgrade&prop=extracts|images|links&pithumbsize=400&inprop=url&redirects=&format=json&origin=*');
 
         // Récupère le contenu de la réponse et convertit le JSON en une variable php
         $content = json_decode($response->getContent());
+        // dd($content);
 
         // dump($content);
 
