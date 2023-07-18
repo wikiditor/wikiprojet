@@ -23,4 +23,9 @@ class FileRepository extends ServiceDocumentRepository
         $this->getDocumentManager()->persist($file);
         $this->getDocumentManager()->flush();
     }
+    public function remove(File $file): void
+    {
+        $this->getDocumentManager()->remove($file);
+        $this->getDocumentManager()->flush();
+    }
 }

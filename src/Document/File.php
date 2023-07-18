@@ -18,13 +18,19 @@ class File
     private string $content;
 
     #[MongoDB\Field(type: 'date')]
-    private \DateTime $creationDate;
+    private ?\DateTime $creationDate = null;
 
     #[MongoDB\Field(type: 'date')]
-    private \DateTime $saveDate;
+    private ?\DateTime $saveDate = null;
 
     // #[MongoDB\UserId]
     private string $userId;
+
+    public function __construct()
+    {
+        $this->creationDate = new \DateTime();
+    }
+
 
     public function getId(): string
     {
@@ -63,14 +69,14 @@ class File
         return $this;
     }
 
-    public function getCreationDate(): \DateTime
+    public function getCreationDate(): ?\DateTime
     {
         return $this->creationDate;
     }
-    public function setCreationDate(\DateTime $creationDate): File
+
+    public function setCreationDate(?\DateTime $creationDate): File
     {
         $this->creationDate = $creationDate;
-
         return $this;
     }
 
