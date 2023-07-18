@@ -1,79 +1,51 @@
 <?php
 
-namespace App\Document;
+namespace App\Entity;
 
-// Importe les classes nécessaires pour la création du document User.
-use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 use App\Repository\UserRepository;
+use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-// Définition du document User qui implémente UserInterface et PasswordAuthenticatedUserInterface.
-// UserInterface est utilisé par Symfony pour le système de sécurité.
-#[MongoDB\Document(repositoryClass: UserRepository::class)]
+#[ORM\Entity(repositoryClass: UserRepository::class)]
+#[ORM\Table(name: '`user`')]
+#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
-    #[MongoDB\Id]    
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
     private ?int $id = null;
 
-    #[MongoDB\Field(type: 'string')]
+    #[ORM\Column(length: 180, unique: true)]
     private ?string $email = null;
 
-    #[MongoDB\Field(type: 'string')]
-    private string $alias;
+    #[ORM\Column]
+    private array $roles = [];
 
-    #[MongoDB\Field(type: 'collection')]
-    private array $roles = ['ROLE_USER'];
-
-    #[MongoDB\Field(type: 'string')]
+    /**
+     * @var string The hashed password
+     */
+    #[ORM\Column]
     private ?string $password = null;
 
-    #[MongoDB\Field(type: 'string')]
-    private string $lastName;
-
-    #[MongoDB\Field(type: 'string')]
-    private string $firstName;
-
-    #[MongoDB\Field(type: 'string')]
-    private string $picture;
-
-    #[MongoDB\Field(type: 'bool')]
+    #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
 
-
-    // getters et setters
-
-    public function getId(): ?string
+    public function getId(): ?int
     {
         return $this->id;
     }
-    public function setId(string $id): static
-    {
-        $this->id = $id;
-
-        return $this;
-    }
-
 
     public function getEmail(): ?string
     {
         return $this->email;
     }
+
     public function setEmail(string $email): static
     {
         $this->email = $email;
-
-        return $this;
-    }
-
-    public function getAlias(): string
-    {
-        return $this->alias;
-    }
-    public function setAlias(string $alias): static
-    {
-        $this->alias = $alias;
 
         return $this;
     }
@@ -118,39 +90,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPassword(string $password): static
     {
         $this->password = $password;
-
-        return $this;
-    }
-
-    public function getLastName(): string
-    {
-        return $this->lastName;
-    }
-    public function setLastName(string $lastName): User
-    {
-        $this->lastName = $lastName;
-
-        return $this;
-    }
-
-    public function getFirstName(): string
-    {
-        return $this->firstName;
-    }
-    public function setFirstName(string $firstName): User
-    {
-        $this->firstName = $firstName;
-
-        return $this;
-    }
-
-    public function getPicture(): string
-    {
-        return $this->picture;
-    }
-    public function setPicture(string $picture): User
-    {
-        $this->picture = $picture;
 
         return $this;
     }
