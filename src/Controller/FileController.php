@@ -13,42 +13,79 @@ use App\Form\FileType;
 #[Route('/file')]
 class FileController extends AbstractController
 {
-
     #[Route('/', name: 'app_file')]
     public function index(Request $request, FileRepository $fileRepository)
     {
         $file = new File();
         $form = $this->createForm(FileType::class, $file);
-    
+
         $form->handleRequest($request);
-    
+
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
                 // Récupérer le contenu du formulaire
                 $content = $file->getContent();
-    
+
                 // Enregistrer le contenu dans l'objet File
                 $file->setContent($content);
-    
+
                 $fileRepository->saveFile($file);
-    
-                //return $this->redirectToRoute('/');
+
+                return $this->redirectToRoute('app_file_list');
             }
         }
-    
+
         return $this->render('file/index.html.twig', [
             'controller_name' => 'FileController',
             'form' => $form->createView(),
         ]);
     }
-    
-
 
     #[Route('/list', name: 'app_file_list')]
-    public function getListFiles(): Response
+    public function getListFiles(FileRepository $fileRepository): Response
     {
+        $listFiles = $fileRepository->findAll();
         return $this->render('file/list.html.twig', [
             'controller_name' => 'Liste des fichiers',
+            'listFiles' => $listFiles,
+
         ]);
+    }
+    #[Route('/{id}', name: 'app_file_update', methods: ['POST', 'GET'])]
+    public function update(Request $request, string $id, FileRepository $fileRepository): Response
+    {
+        $file = $fileRepository->find($id);
+
+        if (!$file) {
+            throw $this->createNotFoundException('Le fichier n\'existe pas');
+        }
+
+        $form = $this->createForm(FileType::class, $file);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $fileRepository->saveFile($file);
+
+            return $this->redirectToRoute('app_file_list');
+        }
+
+        return $this->render('file/update.html.twig', [
+            'controller_name' => 'Liste des fichiers',
+            'form' => $form->createView(),
+        ]);
+    }
+
+    #[Route('/delete/{id}', name: 'app_file_delete')]
+    public function delete(string $id, FileRepository $fileRepository): Response
+    {
+        $file = $fileRepository->find($id);
+
+        if (!$file) {
+            throw $this->createNotFoundException('Le fichier n\'existe pas');
+        }
+
+        $fileRepository->remove($file);
+
+        return $this->redirectToRoute('app_file_list');
     }
 }

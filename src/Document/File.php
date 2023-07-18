@@ -18,7 +18,7 @@ class File
     private string $content;
 
     #[MongoDB\Field(type: 'date')]
-    private \DateTime $creationDate;
+    private ?\DateTime $creationDate = null;
 
     #[MongoDB\Field(type: 'date')]
     private \DateTime $lastUpdate;
@@ -63,14 +63,14 @@ class File
     }
     
 
-    public function getCreationDate(): \DateTime
+    public function getCreationDate(): ?\DateTime
     {
         return $this->creationDate;
     }
-    public function setCreationDate(\DateTime $creationDate): File
+
+    public function setCreationDate(?\DateTime $creationDate): File
     {
         $this->creationDate = $creationDate;
-
         return $this;
     }
 
