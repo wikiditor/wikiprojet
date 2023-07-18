@@ -41,16 +41,26 @@ document.addEventListener("DOMContentLoaded", (e) => {
         // RÉCUPÈRE les données saisies par l'utilisateur
         const searchTerm = document.getElementById('searchTerm').value;
         const language = document.getElementById('language').value;
-
+        
+       
         // redirection vers la page demandée
        // window.location.replace(`/article/${searchTerm}/${language}`);
+       /*https://'+ language +'.wikipedia.org/w/api.php?action=query&titles=' + searchTerm + 
+        '&prop=extracts|images|links*/
+       
         window.fetch('https://'+ language +'.wikipedia.org/w/api.php?action=query&titles=' + searchTerm + 
         '&prop=extracts|pageimages|info&pithumbsize=400&inprop=url&redirects=&format=json&origin=*')
             .then(httpResponse => httpResponse.json())
             .then(data => {
                 const content = data.query.pages[Object.keys(data.query.pages)[0]].extract;
+                const title = data.query.pages[Object.keys(data.query.pages)[0]].title;
                 const contentDisplay = document.getElementById('content');
+                const titleDisplay = document.getElementById('title');
                 contentDisplay.innerHTML = content;
+                titleDisplay.innerHTML = title;
+            })
+            .catch(error => {
+                console.log(error);
             })
     });
 });
@@ -74,7 +84,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
 {# charge le contenu de l'article récupéré via l'api#}
 <section>
     <article>
-        <h1> {{ title }}  </h1>
+         <h1 id="title"> {{ title }}  </h1> 
         <div id="content">{{ extract }} </div>
          
 
