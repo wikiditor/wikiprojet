@@ -86,6 +86,20 @@ document.addEventListener("DOMContentLoaded", (e) => {
     <article>
          <h1 id="title"> {{ title }}  </h1> 
         <div id="content">{{ extract }} </div>
+        <ul>
+            {% for image in images %}
+                <li>
+                    <img src="{{image['url']}}" alt="">
+                    <p>{{image['title']}}</p>
+                </li>
+            {% endfor %}
+        </ul>
+        {# <ul>
+            {% for lien in liens %}
+                <li>
+                    <p>{{lien}}</p>
+                </li>
+        </ul> #}
          
 
     </article>

@@ -26,18 +26,35 @@ class ArticleController extends AbstractController
         $httpClient = HttpClient::create();
 
         // Envoie une requête GET à l'API
-        $response = $httpClient->request('GET', 'https://en.wikipedia.org/w/api.php?action=query&titles=belgrade&prop=extracts|images|links&pithumbsize=400&inprop=url&redirects=&format=json&origin=*');
+        $response = $httpClient->request('GET', 'https://fr.wikipedia.org/w/api.php?action=query&titles=france&prop=extracts|images|pageimages|info&pithumbsize=400&inprop=url&redirects=&format=json&origin=*');
 
         // Récupère le contenu de la réponse et convertit le JSON en une variable php
         $content = json_decode($response->getContent());
-        // dd($content);
-
         // dump($content);
 
         // Accède aux valeurs 'extract' et 'title' dans l'objet PHP
         $pages = (array)$content->query->pages;
         $article = array_pop($pages);
+
         $extract = $article->extract;
+        $images = [];
+        foreach ($article->images as $image) {
+
+            //$response = $httpClient->request('GET', 'https://commons.wikimedia.org/w/api.php?action=query&pageids=69582727&prop=imageinfo&iiprop=extmetadata|url&format=json');
+            //dd($image);
+            $response = $httpClient->request('GET', 'https://fr.wikipedia.org/w/api.php?action=query&titles=' . $image->title . '&prop=imageinfo&iiprop=url&format=json');
+            $content = json_decode($response->getContent());
+            $pages = (array)$content->query->pages;
+            $page = array_pop($pages);
+            $infos = (array) $page->imageinfo;
+            $infos = array_pop($infos);
+            
+            //dd($infos);
+            $images[] = [
+                'title' => $image->title,
+                'url' => $infos->url
+            ];
+        }
         $title = $article->title;
 
 
@@ -45,7 +62,10 @@ class ArticleController extends AbstractController
         return $this->render('article/index.html.twig', [
             'title' => $title,
             'extract' => $extract,
+            'images' => $images
         ]);
+
+        
     }
 
 
@@ -60,11 +80,11 @@ class ArticleController extends AbstractController
 
         // Envoie une requête GET à l'API
         $response = $httpClient->request('GET', 'https://'. $language .'.wikipedia.org/w/api.php?action=query&titles=' . $searchTerm . 
-        '&prop=extracts|pageimages|info&pithumbsize=400&inprop=url&redirects=&format=json&origin=*');
+        '&prop=extracts|images|pageimages|info&pithumbsize=400&inprop=url&redirects=&format=json&origin=*');
 
         // Récupère le contenu de la réponse et convertit le JSON en une variable php
         $content = json_decode($response->getContent());
-
+        dd($content);
         // dump($content);
 
         // Accède aux valeurs 'extract' et 'title' dans l'objet PHP
@@ -75,22 +95,19 @@ class ArticleController extends AbstractController
 
         if (isset($article->extract)) {
             $extract = $article->extract; // PLANTE SI ARTICLE NON TROUVE
+            $images = $article->images;
             $title = $article->title;
             return $this->render('article/index.html.twig', [
                 'title' => $title,
                 'extract' => $extract,
+                'images' => $images
             ]);
         } else {
             return $this->render('article/index.html.twig', [
                 'title' => 'Nous n\'avons pas compris votre requête.',
-                'extract' => 'Cette page n\'existe pas.'
+                'extract' => 'Cette page n\'existe pas.',
+                'images' => []
             ]);
         }
-
-       
-
-     
-        
-      
     }
 }
