@@ -6,7 +6,7 @@ console.log('COUCOU !');
 // const draggable = new Draggable(document.querySelectorAll('ul'), {
 //     draggable: 'li'
     
-});
+
 console.log('coucou draggable', draggable);
 
 //const editor = new EditorJS();
