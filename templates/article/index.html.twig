@@ -2,7 +2,60 @@
 
 {% block title %}Hello ArticleController!{% endblock %}
 
+
+
+
+
+
 {% block body %}
+<header>
+</header>
+<main>
+</main>
+<footer>
+</footer>
+<!-- Formulaire de recherche -->
+<form method="get" id="search-form">
+    <input type="text" name="searchTerm" id="searchTerm" placeholder="Entrez votre recherche...">
+    <select name="language" id="language">
+        <option value="fr">Français</option>
+        <option value="en">English</option>
+        <option value="es">Español</option>
+        <option value="de">Deutsch</option>
+    </select>
+    <button type="submit">Rechercher</button>
+</form>
+<script>
+// vérifie qu'on a bien chargé toute la page
+document.addEventListener("DOMContentLoaded", (e) => {
+    
+    // cherche le bouton dans le html
+    let button = document.querySelector('#search-form button');
+
+    // détecte le click sur le bouton
+    button.addEventListener('click',  (e) => { 
+
+        // supprime le comportement normal du formulaire
+        e.preventDefault();
+
+        // RÉCUPÈRE les données saisies par l'utilisateur
+        const searchTerm = document.getElementById('searchTerm').value;
+        const language = document.getElementById('language').value;
+
+        // redirection vers la page demandée
+       // window.location.replace(`/article/${searchTerm}/${language}`);
+        window.fetch('https://'+ language +'.wikipedia.org/w/api.php?action=query&titles=' + searchTerm + 
+        '&prop=extracts|pageimages|info&pithumbsize=400&inprop=url&redirects=&format=json&origin=*')
+            .then(httpResponse => httpResponse.json())
+            .then(data => {
+                const content = data.query.pages[Object.keys(data.query.pages)[0]].extract;
+                const contentDisplay = document.getElementById('content');
+                contentDisplay.innerHTML = content;
+            })
+    });
+});
+</script>
+
 <style>
     .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
@@ -22,7 +75,8 @@
 <section>
     <article>
         <h1> {{ title }}  </h1>
-        {{ extract|raw }}  
+        <div id="content">{{ extract }} </div>
+         
 
     </article>
 
@@ -30,6 +84,8 @@
         <textarea name="" id="" cols="30" rows="10"></textarea>
     </aside>
 </section>
+
+<!--<iframe src="https://fr.wikipedia.org/" frameborder="0"></iframe>-->
 
 
 {% endblock %}
