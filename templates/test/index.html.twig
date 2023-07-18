@@ -1,11 +1,15 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Hello TestController!{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="./assets/styles/app.css">
+{% endblock %}
 
 {% block body %}
 <style>
     .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+
 </style>
 
 <div class="example-wrapper">
@@ -21,6 +25,13 @@
 </div>
 {# <div id="draggable" draggable="true">Je peux être déplacé !</div>
 <div id="dropzone">déposez ici !</div> #}
+<div class="droptarget" ondrop="drop(event)" ondragover="allowDrop(event)">
+  <p ondragstart="dragStart(event)" ondragend="dragEnd(event)" draggable="true" id="dragtarget">deplacez moi!</p>
+</div>
+
+<p id="demo"></p>
+
+<div class="droptarget" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
 
 <script src="../assets.js"></script>
 

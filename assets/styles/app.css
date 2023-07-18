@@ -1,3 +1,6 @@
-body {
-    background-color: lightgray;
-}
+.droptarget {
+    width: 100px; 
+    height: 35px;
+    padding: 10px;
+    border: 1px solid black;
+  }
