@@ -80,12 +80,13 @@ document.addEventListener("DOMContentLoaded", (e) => {
                 </li>
             {% endfor %}
         </ul>
-        {# <ul>
-            {% for lien in liens %}
+        <ul>
+            {% for link in links %}
                 <li>
-                    <p>{{lien}}</p>
+                    <a href="{{link['url']}}">{{link['label']}}</a>
                 </li>
-        </ul> #}
+                {% endfor %}
+        </ul> 
          
 
     </article>
