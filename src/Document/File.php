@@ -18,13 +18,15 @@ class File
     private string $content;
 
     #[MongoDB\Field(type: 'date')]
-    private \DateTime $creationDate;
+    private ?\DateTime $creationDate = null;
 
     #[MongoDB\Field(type: 'date')]
-    private \DateTime $saveDate;
+    private \DateTime $lastUpdate;
 
-    #[MongoDB\UserId]
+    // #[MongoDB\UserId]
     private string $userId;
+
+
 
     public function getId(): string
     {
@@ -38,11 +40,11 @@ class File
     }
 
 
-    public function getTitle(): string
+      public function getTitle(): string
     {
         return $this->title;
     }
-    public function settitle(string $title): File
+    public function setTitle(string $title): File
     {
         $this->title = $title;
 
@@ -59,26 +61,27 @@ class File
 
         return $this;
     }
+    
 
-    public function getCreationDate(): \DateTime
+    public function getCreationDate(): ?\DateTime
     {
         return $this->creationDate;
     }
-    public function setCreationDate(\DateTime $creationDate): File
+
+    public function setCreationDate(?\DateTime $creationDate): File
     {
         $this->creationDate = $creationDate;
-
         return $this;
     }
 
 
-    public function getSaveDate(): \DateTime
+    public function getLastUpdate(): \DateTime
     {
-        return $this->saveDate;
+        return $this->lastUpdate;
     }
-    public function setSaveDate(\DateTime $saveDate): File
+    public function setLastUpdate(\DateTime $lastUpdate): File
     {
-        $this->saveDate = $saveDate;
+        $this->lastUpdate = $lastUpdate;
 
         return $this;
     }
