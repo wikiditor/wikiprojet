@@ -55,6 +55,7 @@ class ArticleController extends AbstractController
                 'url' => $infos->url
             ];
         }
+        
         $title = $article->title;
 
 
