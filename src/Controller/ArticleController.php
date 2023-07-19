@@ -94,10 +94,9 @@ class ArticleController extends AbstractController
         if (isset($article->extract)) {
             $extract = $article->extract; // PLANTE SI ARTICLE NON TROUVE
             $images = [];
+            //dd($article->images);
             foreach ($article->images as $image) {
     
-                //$response = $httpClient->request('GET', 'https://commons.wikimedia.org/w/api.php?action=query&pageids=69582727&prop=imageinfo&iiprop=extmetadata|url&format=json');
-                //dd($image);
                 $response = $httpClient->request('GET', 'https://fr.wikipedia.org/w/api.php?action=query&titles=' . $image->title . '&prop=imageinfo&iiprop=url&format=json');
                 $content = json_decode($response->getContent());
                 $pages = (array)$content->query->pages;
