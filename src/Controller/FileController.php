@@ -9,6 +9,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\FileRepository;
 use App\Document\File;
 use App\Form\FileType;
+use DateTime;
+use DateTimeZone;
 
 #[Route('/file')]
 class FileController extends AbstractController
@@ -18,23 +20,28 @@ class FileController extends AbstractController
     {
         $file = new File();
         $form = $this->createForm(FileType::class, $file);
-
+    
         $form->handleRequest($request);
-
+    
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
                 // Récupérer le contenu du formulaire
                 $content = $file->getContent();
-
+    
                 // Enregistrer le contenu dans l'objet File
                 $file->setContent($content);
-
+    
+                $timezone = new DateTimeZone('Europe/Paris');
+                $now = new DateTime('now', $timezone);
+                $file->setCreationDate($now); // Affecte la date de création actuelle
+                $file->setLastUpdate($now); // Affecte la date de modification actuelle
+    
                 $fileRepository->saveFile($file);
-
+    
                 return $this->redirectToRoute('app_file_list');
             }
         }
-
+    
         return $this->render('file/index.html.twig', [
             'controller_name' => 'FileController',
             'form' => $form->createView(),
@@ -44,31 +51,37 @@ class FileController extends AbstractController
     #[Route('/list', name: 'app_file_list')]
     public function getListFiles(FileRepository $fileRepository): Response
     {
-        $listFiles = $fileRepository->findAll();
+        $listFiles = $fileRepository->findBy([], ['lastUpdate' => 'DESC']); // Trier les fichiers par date de modification décroissante;
         return $this->render('file/list.html.twig', [
             'controller_name' => 'Liste des fichiers',
             'listFiles' => $listFiles,
 
         ]);
     }
-    #[Route('/{id}', name: 'app_file_update', methods: ['POST', 'GET'])]
+    #[Route('/update/{id}', name: 'app_file_update', methods: ['POST', 'GET'])]
     public function update(Request $request, string $id, FileRepository $fileRepository): Response
     {
         $file = $fileRepository->find($id);
-
+    
         if (!$file) {
             throw $this->createNotFoundException('Le fichier n\'existe pas');
         }
-
+    
         $form = $this->createForm(FileType::class, $file);
         $form->handleRequest($request);
-
+    
         if ($form->isSubmitted() && $form->isValid()) {
+            if ($request->query->get('update') === 'true') {
+                $timezone = new DateTimeZone('Europe/Paris');
+                $now = new DateTime('now', $timezone);
+                $file->setLastUpdate($now);
+            }
+    
             $fileRepository->saveFile($file);
-
+    
             return $this->redirectToRoute('app_file_list');
         }
-
+    
         return $this->render('file/update.html.twig', [
             'controller_name' => 'Liste des fichiers',
             'form' => $form->createView(),

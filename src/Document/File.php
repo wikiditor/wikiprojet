@@ -4,6 +4,7 @@ namespace App\Document;
 
 use DateTime;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+use DateTimeZone;
 
 #[MongoDB\Document]
 class File
@@ -21,10 +22,12 @@ class File
     private ?\DateTime $creationDate = null;
 
     #[MongoDB\Field(type: 'date')]
-    private \DateTime $lastUpdate;
+    private ?\DateTime $lastUpdate = null;
 
     // #[MongoDB\UserId]
     private string $userId;
+
+
 
 
 
@@ -58,7 +61,7 @@ class File
     public function setContent(string $content): File
     {
         $this->content = $content;
-
+        $this->lastUpdate = new DateTime('now', new DateTimeZone('Europe/Paris'));
         return $this;
     }
     
@@ -75,7 +78,7 @@ class File
     }
 
 
-    public function getLastUpdate(): \DateTime
+    public function getLastUpdate(): ?\DateTime
     {
         return $this->lastUpdate;
     }
@@ -95,6 +98,10 @@ class File
         $this->userId = $userId;
 
         return $this;
+    }
+    public function __construct()
+    {
+        $this->creationDate = new \DateTime('now', new DateTimeZone('Europe/Paris'));
     }
     
 }
