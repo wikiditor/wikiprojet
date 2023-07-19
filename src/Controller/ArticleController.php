@@ -85,7 +85,7 @@ class ArticleController extends AbstractController
 
         // Récupère le contenu de la réponse et convertit le JSON en une variable php
         $content = json_decode($response->getContent());
-        dd($content);
+        //dd($content);
         // dump($content);
 
         // Accède aux valeurs 'extract' et 'title' dans l'objet PHP
@@ -96,7 +96,24 @@ class ArticleController extends AbstractController
 
         if (isset($article->extract)) {
             $extract = $article->extract; // PLANTE SI ARTICLE NON TROUVE
-            $images = $article->images;
+            $images = [];
+            foreach ($article->images as $image) {
+    
+                //$response = $httpClient->request('GET', 'https://commons.wikimedia.org/w/api.php?action=query&pageids=69582727&prop=imageinfo&iiprop=extmetadata|url&format=json');
+                //dd($image);
+                $response = $httpClient->request('GET', 'https://fr.wikipedia.org/w/api.php?action=query&titles=' . $image->title . '&prop=imageinfo&iiprop=url&format=json');
+                $content = json_decode($response->getContent());
+                $pages = (array)$content->query->pages;
+                $page = array_pop($pages);
+                $infos = (array) $page->imageinfo;
+                $infos = array_pop($infos);
+                
+                //dd($infos);
+                $images[] = [
+                    'title' => $image->title,
+                    'url' => $infos->url
+                ];
+            }
             $title = $article->title;
             return $this->render('article/index.html.twig', [
                 'title' => $title,

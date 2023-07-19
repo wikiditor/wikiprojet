@@ -85,7 +85,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
 <section>
     <article>
          <h1 id="title"> {{ title }}  </h1> 
-        <div id="content">{{ extract }} </div>
+        <div id="content">{{ extract|raw }} </div>
         <ul>
             {% for image in images %}
                 <li>
