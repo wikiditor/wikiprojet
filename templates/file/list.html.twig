@@ -33,9 +33,9 @@
             <tbody>
             {% for row in listFiles %}
                 <tr>
-                    <td><a href="{{ path('app_file_update', {id:row.id}) }}">{{ row.title }}</a></td>
-                    <td>{{ row.creationDate|date('Y-m-d H:i:s')}}</td>
-                    <td>{{ row.saveDate|date('Y-m-d H:i:s')}}</td>
+                    <td><a href="{{ path('app_file_update', {id: row.id, update: true}) }}">{{ row.title }}</a></td>
+                    <td>{{ row.creationDate|date('d/m/Y à H:i', 'Europe/Paris')}}</td>
+                    <td>{{ row.lastUpdate|date('d/m/Y à H:i', 'Europe/Paris')}}</td>
                     <td><a href="{{ path('app_file_delete', {id:row.id}) }}"><span class="btn btn-danger fa fa-trash"></span></a>
                     </td>
                 </tr>
