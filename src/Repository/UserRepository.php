@@ -47,7 +47,8 @@ class UserRepository extends ServiceDocumentRepository implements PasswordUpgrad
         $this->findAll();
     }
 
-    public function saveUser($user)
+    //modifie les informations du user
+    public function updateUser($user)
     {
         $this->getDocumentManager()->persist($user);
         $this->getDocumentManager()->flush();

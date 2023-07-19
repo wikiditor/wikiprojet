@@ -10,8 +10,6 @@
 
 <div class="example-wrapper">
     <h1>Liste des utilisateurs</h1>
-
- 
 </div>
 
 <div class="table-responsive container">
@@ -19,19 +17,22 @@
             <thead>
                 <tr>
                     <th>Alias</th>
-                    <th>Email</th>					
+                    <th>Email</th>
+                    <th>Modifier un utilisateur</th>					
                 </tr>
             </thead>
             <tbody>
             {% for row in listUsers %}
                 <tr>
                     <td></td>                      
-                    <td>{{ row.Email}}</td>                    
+                    <td>{{ row.email() }}</td>
+                    <td>
+                       <a href="{{ path('app_admin_user_update', {'id': row.getId()}) }}" class="btn btn-primary fa fa-edit"></a>                    
+                    </td>
                 </tr>
-                {% endfor %}
+            {% endfor %}
             </tbody>
         </table>
     </div>
-
 
 {% endblock %}

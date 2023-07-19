@@ -35,8 +35,7 @@ class RegistrationController extends AbstractController
             );
 
             // Ajout de l'utilisateur à la base de données.
-            $userRepository->addUser($user);
-           
+            $userRepository->addUser($user);        
 
 
             // Redirection vers la page de connexion.
@@ -51,28 +50,6 @@ class RegistrationController extends AbstractController
 
     
     
-    #[Route('admin/user/{id}', name: 'app_admin_user_update', methods: ['POST', 'GET'])]
-    public function update(Request $request, string $id, UserRepository $userRepository): Response
-    {
-        $user = $userRepository->find($id);
-
-        if (!$user) {
-            throw $this->createNotFoundException('L\'utilisateur n\'existe pas');
-        }
-
-        $form = $this->createForm(FileType::class, $user);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $userRepository->saveUser($user);
-
-            return $this->redirectToRoute('app_admin_user');
-        }
-
-        return $this->render('registration/update.html.twig', [
-            'controller_name' => 'Liste des fichiers',
-            'form' => $form->createView(),
-        ]);
-    }
+    
 
 }  
