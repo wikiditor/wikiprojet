@@ -49,12 +49,11 @@ class ArticleController extends AbstractController
     }
 
 
-
     #[Route('/article/{searchTerm}/{language}', name: 'app_article_search')]
     public function modifyWikipediaApiUrl($searchTerm, $language)
     {
         $searchTerm = ucwords(mb_strtolower($searchTerm));
-
+        $searchTerm = str_replace(' ', '_', $searchTerm);
 
         $httpClient = HttpClient::create();
 
@@ -71,8 +70,6 @@ class ArticleController extends AbstractController
         $pages = (array)$content->query->pages;
         $article = array_pop($pages);
 
-
-
         if (isset($article->extract)) {
             $extract = $article->extract; // PLANTE SI ARTICLE NON TROUVE
             $title = $article->title;
@@ -86,11 +83,5 @@ class ArticleController extends AbstractController
                 'extract' => 'Cette page n\'existe pas.'
             ]);
         }
-
-       
-
-     
-        
-      
     }
 }

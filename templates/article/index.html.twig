@@ -44,11 +44,11 @@ document.addEventListener("DOMContentLoaded", (e) => {
         
        
         // redirection vers la page demandée
-       // window.location.replace(`/article/${searchTerm}/${language}`);
+       window.location.replace(`/article/${searchTerm}/${language}`);
        /*https://'+ language +'.wikipedia.org/w/api.php?action=query&titles=' + searchTerm + 
         '&prop=extracts|images|links*/
        
-        window.fetch('https://'+ language +'.wikipedia.org/w/api.php?action=query&titles=' + searchTerm + 
+        {# window.fetch('https://'+ language +'.wikipedia.org/w/api.php?action=query&titles=' + searchTerm + 
         '&prop=extracts|pageimages|info&pithumbsize=400&inprop=url&redirects=&format=json&origin=*')
             .then(httpResponse => httpResponse.json())
             .then(data => {
@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
             })
             .catch(error => {
                 console.log(error);
-            })
+            }) #}
     });
 });
 </script>
@@ -85,7 +85,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
 <section>
     <article>
          <h1 id="title"> {{ title }}  </h1> 
-        <div id="content">{{ extract }} </div>
+        <div id="content">{{ extract|raw }} </div>
          
 
     </article>
