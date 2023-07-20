@@ -11,7 +11,9 @@ use App\Document\File;
 use App\Form\FileType;
 use DateTime;
 use DateTimeZone;
+use Doctrine\ODM\MongoDB\DocumentManager;
 use Knp\Snappy\Pdf;
+
 
 #[Route('/file')]
 class FileController extends AbstractController
@@ -103,43 +105,33 @@ class FileController extends AbstractController
         return $this->redirectToRoute('app_file_list');
     }
 
-    #[Route('/export/pdf', name: 'export_pdf')]
-    public function exportPdf(Pdf $snappy, Request $request, FileRepository $fileRepository): Response
+    #[Route('/export/pdf/{id}', name: 'app_file_export')]
+    public function exportContentToPdf(string $id, Pdf $snappy, FileRepository $fileRepository)
     {
-        $file = new File();
-        $form = $this->createForm(FileType::class, $file);
-
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $fileRepository->saveFile($file);
-
-            // Récupérez les données du formulaire
-            $data = $form->getData();
-
-            // Convertissez les données en HTML
-            $html = $this->renderView('pdf_template.html.twig', [
-                'data' => $data,
-            ]);
-
-            // Générez le PDF à partir du HTML
-            $pdf = $snappy->getOutputFromHtml($html);
-
-            // Créez une réponse avec le PDF
-            return new Response(
-                $pdf,
-                200,
-                [
-                    'Content-Type' => 'application/pdf',
-                    'Content-Disposition' => 'inline; filename="document.pdf"'
-                ]
-            );
+        // Récupérer le document File avec l'ID spécifié
+        $file = $fileRepository->find($id);
+    
+        if (!$file) {
+            throw $this->createNotFoundException('Le fichier n\'existe pas');
         }
-
-        // Retournez le formulaire s'il n'est pas valide
-        // return $this->render('file/pdf_file.html.twig', [
-        //     'form' => $form->createView(),
-        // ]);
+    
+        // Créer le PDF à partir du contenu du fichier
+        $html = '<html><body><p>' . $file->getContent() . '</p></body></html>';
+        $pdfContent = $snappy->getOutputFromHtml($html);
+    
+        // Créez la réponse
+        $response = new Response(
+            $pdfContent,
+            Response::HTTP_OK,
+            ['content-type' => 'application/pdf']
+        );
+    
+        return $this->render('file/index.html.twig', [
+            'controller_name' => 'FileController',
+            'form' => $form->createView(),
+            'file' => $file,
+        ]);
+        
     }
-
+    
 }

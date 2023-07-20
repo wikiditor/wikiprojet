@@ -29,16 +29,7 @@
     {{ form_end(form) }}
 </div>
 
-<div class="div">
-    <!-- Bouton pour exporter en PDF -->
-    <!-- Vous pouvez ajouter une fonction javascript pour obtenir la valeur du champ 'content' et la passer à la route 'export_pdf' -->
-    <a id="export_pdf" href="#" class="btn btn-primary mt-3">Exporter en PDF</a>
-</div>
+<a href="{{ path('app_file_export', {'id': form.id}) }}" class="btn btn-primary">Exporter le PDF</a>
 
-<script type="text/javascript">
-document.getElementById('export_pdf').onclick = function(){
-    var content = document.getElementById('content').value;
-    this.href = "{{ path('export_pdf') }}?content=" + encodeURIComponent(content);
-};
-</script>
+
 {% endblock %}
