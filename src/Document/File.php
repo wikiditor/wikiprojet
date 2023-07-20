@@ -27,7 +27,10 @@ class File
     // #[MongoDB\UserId]
     private string $userId;
 
-
+    /**
+     * @MongoDB\ReferenceOne(targetDocument=User::class)
+     */
+    private ?User $user = null;
 
 
 
@@ -43,7 +46,7 @@ class File
     }
 
 
-      public function getTitle(): string
+    public function getTitle(): string
     {
         return $this->title;
     }
@@ -64,7 +67,7 @@ class File
         $this->lastUpdate = new DateTime('now', new DateTimeZone('Europe/Paris'));
         return $this;
     }
-    
+
 
     public function getCreationDate(): ?\DateTime
     {
@@ -104,4 +107,15 @@ class File
         $this->creationDate = new \DateTime('now', new DateTimeZone('Europe/Paris'));
     }
     
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): File
+    {
+        $this->user = $user;
+
+        return $this;
+    }
 }
