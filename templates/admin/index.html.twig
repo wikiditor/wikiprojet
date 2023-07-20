@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dashboard Admin!
+{% endblock %}
+
+{% block body %}
+	<style>
+		.example-wrapper {
+			margin: 1em auto;
+			max-width: 800px;
+			width: 95%;
+			font: 18px / 1.5 sans-serif;
+		}
+		.example-wrapper code {
+			background: #F5F5F5;
+			padding: 2px 6px;
+		}
+	</style>
+
+	<div class="example-wrapper">
+		<h1>Liste des utilisateurs</h1>
+	</div>
+
+	<div class="table-responsive container">
+		<table class="table table-striped table-sm">
+			<thead>
+				<tr>
+					<th>Alias</th>
+					<th>Email</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for row in listUsers %}
+					<tr>
+						<td>{{ row.alias }}</td>
+						<td>{{ row.email }}</td>
+						<td>
+							<a href="{{ path('app_admin_user_update', {'id': row.id}) }}" class="btn btn-primary fa fa-edit"></a>
+							{% if not row.isBlocked %}
+								<a href="{{ path('app_admin_user_block', {'id': row.id}) }}" class="btn btn-warning fa fa-ban"></a>
+							{% else %}
+								<a href="{{ path('app_admin_user_block', {'id': row.id}) }}" class="btn btn-danger fa fa-ban"></a>
+							{% endif %}
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+
+{% endblock %}

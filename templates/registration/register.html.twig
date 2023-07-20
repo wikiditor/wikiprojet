@@ -1,0 +1,38 @@
+{# Hérite du template de base 'base.html.twig' #}
+{% extends 'base.html.twig' %}
+
+{# Définit le titre de la page #}
+{% block title %}Inscription{% endblock %}
+
+{# Définit le contenu principal de la page #}
+{% block body %}
+    {# Parcourt et affiche tous les messages d'erreur liés à la vérification de l'email #}
+    {% for flash_error in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+    {% endfor %}
+
+    <div class="container">
+
+    {# Affiche le titre de la page #}
+    <h1>Inscription</h1>
+
+    {# Affiche les erreurs de validation liées à l'ensemble du formulaire #}
+    {{ form_errors(registrationForm) }}
+
+    {# Commence le formulaire #}
+    {{ form_start(registrationForm) }}
+        {# Affiche le champ alias (pseudo) avec ses erreurs éventuelles #}
+        {{ form_row(registrationForm.alias) }}
+        {# Affiche le champ email avec ses erreurs éventuelles #}
+        {{ form_row(registrationForm.email) }}        
+        {# Affiche le champ du mot de passe avec ses erreurs éventuelles #}
+        {{ form_row(registrationForm.plainPassword) }}            
+        {# Affiche la case à cocher pour accepter les conditions avec ses erreurs éventuelles #}
+        {{ form_row(registrationForm.agreeTerms) }}
+
+        {# Affiche le bouton pour soumettre le formulaire #}
+        <button type="submit" class="btn btn-success mt-3">S'inscrire</button>
+    {# Termine le formulaire #}
+    {{ form_end(registrationForm) }}
+    </div>
+{% endblock %}
