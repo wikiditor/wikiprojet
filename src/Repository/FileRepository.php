@@ -28,4 +28,8 @@ class FileRepository extends ServiceDocumentRepository
         $this->getDocumentManager()->remove($file);
         $this->getDocumentManager()->flush();
     }
+    public function findByUserId(string $userId): array
+    {
+        return $this->findBy(['userId' => $userId]);
+    }
 }

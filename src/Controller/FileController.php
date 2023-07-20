@@ -18,57 +18,65 @@ class FileController extends AbstractController
 {
     #[Route('/', name: 'app_file')]
     public function index(Request $request, FileRepository $fileRepository, Security $security)
-    {
-        $file = new File();
-        $user = $security->getUser();
+{
+    $file = new File();
+    $user = $security->getUser();
 
-        if (!$user) {
-            // Gérer le cas où l'utilisateur n'est pas authentifié
-        }
-
-        $file->setUserId($user->getId()); // Définir l'id de l'utilisateur sur le fichier
-
-        // Crée le formulaire de création de fichier
-        $form = $this->createForm(FileType::class, $file);
-
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            // Récupérer le contenu du formulaire
-            $content = $file->getContent();
-
-            // Enregistrer le contenu dans l'objet File
-            $file->setContent($content);
-
-            // Définir la date de création et de dernière modification actuelle
-            $timezone = new DateTimeZone('Europe/Paris');
-            $now = new DateTime('now', $timezone);
-            $file->setCreationDate($now);
-            $file->setLastUpdate($now);
-
-            // Sauvegarder le fichier dans la base de données
-            $fileRepository->saveFile($file);
-
-            return $this->redirectToRoute('app_file_list');
-        }
-
-        return $this->render('file/index.html.twig', [
-            'controller_name' => 'FileController',
-            'form' => $form->createView(),
-        ]);
+    if (!$user) {
+        // Gérer le cas où l'utilisateur n'est pas authentifié
     }
+    // Lier l'utilisateur actuel à l'entité File
+    $file->setUser($user);
+
+    // Définir l'id de l'utilisateur sur le fichier
+    $file->setUserId($user->getId());
+
+    // Crée le formulaire de création de fichier
+    $form = $this->createForm(FileType::class, $file);
+
+    $form->handleRequest($request);
+
+    if ($form->isSubmitted() && $form->isValid()) {
+        // Récupérer le contenu du formulaire
+        $content = $file->getContent();
+
+        // Enregistrer le contenu dans l'objet File
+        $file->setContent($content);
+
+        // Définir la date de création et de dernière modification actuelle
+        $timezone = new DateTimeZone('Europe/Paris');
+        $now = new DateTime('now', $timezone);
+        $file->setCreationDate($now);
+        $file->setLastUpdate($now);
+
+        // Sauvegarder le fichier dans la base de données
+        $fileRepository->saveFile($file);
+
+        return $this->redirectToRoute('app_file_list');
+    }
+
+    return $this->render('file/index.html.twig', [
+        'controller_name' => 'FileController',
+        'form' => $form->createView(),
+    ]);
+}
+
 
     #[Route('/list', name: 'app_file_list')]
     public function getListFiles(FileRepository $fileRepository, Security $security): Response
     {
+        // Récupérer l'utilisateur connecté
         $user = $security->getUser();
 
         if (!$user) {
             // Gérer le cas où l'utilisateur n'est pas authentifié
+            // Par exemple, redirigez-le vers la page de connexion
+            return $this->redirectToRoute('app_login');
         }
 
-        $listFiles = $fileRepository->findBy(['userId' => $user->getId()], ['lastUpdate' => 'DESC']);
-
+        // Récupérer la liste des fichiers créés par l'utilisateur connecté
+        $listFiles = $fileRepository->findByUserId($user->getId());
+        
         return $this->render('file/list.html.twig', [
             'controller_name' => 'Liste des fichiers',
             'listFiles' => $listFiles,

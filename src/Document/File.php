@@ -99,7 +99,7 @@ class File
     public function setUserId(string $userId): File
     {
         $this->userId = $userId;
-
+    
         return $this;
     }
     public function __construct()
