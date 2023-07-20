@@ -44,13 +44,15 @@ class UserRepository extends ServiceDocumentRepository implements PasswordUpgrad
       //récupère tous les users (documents) de la collection
       public function findAllUsers()
     {
-        $this->findAll();
+        return $this->findAll();
     }
 
-    //modifie les informations du user
-    public function updateUser($user)
+
+    public function updateUser(User $user, bool $isBlocked = false): void
     {
+        $user->setBlocked($isBlocked);
         $this->getDocumentManager()->persist($user);
         $this->getDocumentManager()->flush();
     }
+
 }

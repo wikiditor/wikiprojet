@@ -14,7 +14,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 #[MongoDB\Document(repositoryClass: UserRepository::class)]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
-    #[MongoDB\Id]    
+    #[MongoDB\Id]
     private ?string $id = null;
 
     #[MongoDB\Field(type: 'string')]
@@ -41,6 +41,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[MongoDB\Field(type: 'bool')]
     private $isVerified = false;
 
+    // Ajoute le champ blocked
+    #[MongoDB\Field(type: 'bool')]
+    private $blocked = false;
+
+    // Constructeur de la classe
+    public function __construct()
+    {
+        $this->alias = '';
+    }
 
     // getters et setters
 
@@ -68,15 +77,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     public function getAlias(): string
-    {
-        return $this->alias;
+{
+    if (!isset($this->alias)) {
+        $this->alias = '';
     }
+    return $this->alias;
+}
     public function setAlias(string $alias): static
-    {
-        $this->alias = $alias;
-
-        return $this;
+{
+    if (!isset($this->alias)) {
+        $this->alias = '';
     }
+    $this->alias = $alias;
+
+    return $this;
+}
+
 
     /**
      * A visual identifier that represents this user.
@@ -172,6 +188,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsVerified(bool $isVerified): static
     {
         $this->isVerified = $isVerified;
+
+        return $this;
+    }
+    // Ajoute les méthodes pour le champ blocked
+    public function isBlocked(): bool
+    {
+        return $this->blocked;
+    }
+
+    public function setBlocked(bool $blocked): static
+    {
+        $this->blocked = $blocked;
 
         return $this;
     }
