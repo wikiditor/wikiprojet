@@ -11,6 +11,7 @@ use App\Document\File;
 use App\Form\FileType;
 use DateTime;
 use DateTimeZone;
+use Knp\Snappy\Pdf;
 
 #[Route('/file')]
 class FileController extends AbstractController
@@ -101,4 +102,44 @@ class FileController extends AbstractController
 
         return $this->redirectToRoute('app_file_list');
     }
+
+    #[Route('/export/pdf', name: 'export_pdf')]
+    public function exportPdf(Pdf $snappy, Request $request, FileRepository $fileRepository): Response
+    {
+        $file = new File();
+        $form = $this->createForm(FileType::class, $file);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $fileRepository->saveFile($file);
+
+            // Récupérez les données du formulaire
+            $data = $form->getData();
+
+            // Convertissez les données en HTML
+            $html = $this->renderView('pdf_template.html.twig', [
+                'data' => $data,
+            ]);
+
+            // Générez le PDF à partir du HTML
+            $pdf = $snappy->getOutputFromHtml($html);
+
+            // Créez une réponse avec le PDF
+            return new Response(
+                $pdf,
+                200,
+                [
+                    'Content-Type' => 'application/pdf',
+                    'Content-Disposition' => 'inline; filename="document.pdf"'
+                ]
+            );
+        }
+
+        // Retournez le formulaire s'il n'est pas valide
+        return $this->render('file/pdf_file.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
 }
