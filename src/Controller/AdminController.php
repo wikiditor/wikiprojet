@@ -64,6 +64,8 @@ class AdminController extends AbstractController
     #[Route('/{id}/block', name: 'app_admin_user_block', methods: ['POST', 'GET'])]
     #[IsGranted('ROLE_ADMIN')]
     public function blockUser(Request $request, string $id, UserRepository $userRepository): Response
+    #[Route('/delete/{id}', name: 'app_admin_user_delete')]
+    public function delete(string $id, UserRepository $userRepository): Response
     {
         $user = $userRepository->find($id);
 
@@ -81,6 +83,11 @@ class AdminController extends AbstractController
         $userRepository->updateUser($user);
 
         // Rediriger vers la liste des utilisateurs
+            throw $this->createNotFoundException('Le fichier n\'existe pas');
+        }
+
+        $userRepository->remove($user);
+
         return $this->redirectToRoute('app_admin_user');
     }
 

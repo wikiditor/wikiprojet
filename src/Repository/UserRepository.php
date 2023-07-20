@@ -55,4 +55,9 @@ class UserRepository extends ServiceDocumentRepository implements PasswordUpgrad
         $this->getDocumentManager()->flush();
     }
 
+    public function remove(User $user): void
+    {
+        $this->getDocumentManager()->remove($user);
+        $this->getDocumentManager()->flush();
+    }
 }
