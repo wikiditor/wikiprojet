@@ -2,11 +2,13 @@
 
 namespace App\Form;
 
+//importe les classes et les interfaces nécessaires à la construction du formulaire
 use App\Document\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Email;
@@ -14,6 +16,7 @@ use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
+//définit une nouvelle classe de formulaire qui hérite d'AbstractType
 class RegistrationFormType extends AbstractType
 {
     /**
@@ -26,35 +29,51 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('alias')
-            ->add('email', EmailType::class,[               
+            //ajoute le champ pour le username
+            ->add('alias', TextType::class, [
+                'label' => 'Pseudo',
+                'attr' => [
+                    'class' => 'form-control'
+                ]
+            ])
+            //ajoute le champ pour l'email' et un message d'erreur si le format est invalide
+            ->add('email', EmailType::class,[  
+                'label' => 'Email',
+                'attr' => [
+                    'class' => 'form-control'
+                ],             
                 'constraints' => [
                     new Email([
                         'message' => 'Veuillez entrer un format d\'email valide',
                     ]),
                 ]
             ])
+            //ajoute une case à cocher pour accepter les conditions
             ->add('agreeTerms', CheckboxType::class, [
+                'label' => 'Accepter les conditions',
                 'mapped' => false,
                 'constraints' => [
                     new IsTrue([
-                        'message' => 'You should agree to our terms.',
+                        'message' => 'Veuillez acceptez nos conditions d\'utilisation.',
                     ]),
                 ],
             ])
-            ->add('plainPassword', PasswordType::class, [
-                // instead of being set onto the object directly,
-                // this is read and encoded in the controller
+            //permet à l'utilisateur d'entrer son mot de passe qui doit contenir au moins 6 caractères
+            ->add('plainPassword', PasswordType::class, [               
+                'label' => 'Mot de passe',              
                 'mapped' => false,
-                'attr' => ['autocomplete' => 'new-password'],
+                'attr' => [
+                    'autocomplete' => 'new-password',
+                    'class' => 'form-control'
+                ],
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please enter a password',
+                        'message' => 'Veuillez entrer un mot de passe',
                     ]),
                     new Length([
                         'min' => 6,
-                        'minMessage' => 'Your password should be at least {{ limit }} characters',
-                        // max length allowed by Symfony for security reasons
+                        'minMessage' => 'Votre mot de passe doit contenir au moins {{ limit }} caractères',
+                        // longueur maximale permise par Symfony pour des raisons de sécurité
                         'max' => 4096,
                     ]),
                 ],
@@ -62,6 +81,12 @@ class RegistrationFormType extends AbstractType
         ;
     }
 
+    /**
+     * spécifie que les données du formulaire seront utilisées pour créer un objet de la classe 'User'
+     *
+     * @param OptionsResolver $resolver
+     * @return void
+     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([

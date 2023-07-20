@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-
+// Importation des différentes classes et interfaces utilisées dans le contrôleur.
 use App\Form\UserType;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
