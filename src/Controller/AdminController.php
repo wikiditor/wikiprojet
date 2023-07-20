@@ -5,6 +5,7 @@ namespace App\Controller;
 // Importation des différentes classes et interfaces utilisées dans le contrôleur.
 use App\Form\UserType;
 use App\Repository\UserRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,6 +18,7 @@ class AdminController extends AbstractController
 
     //récupère la liste des utilisateurs
     #[Route('/', name: 'app_admin_user')]
+    #[IsGranted('ROLE_ADMIN')]
     public function getUsers(UserRepository $userRepository): Response
     {
         $listUsers = $userRepository->findAll();
@@ -27,6 +29,7 @@ class AdminController extends AbstractController
 
     //modifie certaines informations de l'utilisateur
     #[Route('/{id}/edit', name: 'app_admin_user_update', methods: ['POST', 'GET'])]
+    #[IsGranted('ROLE_ADMIN')]
     public function update(Request $request, string $id, UserRepository $userRepository): Response
     {
         // Utilise le UserRepository pour trouver un utilisateur basé sur son 'id'.
@@ -57,6 +60,28 @@ class AdminController extends AbstractController
             'user' => $user,
             'form' => $form->createView(),
         ]);
+    }
+    #[Route('/{id}/block', name: 'app_admin_user_block', methods: ['POST', 'GET'])]
+    #[IsGranted('ROLE_ADMIN')]
+    public function blockUser(Request $request, string $id, UserRepository $userRepository): Response
+    {
+        $user = $userRepository->find($id);
+
+        if (!$user) {
+            throw $this->createNotFoundException('L\'utilisateur n\'existe pas');
+        }
+
+        // Récupérer le statut de blocage actuel de l'utilisateur
+        $isBlocked = $user->isBlocked();
+
+        // Inverser le statut de blocage
+        $user->setBlocked(!$isBlocked);
+
+        // Mettre à jour l'utilisateur dans la base de données
+        $userRepository->updateUser($user);
+
+        // Rediriger vers la liste des utilisateurs
+        return $this->redirectToRoute('app_admin_user');
     }
 
 }
