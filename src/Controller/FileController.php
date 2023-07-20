@@ -137,9 +137,9 @@ class FileController extends AbstractController
         }
 
         // Retournez le formulaire s'il n'est pas valide
-        return $this->render('file/pdf_file.html.twig', [
-            'form' => $form->createView(),
-        ]);
+        // return $this->render('file/pdf_file.html.twig', [
+        //     'form' => $form->createView(),
+        // ]);
     }
 
 }
