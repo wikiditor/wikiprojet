@@ -2,7 +2,120 @@
 
 {% block title %}Connexion{% endblock %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="/assets/styles/style.css">
+{% endblock %}
+
 {% block body %}
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    {% if app.user %}
+        <div class="mb-3">
+            Vous êtes connecté en tant que {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+        </div>
+    {% endif %}
+
+        <section class="connecter">
+            <div class="container">
+                <div class="row">
+                    <form  class="col-12 col-md-5 col-xl-5">
+
+                        <div class="div container">
+
+                        <h1>Se connecter</h1>
+
+                        <label for="inputEmail" class="form-label">Adresse e-mail</label>
+                        <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus placeholder="Entrez votre adresse de courriel">
+                        <label for="inputPassword" class="form-label">Mot de passe</label>
+                        <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required placeholder="Entrez votre mot de passe">
+
+                        <input type="hidden" name="_csrf_token"
+                            value="{{ csrf_token('authenticate') }}"
+                        >
+
+                            <p class="text-end">
+                                <a class="liengauche" href="#">Mot de passe oublié?</a>
+                            </p>
+                            <div class="bouton">
+                                <button class="btn btn-primary" type="submit">Se connecter</button>
+                            </div>
+                        </div>
+
+                    </form>
+
+                    <div class="col-12 col-md-2 col-xl-2">
+
+                    </div>
+
+                    <form action="#" id="bloc-compte" class="col-12 col-md-5 col-xl-5">
+                        <h1>Créer un compte</h1>
+
+                        <label for="validationCustomUsername" class="form-label d-flex justify-content-between align-items-center">
+                            <span>Nom d'utilisateur</span>
+                            <a class="aide" href="#">aidez-moi à choisir *</a>
+                            
+                        </label>
+                        
+
+                        <div>
+                            <!-- <span class="input-group-text" id="inputGroupPrepend">@</span> -->
+                            <input type="text" class="form-control" id="validationCustomUsername"
+                                aria-describedby="inputGroupPrepend" placeholder="Saisissez votre nom d’utilisateur"
+                                required>
+                        </div>
+
+
+
+                        <div>
+                            <label for="exampleFormControlInput2" class="form-label d-flex justify-content-between align-items-center">
+                                <span>Adresse e-mail</span>
+                                <a class="obligatoire" href="#">obligatoire *</a>
+                            </label>
+                            
+                            <input type="email" class="form-control" id="exampleFormControlInput2"
+                                placeholder="Entrez votre adresse de courriel">
+                        </div>
+
+
+                        <p class="italic">
+                            Un courriel est nécessaire pour récupérer votre compte en cas de <br> perte de votre mot de
+                            passe
+                        </p>
+
+                        <div>
+                            <label for="inputPassword5" class="form-label">Mot de passe</label>
+                            <input type="password" id="inputPassword5" class="form-control"
+                                aria-labelledby="passwordHelpBlock" placeholder="Entrez votre mot de passe">
+                        </div>
+                        <div id="passwordHelpBlock" class="form-text">
+
+                        </div>
+                        <p class="italic">
+                            Il est recommandé d’utiliser un mot de passe unique que vous <br>  n’utilisez sur aucun autre site
+                            web.
+                        </p>
+                        <div>
+                            <label for="inputPassword5" class="form-label">Confirmez le mot de passe</label>
+                            <input type="password" id="inputPassword5" class="form-control"
+                                aria-labelledby="passwordHelpBlock" placeholder="Entrez à nouveau le mot de passe">
+                            <div id="passwordHelpBlock" class="form-text">
+
+                            </div>
+                        </div>
+                        <div class="bouton">
+                            <button class="btn btn-primary" type="submit">S'inscrire</button>
+                        </div>
+                       
+
+                    </form>
+
+                </div>
+            </div>
+        </section>
+
+
 <form method="post">
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -14,21 +127,25 @@
         </div>
     {% endif %}
 
-    <div class="div container">
+    {# <div class="div container">
 
-    <h1 class="h3 mb-3 font-weight-normal">Connectez-vous</h1>
-    <label for="inputEmail">Email</label>
-    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
-    <label for="inputPassword">Mot de passe</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+    <h1>Se connecter</h1>
+
+    <label for="inputEmail" class="form-label">Adresse e-mail</label>
+    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus placeholder="Entrez votre adresse de courriel">
+    <label for="inputPassword" class="form-label">Mot de passe</label>
+    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required placeholder="Entrez votre mot de passe">
 
     <input type="hidden" name="_csrf_token"
            value="{{ csrf_token('authenticate') }}"
     >
 
-    <button class="btn btn-lg btn-primary" type="submit">
-        Connexion
-    </button>
+        <p class="text-end">
+            <a class="liengauche" href="#">Mot de passe oublié?</a>
+        </p>
+        <div class="bouton">
+            <button class="btn btn-primary" type="submit">Se connecter</button>
+        </div>
     </div>
-</form>
+</form> #}
 {% endblock %}
