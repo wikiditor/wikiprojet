@@ -27,7 +27,8 @@
                     <td></td>                      
                     <td>{{ row.email() }}</td>
                     <td>
-                       <a href="{{ path('app_admin_user_update', {'id': row.getId()}) }}" class="btn btn-primary fa fa-edit"></a>                    
+                       <a href="{{ path('app_admin_user_update', {'id': row.getId()}) }}" class="btn btn-primary fa fa-edit"></a>
+                       <a href="{{ path('app_admin_user_delete', {'id': row.getId()}) }}" class="btn btn-danger fa fa-trash"></a>                     
                     </td>
                 </tr>
             {% endfor %}

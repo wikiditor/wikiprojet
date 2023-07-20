@@ -58,5 +58,18 @@ class AdminController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+    #[Route('/delete/{id}', name: 'app_admin_user_delete')]
+    public function delete(string $id, UserRepository $userRepository): Response
+    {
+        $user = $userRepository->find($id);
+
+        if (!$user) {
+            throw $this->createNotFoundException('Le fichier n\'existe pas');
+        }
+
+        $userRepository->remove($user);
+
+        return $this->redirectToRoute('app_admin_user');
+    }
 
 }
