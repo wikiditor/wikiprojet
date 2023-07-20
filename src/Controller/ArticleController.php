@@ -102,7 +102,12 @@ class ArticleController extends AbstractController
     {
         $searchTerm = ucwords(mb_strtolower($searchTerm));
         $searchTerm = str_replace(' ', '_', $searchTerm);
+<<<<<<< Updated upstream
         //dd($searchTerm);
+=======
+
+
+>>>>>>> Stashed changes
         $httpClient = HttpClient::create();
 
         // Envoie une requête GET à l'API

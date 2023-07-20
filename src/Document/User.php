@@ -2,22 +2,32 @@
 
 namespace App\Document;
 
+// Importe les classes nécessaires pour la création du document User.
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+use App\Repository\UserRepository;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
-#[MongoDB\Document]
-class User
+// Définition du document User qui implémente UserInterface et PasswordAuthenticatedUserInterface.
+// UserInterface est utilisé par Symfony pour le système de sécurité.
+#[MongoDB\Document(repositoryClass: UserRepository::class)]
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
-    #[MongoDB\Id]
-    private string $id;
+    #[MongoDB\Id]    
+    private ?string $id = null;
+
+    #[MongoDB\Field(type: 'string')]
+    private ?string $email = null;
 
     #[MongoDB\Field(type: 'string')]
     private string $alias;
 
-    #[MongoDB\Field(type: 'string')]
-    private string $email;
+    #[MongoDB\Field(type: 'collection')]
+    private array $roles = ['ROLE_USER'];
 
     #[MongoDB\Field(type: 'string')]
-    private string $password;
+    private ?string $password = null;
 
     #[MongoDB\Field(type: 'string')]
     private string $lastName;
@@ -28,12 +38,17 @@ class User
     #[MongoDB\Field(type: 'string')]
     private string $picture;
 
+    #[MongoDB\Field(type: 'bool')]
+    private $isVerified = false;
 
-    public function getId(): string
+
+    // getters et setters
+
+    public function getId(): ?string
     {
         return $this->id;
     }
-    public function setId(string $id): User
+    public function setId(string $id): static
     {
         $this->id = $id;
 
@@ -41,39 +56,71 @@ class User
     }
 
 
-    public function getAlias(): string
-    {
-        return $this->alias;
-    }
-    public function setAlias(string $alias): User
-    {
-        $this->alias = $alias;
-
-        return $this;
-    }
-
-    public function getEmail(): string
+    public function getEmail(): ?string
     {
         return $this->email;
     }
-    public function setEmail(string $email): User
+    public function setEmail(string $email): static
     {
         $this->email = $email;
 
         return $this;
     }
 
+    public function getAlias(): string
+    {
+        return $this->alias;
+    }
+    public function setAlias(string $alias): static
+    {
+        $this->alias = $alias;
+
+        return $this;
+    }
+
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUserIdentifier(): string
+    {
+        return (string) $this->email;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): static
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    /**
+     * @see PasswordAuthenticatedUserInterface
+     */
     public function getPassword(): string
     {
         return $this->password;
     }
-    public function setPassword(string $password): User
+
+    public function setPassword(string $password): static
     {
         $this->password = $password;
 
         return $this;
     }
-
 
     public function getLastName(): string
     {
@@ -107,8 +154,25 @@ class User
 
         return $this;
     }
-    
-   
 
-    
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials(): void
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
+    }
+
+    public function isVerified(): bool
+    {
+        return $this->isVerified;
+    }
+
+    public function setIsVerified(bool $isVerified): static
+    {
+        $this->isVerified = $isVerified;
+
+        return $this;
+    }
 }
