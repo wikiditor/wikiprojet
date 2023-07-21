@@ -24,30 +24,22 @@ class FileController extends AbstractController
 
     if (!$user) {
         // Gérer le cas où l'utilisateur n'est pas authentifié
+        return $this->redirectToRoute('app_login');
     }
-    // Lier l'utilisateur actuel à l'entité File
-    $file->setUser($user);
-
-    // Définir l'id de l'utilisateur sur le fichier
-    $file->setUserId($user->getId());
 
     // Crée le formulaire de création de fichier
     $form = $this->createForm(FileType::class, $file);
-
     $form->handleRequest($request);
 
     if ($form->isSubmitted() && $form->isValid()) {
-        // Récupérer le contenu du formulaire
-        $content = $file->getContent();
-
-        // Enregistrer le contenu dans l'objet File
-        $file->setContent($content);
-
         // Définir la date de création et de dernière modification actuelle
         $timezone = new DateTimeZone('Europe/Paris');
         $now = new DateTime('now', $timezone);
         $file->setCreationDate($now);
         $file->setLastUpdate($now);
+
+        // On ajoute l'utilisateur connecté qui a créé le document
+        $file->setUser($user);
 
         // Sauvegarder le fichier dans la base de données
         $fileRepository->saveFile($file);
@@ -75,7 +67,7 @@ class FileController extends AbstractController
         }
 
         // Récupérer la liste des fichiers créés par l'utilisateur connecté
-        $listFiles = $fileRepository->findByUserId($user->getId());
+        $listFiles = $fileRepository->findByUser($user);
         
         return $this->render('file/list.html.twig', [
             'controller_name' => 'Liste des fichiers',

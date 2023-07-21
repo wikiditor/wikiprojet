@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Document\User;
 use App\Document\File;
 use Doctrine\Bundle\MongoDBBundle\ManagerRegistry;
 use Doctrine\Bundle\MongoDBBundle\Repository\ServiceDocumentRepository;
@@ -28,8 +29,8 @@ class FileRepository extends ServiceDocumentRepository
         $this->getDocumentManager()->remove($file);
         $this->getDocumentManager()->flush();
     }
-    public function findByUserId(string $userId): array
+    public function findByUser(User $user): array
     {
-        return $this->findBy(['userId' => $userId]);
+        return $this->findBy(['user' => $user]);
     }
 }
