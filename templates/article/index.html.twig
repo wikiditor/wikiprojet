@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ArticleController!
+{% block title %}Hello ArticleController   !
 {% endblock %}
 {% block stylesheets %}
 
@@ -8,47 +8,7 @@
 
 
 {% block body %}
-    
-    <!--Formulaire de recherche-->
-	<form method="get" id="search-form">
-		<input type="text" name="searchTerm" id="searchTerm" placeholder="Entrez votre recherche...">
-		<select name="language" id="language">
-			<option value="fr">Français</option>
-			<option value="en">English</option>
-			<option value="es">Español</option>
-			<option value="de">Deutsch</option>
-		</select>
-		<button type="submit">Rechercher</button>
-	</form>
-
-
-<script>
-// vérifie qu'on a bien chargé toute la page
-document.addEventListener("DOMContentLoaded", (e) => { // cherche le bouton dans le html
-let button = document.querySelector('#search-form button');
-
-// détecte le click sur le bouton
-button.addEventListener('click', (e) => { // supprime le comportement normal du formulaire
-e.preventDefault();
-
-// RÉCUPÈRE les données saisies par l'utilisateur
-const searchTerm = document.getElementById('searchTerm').value;
-const language = document.getElementById('language').value;
-
-
-// redirection vers la page demandée
-window.location.replace(`/article/${searchTerm}/${language}`);
-/*https://'+ language +'.wikipedia.org/w/api.php?action=query&titles=' + searchTerm + 
-        '&prop=extracts|images|links*/
-});
-});
-	</script>
-
-
-	
-    
-    
-    {# charge le contenu de l'article récupéré via l'api #}
+ {# charge le contenu de l'article récupéré via l'api #}
   
         <div class="cutpage">
 	        <div class="widthpage">
@@ -150,6 +110,7 @@ window.location.replace(`/article/${searchTerm}/${language}`);
                 </article>
             </div>
         </div>
+         
 <script src="/assets/js/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
 <script>
 	tinymce.init({selector: '#wikiditor'});

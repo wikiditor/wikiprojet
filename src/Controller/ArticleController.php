@@ -89,6 +89,7 @@ class ArticleController extends AbstractController
                     //dd($infos);
                     $images[] = [
                         'title' => $image->title,
+                        
                         'url' => $infos->url
                     ];
                 }
