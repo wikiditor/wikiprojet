@@ -35,7 +35,7 @@ class ArticleController extends AbstractController
      * @param [type] $language
      * @return void
      */
-    public function getArticle($searchTerm, $language)
+    public function getArticle($searchTerm, $language): Response
     {
 
         $article = $this->getArticleHTML($searchTerm,  $language);
@@ -118,5 +118,31 @@ class ArticleController extends AbstractController
             'images' => [],
             'links' => []
         ];
+    }
+
+    /**
+     * Fonction de sauvegarde en BDD d'un document
+     *
+     * @return Response
+     */
+    #[Route('/save', name: 'app_article_save')]
+    function save(): Response{
+
+        // récupérer ce qui a été tapé
+
+        // retrouver l'article actuel (champ caché)
+
+        // recharge l'article (trouver le bon)
+        $article = $this->getArticleHTML('Orange mécanique',  'fr');
+
+        // sauvegarde les données en BDD
+
+        // créer un message de validation
+        $article['message'] = 'Bravo, votre document à été enregistré';
+
+        // recharge le twig
+        return $this->render('article/index.html.twig', 
+            $article
+        );
     }
 }
