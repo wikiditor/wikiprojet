@@ -16,90 +16,39 @@ class ArticleController extends AbstractController
 
     #[Route('/article', name: 'app_article')]
     /**
-     * Récupère un article Wikipédia via l'API
+     * Récupère un article prédéfini de Wikipédia via l'API
      *
      * @return Response
      * @todo changer le nom de l'article dans l'url de l'api (pour ne pas qu'il soit en dur)
      */
-    public function getArticle(): Response
-    {
-        // Crée une instance de HttpClient
-        $httpClient = HttpClient::create();
+    public function getDefautArticle(): Response {
+        $article = $this->getArticleHTML('Orange mécanique',  'fr');
+        return $this->render('article/index.html.twig', $article);
+    }
 
-        // Envoie une requête GET à l'API
-        $response = $httpClient->request('GET', 'https://fr.wikipedia.org/w/api.php?action=query&titles=france&prop=extracts|images|pageimages|info|links&pithumbsize=400&inprop=url&redirects=&format=json&origin=*');
+    #[Route('/article/{searchTerm}/{language}', name: 'app_article_search')]
+    /**
+     * Récupère un article spécifié de Wikipédia via l'API
+     *
+     * @param [type] $searchTerm
+     * @param [type] $language
+     * @return void
+     */
+    public function getArticle($searchTerm, $language){
 
-        // Récupère le contenu de la réponse et convertit le JSON en une variable php
-        $content = json_decode($response->getContent());
-        // dump($content);
-
-        // Accède aux valeurs 'extract' et 'title' dans l'objet PHP
-        $pages = (array)$content->query->pages;
-        $article = array_pop($pages);
-        // dd($article);
-        $extract = $article->extract;
-        $images = [];
-        $links = [];
-        foreach ($article->images as $image) {
-
-            //$response = $httpClient->request('GET', 'https://commons.wikimedia.org/w/api.php?action=query&pageids=69582727&prop=imageinfo&iiprop=extmetadata|url&format=json');
-            //dd($image);
-            $response = $httpClient->request('GET', 'https://fr.wikipedia.org/w/api.php?action=query&titles=' . $image->title . '&prop=imageinfo&iiprop=url&format=json');
-            $content = json_decode($response->getContent());
-            $pages = (array)$content->query->pages;
-            $page = array_pop($pages);
-            
-            $infos = (array) $page->imageinfo;
-            $infos = array_pop($infos);
-            
-            //dd($infos);
-            $images[] = [
-                'title' => $image->title,
-                'url' => $infos->url
-            ];
-        }
-        
-        $title = $article->title;
-
-
-        //récuperation des liens dans l'api 
-        $links = [];
-
-        foreach ($article->links as $link) {
-
-            //$response = $httpClient->request('GET', 'https://commons.wikimedia.org/w/api.php?action=query&pageids=69582727&prop=imageinfo&iiprop=extmetadata|url&format=json');
-            //dd($image);
-            $response = $httpClient->request('GET', 'https://fr.wikipedia.org/w/api.php?action=query&titles=' . $link->title . '&prop=linkinfo&iiprop=url&format=json');
-            $content = json_decode($response->getContent());
-            $pages = (array)$content->query->pages;
-            $page = array_pop($pages);
-            $infos = (array) $page->linkinfo;
-            $infos = array_pop($infos);
-            
-            //dd($infos);
-            $links[] = [
-                'title' => $link->title,
-                'url' => $infos->url
-            ];
-        }
-         
-    
-
-        // Renvoie une réponse HTTP en affichant le contenu de la réponse de l'API
-        return $this->render('article/index.html.twig', [
-            'title' => $title,
-            'extract' => $extract,
-            'images' => $images,
-            'links' => $links
-        ]);
-
-        
+        $article = $this->getArticleHTML($searchTerm,  $language);
+        return $this->render('article/index.html.twig', $article);
     }
 
 
-    #[Route('/article/{searchTerm}/{language}', name: 'app_article_search')]
-    public function modifyWikipediaApiUrl($searchTerm, $language)
-    {
+    /**
+     * Récupère toutes les datas de l'article spécifié
+     *
+     * @param string $searchTerm
+     * @param [type] $language
+     * @return array
+     */
+    private function getArticleHTML(string $searchTerm, $language):array {
         $searchTerm = ucwords(mb_strtolower($searchTerm));
         $searchTerm = str_replace(' ', '_', $searchTerm);
         //dd($searchTerm);
@@ -152,19 +101,19 @@ class ArticleController extends AbstractController
             }
 
             $title = $article->title;
-            return $this->render('article/index.html.twig', [
+            return [
                 'title' => $title,
                 'extract' => $extract,
                 'images' => $images,
                 'links'=> $links
-            ]);
-        } else {
-            return $this->render('article/index.html.twig', [
-                'title' => 'Nous n\'avons pas compris votre requête.',
-                'extract' => 'Cette page n\'existe pas.',
-                'images' => [],
-                'links' => []
-            ]);
+            ];
         }
+
+        return [
+            'title' => 'Nous n\'avons pas compris votre requête.',
+            'extract' => 'Cette page n\'existe pas.',
+            'images' => [],
+            'links' => []
+        ];
     }
 }
