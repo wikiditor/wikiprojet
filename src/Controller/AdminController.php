@@ -81,7 +81,7 @@ class AdminController extends AbstractController
         $userRepository->updateUser($user);
 
         // Rediriger vers la liste des utilisateurs
-            throw $this->createNotFoundException('Le fichier n\'existe pas');
+        return $this->redirectToRoute('app_admin_user');
     }   
     
 
