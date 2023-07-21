@@ -48,11 +48,15 @@ class UserRepository extends ServiceDocumentRepository implements PasswordUpgrad
     }
 
 
-    public function updateUser(User $user, bool $isBlocked = false): void
+    public function updateUser(User $user): void
     {
-        $user->setBlocked($isBlocked);
         $this->getDocumentManager()->persist($user);
         $this->getDocumentManager()->flush();
     }
 
+    public function remove(User $user): void
+    {
+        $this->getDocumentManager()->remove($user);
+        $this->getDocumentManager()->flush();
+    }
 }

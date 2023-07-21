@@ -1,0 +1,7 @@
+<svg width="50" height="28" viewBox="0 0 50 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="8" y="4" width="20" height="20" rx="4" fill="#212529"/>
+<g style="mix-blend-mode:multiply" opacity="0.7">
+<rect x="8.5" y="4.5" width="19" height="19" rx="3.5" stroke="#212529"/>
+</g>
+<path d="M38 17.0008L33 12.0008L33.7 11.3008L38 15.6008L42.3 11.3008L43 12.0008L38 17.0008Z" fill="#212529"/>
+</svg>

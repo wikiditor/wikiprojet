@@ -27,7 +27,7 @@
 				<tr>
 					<th>Alias</th>
 					<th>Email</th>
-					<th>Action</th>
+					<th>Actions</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -41,12 +41,13 @@
 								<a href="{{ path('app_admin_user_block', {'id': row.id}) }}" class="btn btn-warning fa fa-ban"></a>
 							{% else %}
 								<a href="{{ path('app_admin_user_block', {'id': row.id}) }}" class="btn btn-danger fa fa-ban"></a>
-							{% endif %}
-						</td>
-					</tr>
-				{% endfor %}
-			</tbody>
-		</table>
-	</div>
+							{% endif %}                            
+                            <a href="{{ path('app_admin_user_delete', {'id': row.getId()}) }}" class="btn btn-danger fa fa-trash"></a>                     
+                    </td>
+                </tr>
+            {% endfor %}    
+            </tbody>
+        </table>
+    </div>
 
 {% endblock %}

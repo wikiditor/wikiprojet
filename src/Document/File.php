@@ -2,6 +2,7 @@
 
 namespace App\Document;
 
+use App\Document\User;
 use DateTime;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 use DateTimeZone;
@@ -24,10 +25,8 @@ class File
     #[MongoDB\Field(type: 'date')]
     private ?\DateTime $lastUpdate = null;
 
-    // #[MongoDB\UserId]
-    private string $userId;
-
-
+    #[MongoDB\ReferenceOne(targetDocument: User::class)]
+    private ?User $user = null;
 
 
 
@@ -43,7 +42,7 @@ class File
     }
 
 
-      public function getTitle(): string
+    public function getTitle(): string
     {
         return $this->title;
     }
@@ -64,7 +63,7 @@ class File
         $this->lastUpdate = new DateTime('now', new DateTimeZone('Europe/Paris'));
         return $this;
     }
-    
+
 
     public function getCreationDate(): ?\DateTime
     {
@@ -89,19 +88,20 @@ class File
         return $this;
     }
 
-    public function getuserId(): string
-    {
-        return $this->userId;
-    }
-    public function setUserId(string $userId): File
-    {
-        $this->userId = $userId;
-
-        return $this;
-    }
     public function __construct()
     {
         $this->creationDate = new \DateTime('now', new DateTimeZone('Europe/Paris'));
     }
     
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): File
+    {
+        $this->user = $user;
+
+        return $this;
+    }
 }
