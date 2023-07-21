@@ -8,30 +8,8 @@
 
 
 {% block body %}
-
-<header>
-</header>
-<main>
-</main>
-<footer>
-</footer>
-<!-- Formulaire de recherche -->
-<form method="get" id="search-form">
-    <input type="text" name="searchTerm" id="searchTerm" placeholder="Entrez votre recherche...">
-    <select name="language" id="language">
-        <option value="fr">Français</option>
-        <option value="en">English</option>
-        <option value="es">Español</option>
-        <option value="de">Deutsch</option>
-    </select>
-    <button type="submit">Rechercher</button>
-</form>
-
-<script>
-// vérifie qu'on a bien chargé toute la page
-document.addEventListener("DOMContentLoaded", (e) => {
     
-    <!-- Formulaire de recherche -->
+    <!--Formulaire de recherche-->
 	<form method="get" id="search-form">
 		<input type="text" name="searchTerm" id="searchTerm" placeholder="Entrez votre recherche...">
 		<select name="language" id="language">
@@ -42,8 +20,11 @@ document.addEventListener("DOMContentLoaded", (e) => {
 		</select>
 		<button type="submit">Rechercher</button>
 	</form>
-	<script>
-		// vérifie qu'on a bien chargé toute la page
+
+
+<script>
+
+// vérifie qu'on a bien chargé toute la page
 document.addEventListener("DOMContentLoaded", (e) => { // cherche le bouton dans le html
 let button = document.querySelector('#search-form button');
 
@@ -66,7 +47,8 @@ window.location.replace(`/article/${searchTerm}/${language}`);
 	</script>
 
 
-	{# charge le contenu de l'article récupéré via l'api#}
+	
+    {# charge le contenu de l'article récupéré via l'api #}
 	<section>
 		<article>
 			<h1 id="title">
