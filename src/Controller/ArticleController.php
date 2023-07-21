@@ -21,7 +21,8 @@ class ArticleController extends AbstractController
      * @return Response
      * @todo changer le nom de l'article dans l'url de l'api (pour ne pas qu'il soit en dur)
      */
-    public function getDefautArticle(): Response {
+    public function getDefautArticle(): Response
+    {
         $article = $this->getArticleHTML('Orange mécanique',  'fr');
         return $this->render('article/index.html.twig', $article);
     }
@@ -34,7 +35,8 @@ class ArticleController extends AbstractController
      * @param [type] $language
      * @return void
      */
-    public function getArticle($searchTerm, $language){
+    public function getArticle($searchTerm, $language)
+    {
 
         $article = $this->getArticleHTML($searchTerm,  $language);
         return $this->render('article/index.html.twig', $article);
@@ -48,19 +50,20 @@ class ArticleController extends AbstractController
      * @param [type] $language
      * @return array
      */
-    private function getArticleHTML(string $searchTerm, $language):array {
+    private function getArticleHTML(string $searchTerm, $language): array
+    {
         $searchTerm = ucwords(mb_strtolower($searchTerm));
         $searchTerm = str_replace(' ', '_', $searchTerm);
         //dd($searchTerm);
         $httpClient = HttpClient::create();
 
         // Envoie une requête GET à l'API
-        $response = $httpClient->request('GET', 'https://'. $language .'.wikipedia.org/w/api.php?action=query&titles=' . $searchTerm . 
-        '&prop=extracts|images|pageimages|info|links&pithumbsize=400&inprop=url&redirects=&format=json&origin=*');
+        $response = $httpClient->request('GET', 'https://' . $language . '.wikipedia.org/w/api.php?action=query&titles=' . $searchTerm .
+            '&prop=extracts|images|pageimages|info|links&pithumbsize=400&inprop=url&redirects=&format=json&origin=*');
 
         // Récupère le contenu de la réponse et convertit le JSON en une variable php
         $content = json_decode($response->getContent());
-        
+
         // dump($content);
 
         // Accède aux valeurs 'extract' et 'title' dans l'objet PHP
@@ -72,17 +75,17 @@ class ArticleController extends AbstractController
             $images = [];
             //dd($article->images);
             foreach ($article->images as $image) {
-    
+
                 $response = $httpClient->request('GET', 'https://fr.wikipedia.org/w/api.php?action=query&titles=' . $image->title . '&prop=imageinfo&iiprop=url&format=json');
                 $content = json_decode($response->getContent());
                 $pages = (array)$content->query->pages;
                 $page = array_pop($pages);
-                
+
                 $page = (array) $page;
-                if(isset($page['imageinfo'])) {
+                if (isset($page['imageinfo'])) {
                     $infos = $page['imageinfo'];
                     $infos = array_pop($infos);
-                    
+
                     //dd($infos);
                     $images[] = [
                         'title' => $image->title,
@@ -92,9 +95,9 @@ class ArticleController extends AbstractController
             }
 
             $links = [];
-            foreach($article->links as $link) {
+            foreach ($article->links as $link) {
                 $links[] = [
-                    'wikipedia_url' => 'https://'. $language .'.wikipedia.org/wiki/' . str_replace(' ', '_', $link->title),
+                    'wikipedia_url' => 'https://' . $language . '.wikipedia.org/wiki/' . str_replace(' ', '_', $link->title),
                     'url' => '/article/' . $link->title . '/' . $language,
                     'label' => $link->title,
                 ];
@@ -105,7 +108,7 @@ class ArticleController extends AbstractController
                 'title' => $title,
                 'extract' => $extract,
                 'images' => $images,
-                'links'=> $links
+                'links' => $links
             ];
         }
 
