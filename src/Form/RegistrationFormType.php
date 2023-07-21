@@ -8,6 +8,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -31,14 +32,14 @@ class RegistrationFormType extends AbstractType
         $builder
             //ajoute le champ pour le username
             ->add('alias', TextType::class, [
-                'label' => 'Pseudo',
+                'label' => 'Nom d\'utilisateur',
                 'attr' => [
                     'class' => 'form-control'
                 ]
             ])
             //ajoute le champ pour l'email' et un message d'erreur si le format est invalide
             ->add('email', EmailType::class,[  
-                'label' => 'Email',
+                'label' => 'Adresse e-mail',
                 'attr' => [
                     'class' => 'form-control'
                 ],             
@@ -59,8 +60,22 @@ class RegistrationFormType extends AbstractType
                 ],
             ])
             //permet à l'utilisateur d'entrer son mot de passe qui doit contenir au moins 6 caractères
-            ->add('plainPassword', PasswordType::class, [               
-                'label' => 'Mot de passe',              
+            ->add('plainPassword', RepeatedType::class, [
+                'type' => PasswordType::class,
+                'first_options'  => [
+                    'label' => 'Mot de passe',
+                    'attr' => [
+                        'autocomplete' => 'new-password',
+                        'class' => 'form-control'
+                    ],
+                ],
+                'second_options' => [
+                    'label' => 'Confirmer le mot de passe',
+                    'attr' => [
+                        'autocomplete' => 'new-password',
+                        'class' => 'form-control'
+                    ],
+                ],
                 'mapped' => false,
                 'attr' => [
                     'autocomplete' => 'new-password',
