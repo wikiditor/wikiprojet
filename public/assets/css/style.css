@@ -35,6 +35,15 @@
 }
 
 .container {
-
     text-align: center;
+}
+
+.cutpage{ 
+    display: flex ;
+    justify-content: space-between ;
+}
+
+.widthpage{
+    width: 45%;
+   
 }
