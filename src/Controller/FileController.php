@@ -11,6 +11,8 @@ use App\Document\File;
 use App\Form\FileType;
 use DateTime;
 use DateTimeZone;
+use Doctrine\ODM\MongoDB\DocumentManager;
+use Knp\Snappy\Pdf;
 use Symfony\Component\Security\Core\Security;
 
 #[Route('/file')]
@@ -139,4 +141,34 @@ class FileController extends AbstractController
 
         return $this->redirectToRoute('app_file_list');
     }
+
+    #[Route('/export/pdf/{id}', name: 'app_file_export')]
+    public function exportContentToPdf(string $id, Pdf $snappy, FileRepository $fileRepository)
+    {
+        // Récupérer le document File avec l'ID spécifié
+        $file = $fileRepository->find($id);
+    
+        if (!$file) {
+            throw $this->createNotFoundException('Le fichier n\'existe pas');
+        }
+    
+        // Créer le PDF à partir du contenu du fichier
+        $html = '<html><body><p>' . $file->getContent() . '</p></body></html>';
+        $pdfContent = $snappy->getOutputFromHtml($html);
+    
+        // Créez la réponse
+        $response = new Response(
+            $pdfContent,
+            Response::HTTP_OK,
+            ['content-type' => 'application/pdf']
+        );
+    
+        return $this->render('file/index.html.twig', [
+            'controller_name' => 'FileController',
+            'form' => $form->createView(),
+            'file' => $file,
+        ]);
+        
+    }
+    
 }
