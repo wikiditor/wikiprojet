@@ -29,7 +29,9 @@ class ArticleController extends AbstractController
     public function getDefaultArticle(Request $request, FileRepository $fileRepository, Security $security): Response
     {
         $twigVars = $this->getArticleHTML('Orange mécanique',  'fr');
+
         $twigVars['form'] = $this->buildAndProcessFileForm($request, $fileRepository, $security);
+
         return $this->render('article/index.html.twig', $twigVars);
     }
 
@@ -44,10 +46,48 @@ class ArticleController extends AbstractController
     public function getArticle($searchTerm, $language, Request $request, FileRepository $fileRepository, Security $security)
     {
         $twigVars = $this->getArticleHTML($searchTerm,  $language);
+
         $twigVars['form'] = $this->buildAndProcessFileForm($request, $fileRepository, $security);
+        
         return $this->render('article/index.html.twig', $twigVars);
     }
-
+    
+    #[Route('/article/{id}', name: 'app_article_update', methods: ['POST', 'GET'])]
+    public function update(Request $request, FileRepository $fileRepository, Security $security, ?string $id = null): Response
+    {
+        $user = $security->getUser();
+    
+        if (!$user) {
+            // Gérer le cas où l'utilisateur n'est pas authentifié
+            return $this->redirectToRoute('app_login');
+        }
+    
+        if ($id) {
+            // Update
+            $file = $fileRepository->find($id);
+    
+            if (!$file) {
+                throw $this->createNotFoundException('Le fichier n\'existe pas');
+            }
+    
+            // Ici, on vérifie si l'utilisateur connecté est bien le propriétaire du fichier à modifier
+            if ($user !== $file->getUser()) {
+                // L'utilisateur actuel n'est pas autorisé à mettre à jour ce fichier
+                throw $this->createAccessDeniedException('Vous n\'êtes pas autorisé à modifier ce fichier');
+            }
+    
+            // Appeler la fonction buildAndProcessFileForm avec l'ID du fichier à modifier
+            $formView = $this->buildAndProcessFileForm($request, $fileRepository, $security, $id);
+        } else {
+            // Si l'ID n'est pas fourni, c'est une création, donc appeler la fonction sans ID
+            $formView = $this->buildAndProcessFileForm($request, $fileRepository, $security);
+        }
+    
+        return $this->render('file/index.html.twig', [
+            'controller_name' => 'FileController',
+            'form' => $formView,
+        ]);
+    }
     /**
      * Fonction qui génère et gère le formulaire
      *
