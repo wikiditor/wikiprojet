@@ -127,7 +127,7 @@ public function createOrUpdate(Request $request, FileRepository $fileRepository,
     private function buildAndProcessFileForm(Request $request, FileRepository $fileRepository, Security $security)
     {
         $request->get('wikiditor');
-        // ICI remettre le code de création du form
+        
         $file = new File();
         $user = $security->getUser();
 
