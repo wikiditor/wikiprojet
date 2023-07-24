@@ -85,18 +85,22 @@ class AdminController extends AbstractController
     }   
     
 
-
+    //génère une route pour la suppression de l'utilisateur
     #[Route('/delete/{id}', name: 'app_admin_user_delete')]
     public function delete(string $id, UserRepository $userRepository): Response
-    {     
+    {   
+        //trouve l'utilisateur dans la base de données avec l'id spécifié  
         $user = $userRepository->find($id);
 
+        //affiche un message si l'utilisateur n'est pas trouvé avec cet id
         if (!$user) {
             throw $this->createNotFoundException('L\'utilisateur n\'existe pas');
         }
 
+        //supprime l'utilisateur de la base de données
         $userRepository->remove($user);
 
+        //après la suppression, redirige l'administrateur vers le dashboard admin
         return $this->redirectToRoute('app_admin_user');
     }
 
