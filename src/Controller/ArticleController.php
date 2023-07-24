@@ -28,8 +28,7 @@ class ArticleController extends AbstractController
      */
     public function getDefaultArticle(Request $request, FileRepository $fileRepository, Security $security): Response
     {
-        $twigVars = $this->getArticleHTML('Orange mécanique',  'fr');
-
+        $twigVars = $this->getArticleHTML('Stanley Kubrick',  'fr');
         $twigVars['form'] = $this->buildAndProcessFileForm($request, $fileRepository, $security);
 
         return $this->render('article/index.html.twig', $twigVars);
@@ -109,6 +108,18 @@ public function createOrUpdate(Request $request, FileRepository $fileRepository,
     ]);
 }
 
+    #[Route('/article/fake', name: 'app_article_fake')]
+    /**
+     * Récupère un article prédéfini de Wikipédia via l'API
+     *
+     * @return Response
+     * @todo changer le nom de l'article dans l'url de l'api (pour ne pas qu'il soit en dur)
+     */
+    public function getFakeArticle(Request $request, FileRepository $fileRepository, Security $security): Response
+    {
+        return $this->render('article/fake.html.twig');
+    }
+
     /**
      * Fonction qui génère et gère le formulaire
      *
@@ -121,10 +132,10 @@ public function createOrUpdate(Request $request, FileRepository $fileRepository,
         $file = new File();
         $user = $security->getUser();
 
-        if (!$user) {
-            // Gérer le cas où l'utilisateur n'est pas authentifié
-            return $this->redirectToRoute('app_login');
-        }
+        // if (!$user) {
+        //     // Gérer le cas où l'utilisateur n'est pas authentifié
+        //     return $this->redirectToRoute('app_login');
+        // }
 
         // Crée le formulaire de création de fichier
         $form = $this->createForm(FileType::class, $file);

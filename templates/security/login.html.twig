@@ -2,9 +2,6 @@
 
 {% block title %}Connexio..{% endblock %}
 
-{% block stylesheets %}
-    <link rel="stylesheet" href="/assets/styles/style.css">
-{% endblock %}
 
 {% block body %}
 
@@ -56,37 +53,4 @@
     </div>                  
      
 {% endblock %}
-
-{# <form method="post">
-    {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
-
-    {% if app.user %}
-        <div class="mb-3">
-            Vous êtes connecté en tant que {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
-        </div>
-    {% endif %} #}
-
-    {# <div class="div container">
-
-    <h1>Se connecter</h1>
-
-    <label for="inputEmail" class="form-label">Adresse e-mail</label>
-    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus placeholder="Entrez votre adresse de courriel">
-    <label for="inputPassword" class="form-label">Mot de passe</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required placeholder="Entrez votre mot de passe">
-
-    <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
-
-        <p class="text-end">
-            <a class="liengauche" href="#">Mot de passe oublié?</a>
-        </p>
-        <div class="bouton">
-            <button class="btn btn-primary" type="submit">Se connecter</button>
-        </div>
-    </div>
-</form> #}
 
