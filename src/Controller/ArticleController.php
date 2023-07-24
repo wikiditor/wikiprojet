@@ -28,7 +28,7 @@ class ArticleController extends AbstractController
      */
     public function getDefaultArticle(Request $request, FileRepository $fileRepository, Security $security): Response
     {
-        $twigVars = $this->getArticleHTML('Orange mécanique',  'fr');
+        $twigVars = $this->getArticleHTML('Stanley Kubrick',  'fr');
         $twigVars['form'] = $this->buildAndProcessFileForm($request, $fileRepository, $security);
         return $this->render('article/index.html.twig', $twigVars);
     }
