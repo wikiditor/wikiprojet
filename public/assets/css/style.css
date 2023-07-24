@@ -20,6 +20,8 @@
 
 .button-title {
     vertical-align: middle;
+    text-decoration: none;
+    color: white;
 }
 
 .add-circle {
@@ -36,11 +38,6 @@
     display: flex ;
     justify-content: space-around ;
 
-}
-
-.widthpage{
-    /*width: 47%;*/
-   
 }
 
 .pagewikiditor{
