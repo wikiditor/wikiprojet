@@ -18,7 +18,7 @@
     </ul>
 </div>
 <div class="mb-3">
-<a class="btn btn-success" href="{{ path('app_file') }}">Crée un nouveau projet</a>
+<a class="btn btn-success" href="{{ path('app_article_create_or_update') }}">Crée un nouveau projet</a>
 </div>
 
 {% if listFiles is not empty %}
@@ -35,7 +35,7 @@
             <tbody>
             {% for row in listFiles %}
                 <tr>
-                    <td><a href="{{ path('app_file_update', {id: row.id, update: true}) }}">{{ row.title }}</a></td>
+                    <td><a href="{{ path('app_article_create_or_update', {id: row.id, update: true}) }}">{{ row.title }}</a></td>
                     <td>{{ row.creationDate|date('d/m/Y à H:i', 'Europe/Paris')}}</td>
                     <td>{{ row.lastUpdate|date('d/m/Y à H:i', 'Europe/Paris')}}</td>
                     <td><a href="{{ path('app_file_delete', {id:row.id}) }}"><span class="btn btn-danger fa fa-trash"></span></a>

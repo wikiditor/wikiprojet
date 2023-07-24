@@ -33,4 +33,13 @@ class FileRepository extends ServiceDocumentRepository
     {
         return $this->findBy(['user' => $user]);
     }
+    public function findByUserSortedByLastUpdate(User $user): array
+    {
+        return $this->createQueryBuilder()
+            ->field('user')->equals($user)
+            ->sort('lastUpdate', 'desc')
+            ->getQuery()
+            ->execute()
+            ->toArray();
+    }
 }

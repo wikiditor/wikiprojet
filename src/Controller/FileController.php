@@ -19,42 +19,41 @@ use Symfony\Component\Security\Core\Security;
 class FileController extends AbstractController
 {
     #[Route('/', name: 'app_file')]
-    public function index(Request $request, FileRepository $fileRepository, Security $security)
-{
-    $file = new File();
-    $user = $security->getUser();
+    public function index(Request $request, FileRepository $fileRepository, Security $security): Response
+    {
+        $file = new File();
+        $user = $security->getUser();
 
-    if (!$user) {
-        // Gérer le cas où l'utilisateur n'est pas authentifié
-        return $this->redirectToRoute('app_login');
+        if (!$user) {
+            // Gérer le cas où l'utilisateur n'est pas authentifié
+            return $this->redirectToRoute('app_login');
+        }
+
+        // Crée le formulaire de création de fichier
+        $form = $this->createForm(FileType::class, $file);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Définir la date de création et de dernière modification actuelle
+            $timezone = new DateTimeZone('Europe/Paris');
+            $now = new DateTime('now', $timezone);
+            $file->setCreationDate($now);
+            $file->setLastUpdate($now);
+
+            // On ajoute l'utilisateur connecté qui a créé le document
+            $file->setUser($user);
+
+            // Sauvegarder le fichier dans la base de données
+            $fileRepository->saveFile($file);
+
+            return $this->redirectToRoute('app_file_list');
+        }
+
+        return $this->render('file/index.html.twig', [
+            'controller_name' => 'FileController',
+            'form' => $form->createView(),
+        ]);
     }
-
-    // Crée le formulaire de création de fichier
-    $form = $this->createForm(FileType::class, $file);
-    $form->handleRequest($request);
-
-    if ($form->isSubmitted() && $form->isValid()) {
-        // Définir la date de création et de dernière modification actuelle
-        $timezone = new DateTimeZone('Europe/Paris');
-        $now = new DateTime('now', $timezone);
-        $file->setCreationDate($now);
-        $file->setLastUpdate($now);
-
-        // On ajoute l'utilisateur connecté qui a créé le document
-        $file->setUser($user);
-
-        // Sauvegarder le fichier dans la base de données
-        $fileRepository->saveFile($file);
-
-        return $this->redirectToRoute('app_file_list');
-    }
-
-    return $this->render('file/index.html.twig', [
-        'controller_name' => 'FileController',
-        'form' => $form->createView(),
-    ]);
-}
-
 
     #[Route('/list', name: 'app_file_list')]
     public function getListFiles(FileRepository $fileRepository, Security $security): Response
@@ -69,8 +68,8 @@ class FileController extends AbstractController
         }
 
         // Récupérer la liste des fichiers créés par l'utilisateur connecté
-        $listFiles = $fileRepository->findByUser($user);
-        
+        $listFiles = $fileRepository->findByUserSortedByLastUpdate($user);
+                
         return $this->render('file/list.html.twig', [
             'controller_name' => 'Liste des fichiers',
             'listFiles' => $listFiles,
@@ -92,7 +91,7 @@ class FileController extends AbstractController
             // Gérer le cas où l'utilisateur n'est pas authentifié
         }
 
-        if ($user->getId() !== $file->getUserId()) {
+        if ($user->getId() !== $file->getUser()->getId()) {
             // L'utilisateur actuel n'est pas autorisé à mettre à jour ce fichier
             throw $this->createAccessDeniedException('Vous n\'êtes pas autorisé à modifier ce fichier');
         }
@@ -133,7 +132,7 @@ class FileController extends AbstractController
             // Gérer le cas où l'utilisateur n'est pas authentifié
         }
 
-        if ($user->getId() !== $file->getUserId()) {
+        if ($user->getId() !== $file->getUser()->getId()) {
             // L'utilisateur actuel n'est pas autorisé à supprimer ce fichier
             throw $this->createAccessDeniedException('Vous n\'êtes pas autorisé à supprimer ce fichier');
         }
@@ -141,35 +140,6 @@ class FileController extends AbstractController
         $fileRepository->remove($file);
 
         return $this->redirectToRoute('app_file_list');
-    }
-
-    #[Route('/export/pdf/{id}', name: 'app_file_export')]
-    public function exportContentToPdf(string $id, Pdf $snappy, FileRepository $fileRepository)
-    {
-        // Récupérer le document File avec l'ID spécifié
-        $file = $fileRepository->find($id);
-    
-        if (!$file) {
-            throw $this->createNotFoundException('Le fichier n\'existe pas');
-        }
-    
-        // Créer le PDF à partir du contenu du fichier
-        $html = '<html><body><p>' . $file->getContent() . '</p></body></html>';
-        $pdfContent = $snappy->getOutputFromHtml($html);
-    
-        // Créez la réponse
-        $response = new Response(
-            $pdfContent,
-            Response::HTTP_OK,
-            ['content-type' => 'application/pdf']
-        );
-    
-        return $this->render('file/index.html.twig', [
-            'controller_name' => 'FileController',
-            'form' => $form->createView(),
-            'file' => $file,
-        ]);
-        
     }
     
 }
