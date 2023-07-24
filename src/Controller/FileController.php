@@ -76,6 +76,7 @@ class FileController extends AbstractController
             'listFiles' => $listFiles,
         ]);
     }
+    
     #[Route('/update/{id}', name: 'app_file_update', methods: ['POST', 'GET'])]
     public function update(Request $request, string $id, FileRepository $fileRepository, Security $security): Response
     {
