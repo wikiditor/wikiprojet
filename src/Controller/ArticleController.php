@@ -60,10 +60,10 @@ class ArticleController extends AbstractController
         $file = new File();
         $user = $security->getUser();
 
-        if (!$user) {
-            // Gérer le cas où l'utilisateur n'est pas authentifié
-            return $this->redirectToRoute('app_login');
-        }
+        // if (!$user) {
+        //     // Gérer le cas où l'utilisateur n'est pas authentifié
+        //     return $this->redirectToRoute('app_login');
+        // }
 
         // Crée le formulaire de création de fichier
         $form = $this->createForm(FileType::class, $file);
