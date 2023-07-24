@@ -20,6 +20,8 @@
 
 .button-title {
     vertical-align: middle;
+    text-decoration: none;
+    color: white;
 }
 
 .add-circle {
