@@ -28,7 +28,7 @@ class ArticleController extends AbstractController
      */
     public function getDefaultArticle(Request $request, FileRepository $fileRepository, Security $security): Response
     {
-        $twigVars = $this->getArticleHTML('Orange mécanique',  'fr');
+        $twigVars = $this->getArticleHTML('Stanley Kubrick',  'fr');
         $twigVars['form'] = $this->buildAndProcessFileForm($request, $fileRepository, $security);
         return $this->render('article/index.html.twig', $twigVars);
     }
@@ -46,6 +46,18 @@ class ArticleController extends AbstractController
         $twigVars = $this->getArticleHTML($searchTerm,  $language);
         $twigVars['form'] = $this->buildAndProcessFileForm($request, $fileRepository, $security);
         return $this->render('article/index.html.twig', $twigVars);
+    }
+
+    #[Route('/article/fake', name: 'app_article_fake')]
+    /**
+     * Récupère un article prédéfini de Wikipédia via l'API
+     *
+     * @return Response
+     * @todo changer le nom de l'article dans l'url de l'api (pour ne pas qu'il soit en dur)
+     */
+    public function getFakeArticle(Request $request, FileRepository $fileRepository, Security $security): Response
+    {
+        return $this->render('article/fake.html.twig');
     }
 
     /**
