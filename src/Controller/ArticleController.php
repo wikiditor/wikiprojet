@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Document\File;
 use App\Repository\FileRepository;
-use PhpParser\Node\Expr\Isset_;
 use ReflectionClass;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
