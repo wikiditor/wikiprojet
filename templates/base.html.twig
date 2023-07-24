@@ -20,22 +20,17 @@
         <nav class="navbar">
             <!--  <div class="container-fluid flex-row-reverse justify-content-center "> -->
             <div class="container flex-row-reverse ">
-                <div class="col-2 text-end">                  
-                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                    <a href="{{ path('app_logout') }}">Déconnexion</a>
-                    {% else %}
-                    <a href="{{ path('app_login') }}" title='se connecter'><img class="icone" src="/assets/img/profil.svg" alt="Profil"></a>
-                    {% endif %}
-                    <a href="{{ path('app_logout') }}" title='administrer'><img class="icone" src="/assets/img/option.svg" alt="Options"></a>
-                 </div>
-
+                <div class="col-2 text-end">
+                    <a href="#"><img class="icone" src="/assets/img/profil.svg" alt="profil"></a>
+                    <a href="#"><img class="icone" src="/assets/img/option.svg" alt="options"></a>
+                </div>
 
                 <form class="d-flex col-6" role="search" method="get" id="search-form">
                     <input id="searchTerm" name="searchTerm" class="form-control" type="search" placeholder="Rechercher sur Wikipédia"
                         aria-label="Search">
                 </form>
 
-                <a class="navbar-brand col-3" href="#"><img src="/assets/images/logo-wikipedia.png"
+                <a class="navbar-brand col-3" href="#"><img src="/assets/img/logo-wikipedia.png"
                         alt="logo-wikiditor"></a>
 
                 <button class="navbar-toggler col-1" type="button" data-bs-toggle="collapse"
@@ -113,3 +108,52 @@
         });
     });
 </script>
+
+
+
+
+
+<!--footer-->
+
+ <footer>
+        <div class="texte-footer">
+            <p>
+                La dernière modification de cette page a été faite le 4 janvier 2023 à 13:23.
+            </p>
+            <p>
+                Droit d'auteur : les textes sont disponibles sous licence Creative Commons attribution, partage dans les
+                mêmes conditions ; d’autres conditions peuvent s’appliquer. Voyez les conditions d’utilisation pour plus
+                de détails, ainsi que les crédits graphiques. En cas de réutilisation des textes de cette page, voyez
+                comment citer les auteurs et mentionner la licence. Wikipedia® est une marque déposée de la Wikimedia
+                Foundation, Inc., organisation de bienfaisance régie par le paragraphe 501(c)(3) du code fiscal des
+                États-Unis.
+
+            </p>
+
+        </div>
+        <div class="container-fluid">
+            <div class="d-flex justify-content-center">
+                <span>
+                    <a href="#">Politique de confidentialité</a>
+                    <a href="#">À propos de Wikipédia</a>
+                    <a href="#">Avertissements</a>
+                    <a href="#">Contact</a>
+                    <a href="#">Code de conduite</a>
+                    <a href="#">Version mobile</a>
+                    <a href="#">Développeurs</a>
+                    <a href="#">Statistiques</a>
+                    <a href="#">Cookies</a>
+                    <span>
+                        <a href="#"><img src="/assets/img/logo-branding-footer/wikimedia.svg"
+                                alt="Bouton Logo Wikimedia"></a>
+                        <a href="#"><img src="/assets/img/logo-branding-footer/mediawiki.svg"
+                                alt="Bouton Logo Mediawiki"></a>
+
+                    </span>
+                </span>
+
+
+            </div>
+
+        </div>
+    </footer>
