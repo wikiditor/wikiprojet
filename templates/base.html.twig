@@ -24,9 +24,9 @@
                     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                     <a href="{{ path('app_logout') }}">Déconnexion</a>
                     {% else %}
-                    <a href="{{ path('app_login') }}" title='se connecter'><img class="icone" src="assets/images/profil.svg" alt="profil"></a>
+                    <a href="{{ path('app_login') }}" title='se connecter'><img class="icone" src="/assets/img/profil.svg" alt="Profil"></a>
                     {% endif %}
-                    <a href="{{ path('app_logout') }}" title='administrer'><img class="icone" src="assets/images/option.svg" alt="options"></a>
+                    <a href="{{ path('app_logout') }}" title='administrer'><img class="icone" src="/assets/img/option.svg" alt="Options"></a>
                  </div>
 
 
@@ -35,7 +35,7 @@
                         aria-label="Search">
                 </form>
 
-                <a class="navbar-brand col-3" href="#"><img src="assets/images/logo-wikipedia.png"
+                <a class="navbar-brand col-3" href="#"><img src="/assets/images/logo-wikipedia.png"
                         alt="logo-wikiditor"></a>
 
                 <button class="navbar-toggler col-1" type="button" data-bs-toggle="collapse"
