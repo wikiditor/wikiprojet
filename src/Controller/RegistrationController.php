@@ -37,6 +37,11 @@ class RegistrationController extends AbstractController
             // Ajout de l'utilisateur à la base de données.
             $userRepository->addUser($user);        
 
+            // ajoute le message flash après l'inscription de l'utilisateur
+            $this->addFlash(
+            'success',
+            'Votre compte a été créé avec succès, vous pouvez maintenant vous connecter!'
+            );
 
             // Redirection vers la page de connexion.
             return $this->redirectToRoute('app_login');
