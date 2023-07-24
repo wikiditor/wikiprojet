@@ -2,7 +2,8 @@
 {% extends 'base.html.twig' %}
 
 {# Définit le titre de la page #}
-{% block title %}Inscription{% endblock %}
+{% block title %}Inscription
+{% endblock %}
 
 {# Définit le contenu principal de la page #}
 {% block body %}
@@ -11,28 +12,36 @@
         <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
     {% endfor %}
 
-    <div class="container">
+    <div
+        class="container mt-5">
 
-    {# Affiche le titre de la page #}
-    <h1>Inscription</h1>
+        {# Affiche le titre de la page #}
+        <h1>Créer un compte</h1>
 
-    {# Affiche les erreurs de validation liées à l'ensemble du formulaire #}
-    {{ form_errors(registrationForm) }}
+        {# Affiche les erreurs de validation liées à l'ensemble du formulaire #}
+        {{ form_errors(registrationForm) }}
 
-    {# Commence le formulaire #}
-    {{ form_start(registrationForm) }}
+        {# Commence le formulaire #}
+        {{ form_start(registrationForm) }}
         {# Affiche le champ alias (pseudo) avec ses erreurs éventuelles #}
         {{ form_row(registrationForm.alias) }}
         {# Affiche le champ email avec ses erreurs éventuelles #}
-        {{ form_row(registrationForm.email) }}        
+        {{ form_row(registrationForm.email) }}
+        <p class="italic">
+            Un courriel est nécessaire pour récupérer votre compte en cas de perte de votre mot de passe
+        </p>
         {# Affiche le champ du mot de passe avec ses erreurs éventuelles #}
-        {{ form_row(registrationForm.plainPassword) }}            
+        {{ form_row(registrationForm.plainPassword.first) }}
+        {# Affiche le champ de confirmation du mot de passe avec ses erreurs éventuelles #}
+        {{ form_row(registrationForm.plainPassword.second) }}
+        <p class="italic">
+            Il est recommandé d’utiliser un mot de passe unique que vous n’utilisez sur aucun autre site web.
+        </p>
         {# Affiche la case à cocher pour accepter les conditions avec ses erreurs éventuelles #}
         {{ form_row(registrationForm.agreeTerms) }}
 
         {# Affiche le bouton pour soumettre le formulaire #}
-        <button type="submit" class="btn btn-success mt-3">S'inscrire</button>
-    {# Termine le formulaire #}
-    {{ form_end(registrationForm) }}
+        <button type="submit" class="btn btn-primary mt-3">S'inscrire</button>
+        {# Termine le formulaire #}
+        {{ form_end(registrationForm) }}
     </div>
-{% endblock %}
