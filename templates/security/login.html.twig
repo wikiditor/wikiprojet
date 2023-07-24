@@ -18,6 +18,13 @@
         </div>
     {% endif %}
 
+    {# affiche le message de confirmation d'inscription #}
+	{% for message in app.flashes('success') %}
+		<div class="alert alert-success">
+			{{ message }}
+		</div>
+	{% endfor %}
+
     <div class="d-flex justify-content-center vh-100">
 
         <div class="container mt-5">

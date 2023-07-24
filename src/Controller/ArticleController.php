@@ -124,6 +124,7 @@ class ArticleController extends AbstractController
             $fileRepository->saveFile($file);
         }
 
+        // retourne le formulaire 
         return $form->createView();
     }
 
