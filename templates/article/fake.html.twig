@@ -1,0 +1,366 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ArticleController   !
+{% endblock %}
+{% block stylesheets %}
+
+{% endblock %}
+
+
+{% block body %}
+<!-- MAIN -->
+    <main>
+        <div class="container">
+            <div class="row">
+                <div class=" col-12 col-md-10">
+                    <h1 id="titre-article">
+                        Stanley Kubrick
+                    </h1>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-2 col-md-2">
+                    <h2>Sommaire</h2>
+                </div>
+                <div class="col-2 col-md-6">
+                    <div class=" section-globale">
+                        <ul class="nav nav-underline ">
+                            <li class="nav-item">
+                                <a id="section-active" class="nav-link active" aria-current="page" href="#">Article</a>
+                            </li>
+                            <li class="nav-item">
+                                <a id="section-inactive" class="nav-link" href="#">Discussion</a>
+                            </li>
+                            <li class="nav-item">
+                                <a id="section-inactive" class="nav-link" href="#">Modifier</a>
+                            </li>
+                            <li class="nav-item">
+                                <a id="section-inactive" class="nav-link" href="#">Outils</a>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+                <div class="col-2 col-md-4">
+                    <div class=" d-flex justify-content-end">
+                        <div>
+                            <a href="#"><img id="wikiditor" src="/assets/img/wikiditor.png" alt=""></a>
+                        </div>
+                        <div class="dropdown">
+                            <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                FR
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">EN</a></li>
+                                <li><a class="dropdown-item" href="#">SP</a></li>
+                                <li><a class="dropdown-item" href="#">IT</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+        <div class="container">
+            <div class="row">
+
+                <div class="col-2 col-md-2">
+
+                    <div id="simple-list-example" class="d-flex flex-column gap-2 simple-list-example-scrollspy sommaire-global ">
+                       
+
+                        <strong> <a class="p-1 rounded sommaire-active" href="#simple-list-item-1">1
+                                Biographie</a></strong>
+                        <a id="sommaire-inactive" class="p-1 rounded" href="#simple-list-item-2">2 Style</a>
+                        <a id="sommaire-inactive" class="p-1 rounded" href="#simple-list-item-3">3 Mythe
+                            Kubrick</a>
+                        <a id="sommaire-inactive" class="p-1 rounded" href="#simple-list-item-4">4 Réception</a>
+                        <a id="sommaire-inactive" class="p-1 rounded" href="#simple-list-item-5">5
+                            Filmographie</a>
+                        <a id="sommaire-inactive" class="p-1 rounded" href="#simple-list-item-5">6
+                            Distinctions</a>
+                        <a id="sommaire-inactive" class="p-1 rounded" href="#simple-list-item-5">7 Notes et
+                            références</a>
+                        <a id="sommaire-inactive" class="p-1 rounded" href="#simple-list-item-5">8 Annexes</a>
+                    </div>
+                </div>
+
+
+
+
+
+
+                <article class="col-12 col-md-10">
+
+
+
+
+                    <div class="col-md-4" id="infobox">
+                        <aside>
+                            <h2 id="titre-infobox">Stanley Kubrick</h2>
+                            <img id="image-stanley" src="/assets/img/3f05dc_786a6c21e9b44ea59b8ae6772d7bbc99~mv2 2.png"
+                                alt="Stanley Kubrick">
+                            <h2 id="titre-infobox">Biographie</h2>
+                            <p class="d-flex justify-content-space-between ">
+                                <strong>Nom de naissance</strong>
+                                <span class="contenu-infobox">Stanley Kubrick</span>
+                                <span></span>
+                            </p>
+                            <p class="d-flex justify-content-space-between">
+                                <strong>Naissance</strong>
+                                <span class="contenu-infobox"> 26 juillet 1928
+                                    Manhattan (État de New York, États-Unis)</span>
+                                <span></span>
+                            </p>
+                            <p class="d-flex justify-content-space-between">
+                                <strong>Nationalité</strong>
+                                <span class="contenu-infobox">Américaine</span>
+                                <span></span>
+                            </p>
+                            <p class="d-flex justify-content-space-between">
+                                <strong>Décés</strong>
+                                <span class="contenu-infobox"> 7 mars 1999 (à 70 ans)
+                                    St Albans (Angleterre, Royaume-Uni)</span>
+                                <span></span>
+                            </p>
+                            <p class="d-flex justify-content-space-between">
+                                <strong>Profession</strong>
+                                <span class="contenu-infobox">Photographe
+                                    Réalisateur
+                                    Scénariste
+                                    Producteur</span>
+                                <span></span>
+                            </p>
+                            <p class="d-flex justify-content-space-between">
+                                <strong>Films notables</strong>
+                                <span class="contenu-infobox">voir filmographie</span>
+                                <span></span>
+                            </p>
+                            <img src="/assets/img/signature.jpg" alt="signature">
+
+
+
+                        </aside>
+                    </div>
+
+                    <p>Stanley Kubrick (prononcé en anglais : /ˈstænli ˈkubɹɪk/) est un <a href="#">réalisateur,
+                            photographe,</a>
+                        scénariste et <a href="#">producteur de cinéma américain</a>, né le 26 juillet 1928 à <a
+                            href="#">Manhattan (New York)</a> et
+                        mort le 7 mars 1999 dans son manoir de Childwickbury, entre St Albans et Harpenden
+                        (Hertfordshire, au nord de Londres).
+                        Après des débuts dans la photographie, Kubrick, autodidacte, est également son propre directeur
+                        de la photographie, producteur, scénariste et monteur. Ses treize longs métrages en quarante-six
+                        ans de carrière l'imposent comme l'un des cinéastes majeurs du<a href="#"> XXe siècle</a>. Quatre de ses films
+                        sont classés dans le Top 100 de l'<a href="#">American Film Institute</a> (AFI's 100 Years...100 Movies).</p>
+                    <h2>Biographie</h2>
+                    <h3 >Jeunesse et parenté</h3><hr>
+                    <p>Stanley Kubrick, est issu d'une famille<a href="#"> juive</a> originaire d'<a href="#">Europe centrale</a> habitant dans le
+                        quartier du <a href="#">Bronx</a>.
+                        Il est le fils de Sadie Gertrude Perveler (1903-1985) et de Jacob Leonard Kubrick (1901-1985).
+                        Son père, né aux États-Unis d'une mère roumaine et d'un père austro-hongrois, était <a href="#">cardiologue</a>,
+                        pianiste et photographe amateur. Il apprend à son fils Stanley, âgé de douze ans, à jouer aux
+                        <a href="#">échecs</a>. Cette passion suit Stanley Kubrick toute sa vie. Sa mère, qui était chanteuse et
+                        danseuse, lui donne le goût des livres et de la lecture.
+                        Il a une sœur cadette, Barbara, née le 21 mai 1934.
+                        De <a href="#">1940</a> à <a href="#">1945</a>, Kubrick ne trouve aucun intérêt à l'école : à part la <a href="#">physique</a> rien ne
+                        l'intéresse. Il ne parvient pas à obtenir une moyenne suffisante pour s'inscrire à l'université,
+                        surtout que, la <a href="#">guerre</a> terminée, nombre de soldats revenant du front tentent d'y entrer et que
+                        déjà les inscriptions sont limitées.
+                        En 1947, à l'âge de 18 ans, il se marie avec Toba Metz, une camarade de classe de la William
+                        Howard Taft High School à <a href="#">New York</a>. Ils s'installent dans le quartier de Greenwich Village deux
+                        ans plus tard et divorcent en 1951</p>
+                    <h3>Débuts dans la photographie</h3><hr>
+                    <p>Pour son treizième anniversaire, son père lui offre son premier <a href="#">appareil photo</a>. Cette nouvelle
+                        activité le passionne et lui fait oublier sa passion de jeunesse, le <a href="#">jazz</a>, et son rêve de
+                        devenir batteur de jazz professionnel. Il prend de nombreuses photos et les développe avec un
+                        ami dans la chambre noire familiale. Il devient le photographe officiel de son collège et a pour
+                        idole le <a href="#">reporter-photographe Weegee</a>. En avril 1945, à l'âge de 16 ans, il réussit à vendre au
+                        magazine illustré Look une photographie d'un vendeur de journaux en larmes après la mort de
+                        <a href="#">Franklin D. Roosevelt</a>, qu'il a prise alors qu'il se rendait à l'école.</p>
+                    <h3>Un destin de réalisateur</h3><hr>
+                    <p>Pendant ses premières années de photographe de magazine, <a href="#">Kubrick</a> fréquente assidûment les salles
+                        de cinéma, notamment les séances au MoMA. Ses goûts sont éclectiques, avec une préférence, comme
+                        il le dit en 1963 dans la revue Cinéma, pour le cinéma d'auteurs européen : Ingmar Bergman,
+                        <a href="#">Michelangelo Antonioni</a>, <a href="#">Federico Fellini</a>. Les films de <a href="#">Max Ophüls</a href="#"> comme Le Plaisir ou Madame
+                        de... — mouvement complexe et sans heurt de la caméra, travelling — influencent le jeune Stanley
+                        Kubrick. En 1950, l'autodidacte.Stanley Kubrick, âgé de 22 ans, se décide à sauter le pas et se
+                        lance dans le cinéma. Pour lui, sa meilleure formation, ce sont les longues séances
+                        cinématographiques qu'il s'impose, des meilleurs films au pire des navets. « Je ne peux pas
+                        faire pire » se dit-il.</p>
+                    <h3>Courts métrages et série télévisée</h3><hr>
+                    <p>Dans ses premiers films, Kubrick fait tout lui-même : il est à la fois scénariste, cadreur,
+                        ingénieur du son, monteur et réalisateur. Entre 1950 et 1951, Kubrick réalise deux
+                        documentaires, consacrés l'un à un boxeur, l'autre à un missionnaire. Il reprend l'idée de son
+                        photos-récit Prizefighter et réalise avec Alexander Singer, un camarade de classe, le court
+                        métrage Day of the Fight — une journée de la vie du boxeur Walter Cartier —, filmé comme un
+                        reportage. Autofinancé avec un budget de 3 900 $, le documentaire est vendu à RKO Pictures avec
+                        seulement 100 $ de bénéfice.
+                        Pour Flying Padre, Stanley Kubrick reprend la même idée et suit durant deux jours Fred
+                        Stadtmueller, un missionnaire catholique.</p>
+                    <h3>Un bref passage à Hollywood</h3><hr>
+                    <img src="assets/img/" alt="">
+                    <p>De retour aux États-Unis, Stanley Kubrick écrit deux scénarios qui sont refusés par les majors
+                        hollywoodiens. La MGM lui propose de travailler sur le scénario d'un western avec comme vedette
+                        Marlon Brando. Après six mois de travail de préparation, le cinéaste et l’acteur se fâchent.
+                        Marlon Brando, star hollywoodienne, obtient facilement le départ de Kubrick et décide de
+                        réaliser lui-même La Vengeance aux deux visages.
+
+                        Au même moment, sur un autre film, Kirk Douglas, acteur et producteur principal du péplum
+                        <a href="#">Spartacus</a>, insatisfait du travail d'Anthony Mann, sollicite Stanley Kubrick pour terminer le
+                        film. Après le succès commercial des Sentiers de la gloire, celui-ci accepte et termine le film.
+                        Le tournage dure 167 jours, partagé entre la Californie et l’Espagne pour les scènes de combat
+                        tournées avec 10 000 <a href="#">figurants</a> issus de l'armée espagnole.</p>
+                    <h3>Passage à la couleur</h3><hr>
+                    <p>À partir de ce moment, installé définitivement en Angleterre, le cinéaste travaille de plus en
+                        plus lentement,
+                        poussant de plus en plus loin son perfectionnisme et sa volonté d'expérimentation technique. Il
+                        passe cinq ans à développer son film suivant 2001, l'Odyssée de l'espace. Le 22 avril 1964,
+                        Kubrick rencontre <a href="#">Arthur C. Clarke</a> au restaurant Trader Vic's du <a href="#">Plaza Hotel</a> de<a href="#"> New York</a>. Pour
+                        imaginer le monolithe noir, clé de voûte du film, les deux coscénaristes font la tournée des
+                        galeries d'art le mois suivant leur rencontre. Selon le sémiologue français Alexandre
+                        Bourmeyster, ils se seraient inspirés des œuvres du peintre <a href="#">Georges Yatridès</a>, alors mis en
+                        valeur par un des plus grands marchands de tableaux du moment,<a href="#"> S.E. Johnson</a>, qui exposait les
+                        œuvres de l'artiste de manière permanente aux<a href="#"> International Galleries de Chicago</a>. Le tournage du
+                        film débute le 29 décembre 1965, sous le titre provisoire de Voyage au-delà des étoiles. Il se
+                        déroule dans un premier temps aux studios de Shepperton, puis se poursuit aux Studios d'Elstree,
+                        plus proches de la villa où Kubrick a emménagé.
+                        Les critiques sont sévères envers le film qui est jugé trop long, trop lent, élitiste et
+                        ennuyeux. Le film obtient pourtant quatre <a href="#">Oscars</a> : meilleure direction artistique, meilleure
+                        photographie, meilleurs costumes, meilleur arrangement musical.
+                        Stanley Kubrick entreprend ensuite l'adaptation du roman Shining, l'enfant lumière de Stephen
+                        King. Ce film est dans la lignée de <a href="#">L'Exorciste, Halloween et Rosemary's Baby</a>, le meilleur du
+                        genre selon <a href="#">Kubrick61</a>. Le film est moins risqué financièrement que ses productions précédentes
+                        et, après l'échec commercial de Barry Lyndon, l'adaptation d'un best-seller de Stephen King est
+                        un gage de quasi-succès (les six derniers romans de l'auteur se sont vendus à plus de 22
+                        millions d'exemplaires). Le réalisateur et <a href="#">Diane Johnson</a> modifient profondément l’histoire du
+                        livre, ce qui déplaît à Stephen King qui refuse d’apparaître au générique final du film. Il
+                        n'est pas le seul mécontent : aux <a href="#">États-Unis</a> l'exploitation du film est un échec, le public
+                        enrageant de n'avoir pas assez tremblé et reprochant aux deux scénaristes d'avoir abâtardi le
+                        genre et trahi l'esprit du livre. A la sortie du film, certaines critiques le huent pour ces
+                        raisons. </p>
+                    <h3>Esthétique</h3><hr>
+                    <p>Le jeune Stanley Kubrick,<a href="#"> autodidacte</a>, apprend les ficelles du métier de <a href="#">cinéaste</a> — la
+                        composition d'une image, les éclairages, l'usage des extérieurs et l'art de saisir le mouvement.
+                        Plutôt perfectionniste, il lui arrive de prendre plusieurs centaines de clichés pour réaliser
+                        une seule photo — lors de ses quatre ans passés comme photographe au magazine Look. C'est à
+                        cette époque qu'il décide de commencer sa formation en fréquentant assidûment les salles de
+                        cinéma. Ses goûts sont éclectiques, avec une préférence, comme il le dit en 1963 dans la revue
+                        Cinéma, pour le cinéma d'auteur européen comme celui d'Ingmar Bergman, Michelangelo Antonioni ou
+                        Federico Fellini. Cependant, c'est par les films de<a href="#"> Max Ophüls</a> comme<a href="#"> Le Plaisir</a> ou Madame de...
+                        qu'il sera particulièrement influencé, notamment le mouvement complexe et sans heurt de la
+                        caméra et les nombreux travellings.
+                        Kubrick apprend réellement tous les métiers du cinéma en faisant tout lui-même dans ses premiers
+                        films — scénariste, ingénieur du son, monteur, réalisateur… — ce qui lui permettra par la suite
+                        d'intervenir et d'imposer ses points de vue à ses techniciens lors des tournages afin d'obtenir
+                        l'image exacte qu'il recherchait. Il démontre ainsi dès 1954, avec <a href="#">Le Baiser du tueur</a>, son
+                        talent à jouer avec l'ombre et la lumière et confirme sa maîtrise technique dans la scène de
+                        règlement de comptes dans un entrepôt de mannequins. Il démontre aussi rapidement à ses équipes
+                        techniques ses connaissances et son intérêt pour la photographie et la prise de vue. Pour lui,
+                        un réalisateur est à la fois <a href="#">metteur en scène</a> et technicien.
+                        Au fil de ses films, Kubrick ajoute de nouvelles techniques à sa réalisation qu'il ne cesse de
+                        perfectionner par la suite. C'est à cette époque qu'il se fait remarquer par le brillant de sa
+                        photographie. En 1956, dans <a href="#">L'Ultime Razzia</a>, Kubrick fragmente l'histoire que seule la voix off
+                        très influencée par <a href="#">Citizen Kane</a> d'<a href="#">Orson Welles</a> permet de reconstituer. </p>
+                    <h3>Filmographie</h3><hr>
+                    <h3>Courts métrages documentaire</h3>
+
+                    <a href="#">
+                        <p>1951: Day of the Fight</p>
+                    </a>
+
+                    <a href="#">
+                        <p>1951: Flying Padre</p>
+                    </a>
+
+                    <a href="#">
+                        <p>1953: The Seafarers</p>
+                    </a>
+
+                    <h3>Longs métrages</h3>
+
+                    <a href="">
+                        <p>1953 : Fear and Desire</p>
+
+                    </a>
+                    <a href="">
+                        <p>1955 : Le Baiser du tueur (Killer's Kiss)</p>
+                    </a>
+
+                    <a href="">
+                        <p>1956 : L'Ultime Razzia (The Killing)</p>
+                    </a>
+
+                    <a href="#">
+                        <p>1957 : Les Sentiers de la gloire (Paths of Glory)</p>
+                    </a>
+
+                    <a href="#">
+                        <p>1960 : Spartacus</p>
+                    </a>
+
+                    <a href="#">
+                        <p>1962 : Lolita</p>
+                    </a>
+
+                    <a href="#">
+                        <p>1964 : Docteur Folamour (Learned to Stop Worrying and Love the Bomb)</p>
+                    </a>
+
+                    <a href="#">
+                        <p>1968 : 2001, l'Odyssée de l'espace (2001: A Space Odyssey)</p>
+                    </a>
+
+                    <a href="#">
+                        <p>1971 : Orange mécanique (A Clockwork Orange)</p>
+                    </a>
+
+                    <a href="#">
+                        <p>1975 : Barry Lyndon</p>
+                    </a>
+
+                    <a href="#">
+                        <p>1980 : Shining (The Shining)</p>
+                    </a>
+
+                    <a href="#">
+                        <p>1987 : Full Metal Jacket</p>
+                    </a>
+
+                    <a href="#">
+                        <p>1999 : Eyes Wide Shut</p>
+                    </a>
+
+                    <h3>Prix et récompenses</h3>
+                    <p><a href="">BAFTA 1957</a> meilleur film pour L'Ultime Razzia</p>
+                    <p><a href="">BAFTA 1958 </a> meilleur film pour Les Sentiers de la gloire</p>
+                    <p><a href="">Golden Globes 1961</a> meilleur réalisateur pour Spartacus</p>
+                    <p><a href="">Golden Globes 1963</a>meilleur réalisateur pour Lolita</p>
+                    <p><a href="">Oscars du cinéma 1965</a> meilleur scénario adapté pour Docteur Folamour</p>
+                    <p><a href="">Oscars du cinéma 1969 :</a> meilleur scénario adapté pour 2001, l'Odyssée de l'espace
+                    </p>
+                    <p><a href="">Golden Globes 1972 </a>meilleur réalisateur pour Orange Mécanique</p>
+                    <p><a href="">Oscars du cinéma 1972 </a>meilleur scénario adapté pour Orange mécanique</p>
+                    <p><a href="">Golden Globes 1976</a> meilleur réalisateur pour Barry Lyndon</p>
+                    <p><a href="">Oscars du cinéma 1976 </a> meilleur scénario adapté pour Barry Lyndon</p>
+                    <p><a href="">Césars 1977</a> meilleur film étranger pour Barry Lyndon</p>
+                    <p><a href="">Razzie Awards 1981</a> pire réalisateur pour Shining.</p>
+                    <p><a href="">Saturn Awards 1981</a> meilleur réalisateur pour Shining.</p>
+                    <p><a href="">Oscars du cinéma 1988</a> meilleur scénario adapté pour Full Metal Jacket</p>
+                </article>
+            </div>
+        </div>
+
+
+    </main>
+
+
+{% endblock %}

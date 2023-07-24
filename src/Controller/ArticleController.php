@@ -48,6 +48,18 @@ class ArticleController extends AbstractController
         return $this->render('article/index.html.twig', $twigVars);
     }
 
+    #[Route('/article/fake', name: 'app_article_fake')]
+    /**
+     * Récupère un article prédéfini de Wikipédia via l'API
+     *
+     * @return Response
+     * @todo changer le nom de l'article dans l'url de l'api (pour ne pas qu'il soit en dur)
+     */
+    public function getFakeArticle(Request $request, FileRepository $fileRepository, Security $security): Response
+    {
+        return $this->render('article/fake.html.twig');
+    }
+
     /**
      * Fonction qui génère et gère le formulaire
      *
