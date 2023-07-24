@@ -62,7 +62,7 @@ class ArticleController extends AbstractController
 
         if (!$user) {
             // Gérer le cas où l'utilisateur n'est pas authentifié
-            return $this->redirectToRoute('app_login');
+            //return $this->redirectToRoute('app_login');
         }
 
         // Crée le formulaire de création de fichier
