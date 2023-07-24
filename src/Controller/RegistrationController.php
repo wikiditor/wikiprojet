@@ -17,7 +17,7 @@ class RegistrationController extends AbstractController
 {
    
     // Route pour l'inscription d'un nouvel utilisateur.
-    #[Route('/inscription', name: 'app_register')]
+    #[Route('/register', name: 'app_register')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, DocumentManager $dm, UserRepository $userRepository): Response
     {
         // Création d'une nouvelle instance d'User et de son formulaire associé.
