@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        <script src="https://kit.fontawesome.com/859cb7a22b.js" crossorigin="anonymous"></script>
+        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+        <link rel="stylesheet" href="/assets/css/style.css">
+        <link rel="stylesheet" href="/assets/css/styleArticle.css">
+    </head>
+
+    <body>
+      <!-- HEADER -->
+
+    <header>
+        <nav class="navbar">
+            <!--  <div class="container-fluid flex-row-reverse justify-content-center "> -->
+            <div class="container flex-row-reverse ">
+                <div class="col-2 text-end">
+                    <a href="#"><img class="icone" src="/assets/img/profil.svg" alt="profil"></a>
+                    <a href="#"><img class="icone" src="/assets/img/option.svg" alt="options"></a>
+                </div>
+
+                <form class="d-flex col-6" role="search" method="get" id="search-form">
+                    <input id="searchTerm" name="searchTerm" class="form-control" type="search" placeholder="Rechercher sur Wikipédia"
+                        aria-label="Search">
+                </form>
+
+                <a class="navbar-brand col-3" href="{{ path('app_article') }}"><img src="/assets/img/logo-wikipedia.png"
+                        alt="logo-wikiditor"></a>
+
+                <button class="navbar-toggler col-1" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Accueil</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Portails thématiques</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Article au hasard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Contact</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Contribuer</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Débuter sur Wikipédia</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Aide</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Faire un don</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Langues</a>
+                        </li>
+
+
+                        </li>
+                    </ul>
+
+                </div>
+
+
+            </div>
+        </nav>
+
+    </header>
+        {% block body %}{% endblock %}
+    </body>
+</html>
+
+<script>
+    // vérifie qu'on a bien chargé toute la page
+    document.addEventListener("DOMContentLoaded", (e) => {
+        // cherche le bouton dans le html
+        const input = document.getElementById('searchTerm');       
+        // détecte la touche entrée du clavier
+        input.addEventListener('keyup', (e) => {          
+            if(event.code == 'Enter' ){
+                e.preventDefault();
+                // RÉCUPÈRE les données saisies par l'utilisateur
+                const searchTerm = e.target.value;
+                // const language = document.getElementById('language').value;
+                const language = 'fr';
+                // redirection vers la page demandée
+                window.location.replace(`/article/${searchTerm}/${language}`);
+                /*https://'+ language +'.wikipedia.org/w/api.php?action=query&titles=' + searchTerm + 
+                        '&prop=extracts|images|links*/ 
+            }
+        });
+    });
+</script>
+
+
+
+
+
+<!--footer-->
+
+ <footer>
+        <div class="texte-footer">
+            <p>
+                La dernière modification de cette page a été faite le 4 janvier 2023 à 13:23.
+            </p>
+            <p>
+                Droit d'auteur : les textes sont disponibles sous licence Creative Commons attribution, partage dans les
+                mêmes conditions ; d’autres conditions peuvent s’appliquer. Voyez les conditions d’utilisation pour plus
+                de détails, ainsi que les crédits graphiques. En cas de réutilisation des textes de cette page, voyez
+                comment citer les auteurs et mentionner la licence. Wikipedia® est une marque déposée de la Wikimedia
+                Foundation, Inc., organisation de bienfaisance régie par le paragraphe 501(c)(3) du code fiscal des
+                États-Unis.
+
+            </p>
+
+        </div>
+        <div class="container-fluid">
+            <div class="d-flex justify-content-center">
+                <span>
+                    <a href="#">Politique de confidentialité</a>
+                    <a href="#">À propos de Wikipédia</a>
+                    <a href="#">Avertissements</a>
+                    <a href="#">Contact</a>
+                    <a href="#">Code de conduite</a>
+                    <a href="#">Version mobile</a>
+                    <a href="#">Développeurs</a>
+                    <a href="#">Statistiques</a>
+                    <a href="#">Cookies</a>
+                    <span>
+                        <a href="#"><img src="/assets/img/wikimedia.svg"
+                                alt="Bouton Logo Wikimedia"></a>
+                        <a href="#"><img src="/assets/img/mediawiki.svg"
+                                alt="Bouton Logo Mediawiki"></a>
+
+                    </span>
+                </span>
+
+
+            </div>
+
+        </div>
+    </footer>

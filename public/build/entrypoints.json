@@ -1,0 +1,11 @@
+{
+  "entrypoints": {
+    "app": {
+      "js": [
+        "/build/runtime.js",
+        "/build/vendors-node_modules_shopify_draggable_lib_draggable_bundle_js.js",
+        "/build/app.js"
+      ]
+    }
+  }
+}

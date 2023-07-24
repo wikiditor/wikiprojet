@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        <script src="https://kit.fontawesome.com/859cb7a22b.js" crossorigin="anonymous"></script>
+        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+        <link rel="stylesheet" href="/assets/css/style.css">
+        <link rel="stylesheet" href="/assets/css/styleArticle.css">
+    </head>
+
+    <body>
+      <!-- HEADER -->
+
+    <header>
+        <nav class="navbar">
+            <!--  <div class="container-fluid flex-row-reverse justify-content-center "> -->
+            <div class="container flex-row-reverse ">
+                <div class="col-2 text-end">
+                    <a href="#"><img class="icone" src="/assets/img/profil.svg" alt="profil"></a>
+                    <a href="#"><img class="icone" src="/assets/img/option.svg" alt="options"></a>
+                </div>
+
+                <form class="d-flex col-6" role="search" method="get" id="search-form" action="/article/fake">
+                    <input id="searchTerm" name="searchTerm" class="form-control" type="search" placeholder="Rechercher sur Wikipédia"
+                        aria-label="Search">
+                </form>
+
+                <a class="navbar-brand col-3" href="{{ path('app_article') }}"><img src="/assets/img/logo-wikipedia.png"
+                        alt="logo-wikiditor"></a>
+
+                <button class="navbar-toggler col-1" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Accueil</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Portails thématiques</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Article au hasard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Contact</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Contribuer</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Débuter sur Wikipédia</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Aide</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Faire un don</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Langues</a>
+                        </li>
+
+
+                        </li>
+                    </ul>
+
+                </div>
+
+
+            </div>
+        </nav>
+
+    </header>
+       
+       <main>
+        <section>
+            <div class="container">
+                <h1 class="premier-titre-wikipedia">Bienvenue sur Wikipédia</h1>
+                <div class="d-flex justify-content-between navbar-langue">
+                    <nav>
+                        <ul class="nav nav-underline">
+                            <li class="nav-item">
+                                <a class="nav-link active nav-item-active" aria-current="page" href="#">Accueil</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link nav-item-inactive" href="#">Discussion</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link nav-item-inactive" href="#">Modifier</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link nav-item-inactive" href="#">Outils</a>
+                            </li>
+
+                        </ul>
+                    </nav>
+
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle bouton-langue" type="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            FR
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><button class="dropdown-item" type="button">Alemannisch</button></li>
+                            <li><button class="dropdown-item" type="button">Deutsch</button></li>
+                            <li><button class="dropdown-item" type="button">English</button></li>
+                            <li><button class="dropdown-item" type="button">Español</button></li>
+                            <li><button class="dropdown-item" type="button">Italiano</button></li>
+                            <li><button class="dropdown-item" type="button">Nederlands</button></li>
+                            <li><button class="dropdown-item" type="button">Interlingue</button></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <section id="bienvenue">
+                <div class="container bg-wiki">
+                    <div class="banner">
+                        <div class="banner-titre">
+                            <h1>Wikipédia</h1>
+                            <p class="texte-banner">L’encyclopédie libre que vous pouvez améliorer</p>
+                        </div>
+
+
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <a class="d-block" href="#">Accueil de la communauté</a>
+                                <a class="d-block" href="#">Portails thématiques</a>
+                            </div>
+                            <div>
+                                <a class="d-block" href="#">Principes fondateurs</a>
+                                <a class="d-block" href="#">Sommaire de l’aide</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 col-md-7 col-xl-7">
+                            <article class="article-labellise-acceuil">
+                                <h2 class="titre-article-une">ARTICLE LABELLISE DU JOUR</h2>
+                                <p>
+                                    <a href="#">Le Quatuor d'Homer</a> (Homer's Barbershop Quartet en version originale,
+                                    Homer chante en harmonie en version québécoise) est le premier épisode de la <a
+                                        href="#">saison 5</a> des <a href="#">Simpson</a>. Écrit par <a href="#">Jeff
+                                        Martin</a> et réalisé par <a href="#">Mark Kirkland</a>, l'épisode met en scène
+                                    les
+                                    Bémols (Si Dièse en version québécoise, The Be Sharps dans la version originale), un
+                                    quatuor <a href="#">barbershop</a> fondé par <a href="#">Homer Simpson</a>, dont
+                                    l'histoire est très proche de celle des<a href="#"> Beatles</a>, <a href="#">George
+                                        Harrison</a> et <a href="#">David Crosby</a> apparaissent dans leur propre rôle,
+                                    et
+                                    le quatuor barbershop américain des Dapper Dans joue le rôle des Bémols lorsqu'ils
+                                    chantent.
+                                </p>
+                                <p>
+                                    L'épisode commence lorsque la famille Simpson se rend au marché aux puces. <a
+                                        href="#">Bart</a> et sa sœur <a href="#">Lisa</a> découvrent une photo de leur
+                                    père,
+                                    Homer, sur la couverture d'un vieux <a href="#">disque LP</a>. Homer explique à sa
+                                    famille que le principal<a href="#"> Skinner</a>, <a href="#">Barney Gumble</a>, <a
+                                        href="#">Apu Nahasapeemapetilon</a> et lui avaient enregistré un album de
+                                    barbershop
+                                    en 1985 qui avait rencontré un succès national. Il raconte la formation du groupe,
+                                    son
+                                    apogée et sa séparation. À la fin de l'épisode, les membres du groupe se réunissent
+                                    pour
+                                    un concert sur le toit de la <a href="#">Taverne de Moe</a> et interprètent leur hit
+                                    Baby on Board.
+                                </p>
+                                <p>
+                                    L'épisode contient de nombreuses références aux Beatles et à d'autres icônes de la
+                                    culture populaire. Lors de sa première diffusion aux <a href="#">États-Unis</a>, Le
+                                    Quatuor d'Homer est arrivé trentième audience de la semaine, avec une note de 12,7
+                                    sur
+                                    <a href="#">l'échelle de Nielsen</a>. Le caméo des Beatles a été salué, même si
+                                    l'épisode est une chute de la saison précédente. Les critiques qui ont reproché à
+                                    l'épisode son humour inégal l'ont justifié par le changement de scénaristes avant la
+                                    création de L'épisode contient de nombreuses références aux Beatles et à d'autres
+                                    icônes
+                                    de la culture
+                                </p>
+
+                            </article>
+                        </div>
+
+                        <div class="col-12 col-md-5 col-xl-5">
+                            <article class="article-compte-accueil">
+
+                                <p class="titre-article-compte">Aujourd'hui,<a class="lien-article-compte" href="#">
+                                        Wikipédia en français</a> compte :</p>
+
+                                <div class="d-flex justify-content-between article-compte">
+                                    <div class="text-center">
+
+                                        <p>
+                                            <a class="chiffre" href="#">2 535 552</a><br>
+                                            articles
+                                        </p>
+                                    </div>
+
+                                    <div class="text-center">
+                                        <a class="chiffre" href="#">17 044</a>
+                                        <p class="paragraphe-compte">contributeurs enregistrés actifs</p>
+
+                                    </div>
+                                </div>
+                            </article>
+
+                            <article class="article-presentation-accueil">
+                                <h2 class="titre-article-presentation">PRESENTATION</h2>
+                                <p><a href="#">Wikipédia</a> est un projet d’encyclopédie collective en ligne,
+                                    universelle, multilingue et fonctionnant sur le principe du <a href="#">wiki</a>. Ce
+                                    projet vise à offrir un contenu librement réutilisable, objectif et vérifiable, que
+                                    chacun peut modifier et améliorer.
+                                    Wikipédia est définie par des <a href="#">principes fondateurs</a>. Son contenu est
+                                    sous <a href="#">licence Creative Commons BY-SA</a>. Il peut être <a href="#">copié
+                                        et réutilisé sous la même licence</a>, sous réserve d'en respecter les
+                                    conditions. Wikipédia fournit tous ses contenus gratuitement, sans publicité, et
+                                    sans recourir à l'exploitation des données personnelles de ses utilisateurs.
+                                    Les rédacteurs des articles de Wikipédia sont bénévoles. Ils coordonnent leurs
+                                    efforts au sein d'une communauté collaborative, sans dirigeant.
+                                    ls coordonnent leurs efforts au sein d'une communauté collaborative, sans dirigeant.
+                                </p>
+
+                            </article>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </section>
+            <section class="container">
+                <div class="comment-contribuer">
+                    <h2 class="titre-comment-contribuer">COMMENT CONTRIBUER ?</h2>
+                    <p>
+                        Chacun peut publier immédiatement du contenu en ligne, à condition de respecter les règles
+                        essentielles établies par la <a href="">Fondation Wikimedia</a> et par la communauté ; par
+                        exemple, la <a href="#">vérifiabilité du contenu</a>, l'<a href="#">admissibilité des
+                            articles</a> et <a href="#">garder une attitude cordiale</a>.
+                    </p>
+                    <p>
+                        De nombreuses pages d’aide sont à votre disposition, notamment pour <a href="#">créer un
+                            article</a>, <a href="#">modifier un article</a> ou insérer une image. N’hésitez pas à <a
+                            href="#">poser une question</a> pour être aidé dans vos premiers pas, notamment dans un des
+                        projets thématiques ou dans divers <a href="#">espaces de discussion</a>.
+                        Les <a href="#">pages de discussion</a> servent à centraliser les réflexions et les remarques
+                        permettant d’améliorer les articles.
+                    </p>
+
+                </div>
+            </section>
+            <section>
+                <div class="container">
+                    <div class="row">
+                        <article class="col-12 col-md-6 col-xl-6">
+
+                            <div>
+                                <h2 class="titre-ephemeride">EPHEMERIDE DU 12 JUILLET</h2>
+                                <div class="row">
+
+                                    <img class="col-12 col-md-4 col-xl-4 photo-ephemeride"
+                                        src="/assets/img/guillaume.jpeg"
+                                        alt="  Portrait du roi Guillaume III d'Angleterre (Guillaume d'Orange) peinture à la manière de Willem Wissing">
+
+                                    <p class="col-12 col-md-8 col-xl-8 texte-ephemeride">
+                                        <a href="#">1690</a> : en <a href="#">Irlande</a>, <a href="#">Guillaume III
+                                            d'Orange-Nassau</a> (portrait) remporte la bataille de la Boyne face à
+                                        Jacques II. <br>
+                                        <a href="#">1790</a> : en <a href="#">France</a>, <a href="#">la constitution
+                                            civile du clergé</a> est adoptée par l'Assemblée nationale constituante.
+                                        <br>
+                                        <a href="#">1806</a> : le <a href="#">traité de la confédération du Rhin</a>,
+                                        marquant la fin du <a href="#">Saint-Empire romain germanique</a>, est signé
+                                        entre l'Empire français et plusieurs princes allemands. <br>
+                                        <a href="#">1975</a> : Sao Tomé-et-Principe prend son indépendance du Portugal
+                                        dont il constituait une <a href="#">province ultramarine</a>. <br>
+                                        <a href="#">1979</a> : les Îles Gilbert prennent leur indépendance vis-à-vis du
+                                        Royaume-Uni et deviennent la <a href="#">république des Kiribati</a>. <br>
+                                        <a href="#">2006</a> : le <a href="#">conflit israélo-libanais</a> débute.
+
+                                    </p>
+                                </div>
+                            </div>
+
+                        </article>
+                        <article class="col-12 col-md-6 col-xl-6">
+                            <div class="image-du-jour">
+                                <h2 class="titre-image-du-jour">IMAGE DU JOUR</h2>
+                                <img class="photo-image-du-jour" src="/assets/img/terrasse.jpeg"
+                                    alt="Image qui represent les rizières en terrasses des cordillères des Philippines">
+                                <p class="texte-image-du-jour">
+                                    Rizières en terrasses autour du village de Batad, à Banaue, dans l'île philippine de
+                                    Luçon.(définition réelle 2 992 × 3 992)
+                                </p>
+
+                            </div>
+                        </article>
+
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <div class="container">
+                    <h1 class="titre-actualite">Actualité</h1>
+                    <div class="row">
+                        <article class="col-12 col-md-8 col-xl-8">
+                            <div>
+                                <img class="float-start" src="/assets/img/ShavkatMirziyoyev.jpg"
+                                    alt="Photo de Shavkat Mirziyoyev-un homme d'État ouzbek, président de la république d'Ouzbékistan depuis le 8 septembre 2016.">
+                                <p>
+                                    <a href="#">11 juillet</a> : début du <a href="#">sommet de l'OTAN de 2023</a> à <a
+                                        href="#">Vilnius</a>, capitale de la Lituanie. <br>
+                                    <a href="#">9 juillet</a> : <a href="#">Shavkat Mirziyoyev</a> (photo) est <a
+                                        href="#">réélu président de la république d'Ouzbékistan</a>. <br>
+                                    <a href="#">8 juillet</a> : Edgars Rinkēvičs prend ses fonctions de <a
+                                        href="#">président de la république de Lettonie</a> et devient en conséquence le
+                                    premier chef d'État ouvertement
+                                    homosexuel d'un pays de l'<a href="#">Union européenne</a>. <br>
+                                    <a href="#">7 juillet</a> : l'<a href="#">Organisation pour l'interdiction des armes
+                                        chimiques</a> déclare la destruction de la totalité des munitions chimiques des
+                                    États parties de la Convention sur l'interdiction des armes chimiques. <br>
+                                    <a href="#">1er juillet</a> : l'Espagne prend la présidence tournante du Conseil de
+                                    l'Union européenne.
+                                </p>
+                                <p>
+                                    Événements en cours : <a href="#">Feux de forêt au Québec</a> · <a
+                                        href="#">Manifestations au Sénégal</a> · <a href="#">Feux de forêt en
+                                        Nouvelle-Écosse</a> · <a href="#">Crise politique en Équateur</a> · <a
+                                        href="#">Conflit soudanais</a> · <a href="#">Feux de forêt en Alberta</a> · <a
+                                        href="#">Manifestations en Israël</a> · <a href="#">Manifestations en Iran</a> ·
+                                    <a href="#">Invasion de l'Ukraine par la Russie</a> – <a href="#">Championnat du
+                                        monde junior de rugby à XV</a> · <a href="#">Tournoi de Wimbledon</a> : <a
+                                        href="#">Philippe Garot</a>, <a href="#"><a href="#"><a href="#">Richard G</a>.
+                                            <a href="#">Hovannisian</a>, <a href="#">Hans-Jochen Jaschke (11
+                                                juillet)</a> · <a href="#">Jean-Jacques Becker</a>, <a href="#">Roger
+                                                Gnoan M'Bala</a>, <a href="#">Adrian Palmer 11 juillet</a> · Manny Coto,
+                                            Michel Dupuy, Andrea Evans, Henry Kamm, Asbjørn Sennels, Luis Suárez (photo)
+                                            <a href="#">9 juillet</a> · <a href="#">Patrice Aouissi</a>, <a
+                                                href="#">Pierre-Jean Berrou</a>, <a href="#">Alain Besançon</a>, <a
+                                                href="#">José Mattoso</a>, <a href="#">Evelyn M. Witkin</a> (8 juillet)
+                                            <br>
+                                            1er juillet : l'Espagne prend la présidence tournante du Conseil de l'Union
+                                            européenne. <br>
+                                            <a href="#">7 juillet</a> : l'Organisation pour l'interdiction des armes
+                                            chimiques déclare la destruction de la totalité des munitions chimiques des
+                                            États parties de la <a href="#">Convention</a> sur l'interdiction des armes
+                                            chimiques.
+
+
+                                </p>
+                            </div>
+
+                        </article>
+                        <article class="col-12 col-md-4 col-xl-4">
+                            <div class="saviez-vous">
+                                <h2 class="titre-saviez-vous">LE SAVIEZ-VOUS ?</h2>
+                                <p>
+                                    <a href="#">Simon Pegg</a> a prêté ses traits au personnage de Hughie Campbell dans
+                                    le comic book The Boys avant d’incarner son père dans la <a href="#">série télévisée
+                                        dérivée</a>. <br>
+                                    La <a href="#">République et canton</a> de Genève abrite le cimetière des Rois. <br>
+                                    <a href="#">Han van Meegeren</a> a peint un faux <a href="#">Vermeer</a> en prison.
+                                    <br>
+                                    Tous les États qui avaient une <a href="#">frontière terrestre</a> avec la <a
+                                        href="#">Pologne</a> en 1989 avaient disparu moins de trois ans plus tard. <br>
+                                    Les Algériens <a href="#">Tayeb Zitouni</a> et <a href="#">Tayeb Zitouni</a> sont
+                                    tous deux devenus maires d’une grande ville en 1997, puis ministres, et
+                                    appartiennent au même parti. <br>
+                                    Dans sa version américaine de 1998, <a href="#">Godzilla</a> est présenté comme le
+                                    fruit des essais nucléaires français en <a href="#">Polynésie</a>, choix
+                                    probablement lié à la décision de leur relance par <a href="#">Jacques Chirac</a>.
+                                </p>
+                            </div>
+
+                        </article>
+
+
+                    </div>
+
+                </div>
+            </section>
+            <section>
+                <div class="container">
+                    <hr>
+                    <img class="logo-milieux" src="/assets/img/wikimediawhite.svg" "Logotype Wikimedia">
+                    <p class="texte-section-logotype">
+                        Wikipédia est hébergée par la <a href="#">Wikimedia Foundation</a>, de même que les projets
+                        suivants, coordonnés sur le site <a href="#">Méta-Wiki</a> :
+                    </p>
+                    
+                    <div class="d-flex justify-content-evenly">
+                        <div class="d-flex align-items-center">
+                            <img class="me-3" src="/assets/img/logocommons.svg" alt="Logotype Commons Mediatheque">
+                            <span><a href="#">Commons</a></span>
+                            
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <img class="me-3" src="/assets/img/logowikidata.svg" alt="Logotype Wikidata">
+                            <div>
+                                <span><a href="#">Wikidata</a></span>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <img class="me-3" src="/assets/img/logowiktionnaire.svg" alt="Logotype Wiktionnaire">
+                            <div>
+                                <span><a href="#">Wiktionnaire</a></span>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <img class="me-3" src="/assets/img/logowikisource.svg" alt="Logotype Wikisource">
+                            <div>
+                                <span><a href="#">Wikisource</a></span>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <img class="me-3" src="/assets/img/logowikinews.svg" alt="Logotype Wikinews">
+                            <div>
+                                <span><a href="#">Wikinews</a></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-evenly">
+                        <div class="d-flex align-items-center">
+                            <img class="me-3" src="/assets/img/logowikiquote.svg" alt="Logotype Wikiquote">
+                            <div>
+                                <span><a href="#">Wikiquote</a></span>
+                                
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <img class="me-3" src="/assets/img/logowikivoyage.svg" alt="Logotype Wikivoyage">
+                            <div>
+                                <span><a href="#">Wikivoyage</a></span>
+                                
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <img class="me-3" src="/assets/img/logowikilivres.svg" alt="Logotype Wikilivres">
+                            <div>
+                                <span><a href="#">Wikilivres</a></span>
+                                
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <img class="me-3" src="/assets/img/logowikiversite.svg" alt="Logotype Wikiversite">
+                            <div>
+                                <span><a href="#">Wikiversite</a></span>
+                                
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <img class="me-3" src="/assets/img/logowikispecies.svg" alt="Logotype Wikispecies">
+                            <div>
+                                <span><a href="#">Wikispecies</a></span>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+
+
+                    
+
+                </div>
+            </section>
+
+
+        </section>
+
+    </main>
+
+    </body>
+</html>
+
+
+
+
+
+<!--footer-->
+
+ <footer>
+        <div class="texte-footer">
+            <p>
+                La dernière modification de cette page a été faite le 4 janvier 2023 à 13:23.
+            </p>
+            <p>
+                Droit d'auteur : les textes sont disponibles sous licence Creative Commons attribution, partage dans les
+                mêmes conditions ; d’autres conditions peuvent s’appliquer. Voyez les conditions d’utilisation pour plus
+                de détails, ainsi que les crédits graphiques. En cas de réutilisation des textes de cette page, voyez
+                comment citer les auteurs et mentionner la licence. Wikipedia® est une marque déposée de la Wikimedia
+                Foundation, Inc., organisation de bienfaisance régie par le paragraphe 501(c)(3) du code fiscal des
+                États-Unis.
+
+            </p>
+
+        </div>
+        <div class="container-fluid">
+            <div class="d-flex justify-content-center">
+                <span>
+                    <a href="#">Politique de confidentialité</a>
+                    <a href="#">À propos de Wikipédia</a>
+                    <a href="#">Avertissements</a>
+                    <a href="#">Contact</a>
+                    <a href="#">Code de conduite</a>
+                    <a href="#">Version mobile</a>
+                    <a href="#">Développeurs</a>
+                    <a href="#">Statistiques</a>
+                    <a href="#">Cookies</a>
+                    <span>
+                        <a href="#"><img src="/assets/img/wikimedia.svg"
+                                alt="Bouton Logo Wikimedia"></a>
+                        <a href="#"><img src="/assets/img/mediawiki.svg"
+                                alt="Bouton Logo Mediawiki"></a>
+
+                    </span>
+                </span>
+
+
+            </div>
+
+        </div>
+    </footer>
+
+

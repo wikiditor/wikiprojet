@@ -1,0 +1,218 @@
+/* CSS COMMUN */
+a{
+    text-decoration: none;
+    
+}
+@font-face {
+    font-family: "vastago-semi-bold";
+    src: url(../fonts/Vastago\ Grotesk\ SemiBold.otf);
+}
+
+@font-face {
+    font-family: "vastago-bold";
+    src: url(../fonts/Vastago\ Grotesk\ Bold.otf);
+}
+
+@font-face {
+    font-family: "vastago-medium";
+    src: url(../fonts/Vastago\ Grotesk\ Medium.otf);
+}
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: normal;
+    font-size: 1rem;
+    color: #190207;
+
+}
+
+h1{
+    font-family: "vastago-semi-bold";
+    font-size: 2.25rem;
+    color: #190207;
+}
+
+h2{
+   font-family: Arial, Helvetica, sans-serif;
+   font-weight: normal; 
+   font-size: 1.5rem;
+   color: #190207;
+}
+
+h3{
+    font-family: "vastago-bold";
+    font-size: 1rem;
+    color: #190207;
+}
+
+h4{
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 1rem;
+    color: #190207;
+}
+
+h5{
+    font-family: Arial, Helvetica, sans-serif;
+    font-style: italic;
+    font-size: 0.75rem;
+    color: #190207;
+}
+
+/* HEADER */
+.navbar {
+    border-bottom: 0.25rem solid #E3E7E9;
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem; 
+ }
+ 
+ .navbar-toggler {
+     border: 0;
+     margin-left: -2.625rem;
+ }
+ 
+ .navbar-toggler:focus {
+ 
+     box-shadow: none;
+ }
+ 
+ #search {
+     height: 3.125rem;
+     background-color: #F4F4F4;
+     background-image: url(../img/search.svg);
+     background-repeat: no-repeat;
+     background-position: left 0.625rem center;
+     padding-left: 3.125rem;
+     margin-bottom: 0rem;
+    
+ }
+ .form-control{
+    border-radius: 0;
+ }
+ 
+ .icone{
+     margin-top: 0.3125rem;
+     margin-right: -0.625rem;
+ }
+
+
+ /* MAIN */
+.section-globale{
+ 
+    margin-bottom: 2.93rem;
+}
+
+#section-active{
+    
+    color: #190207;
+    border-bottom-color: #1653FF;
+
+}
+
+#section-inactive{
+
+    color: #6E6F72;
+    border-bottom-color:#E3E7E9}
+    
+
+
+.sommaire-active{
+    color: #190207;
+    text-decoration: none;
+    border-left-style: solid;
+    border-color:#1653FF;
+    border-width: 0.2rem
+  
+   
+    
+}
+.rounded{
+     border-radius: 0rem !important
+
+} 
+
+
+#sommaire-inactive{
+    color:#6E6F72 ;
+    text-decoration: none;
+    border-left-style: solid;
+    border-color: #E3E7E9;
+    border-width: 0.2rem;
+    
+   
+  
+}
+#titre-article{
+    margin-top: 5.3rem;
+    margin-bottom: 5.3rem;
+}
+
+.card{
+    border-style: solid;
+    border-color: #6E6F72;
+}
+#titre-card{
+  
+    color: #6E6F72;
+    background-color: #F4F4F4;
+}
+.dropdown{
+    background-color: #F4F4F4;
+    color: #190207;
+    width: fit-content;
+}
+.taille-texte{
+    width: 1rem;
+}
+
+#infobox{
+    border-style: solid;
+    border-color: #E3E7E9;
+    border-width: 0.06rem;
+    float: right;
+    margin-left: 0.625rem;
+    padding: 0.625rem;
+
+    
+
+}
+#titre-infobox{
+    background-color:#F4F4F4 ;
+    text-align: center;
+}
+.contenu-infobox{
+
+    margin-left:6.625rem ;
+
+}
+#wikiditor{
+    margin-right: 2rem;
+}
+/* .barre-scroll{
+  
+
+
+} */
+#image-stanley{
+    width: 21rem
+}
+main{
+    margin-bottom: 5rem ;
+}
+/* FOOTER */
+footer{
+    border-top: 0.25rem solid #E3E7E9;
+    padding-top: 1.25rem;
+    margin-bottom: 5rem ;
+}
+
+footer a {
+    padding-right: 0.9375rem;
+    
+}
+.texte-footer {
+    margin-left: 16.58rem;
+    margin-right: 12.625rem;
+
+}
+
+

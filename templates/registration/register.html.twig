@@ -1,0 +1,107 @@
+{# Hérite du template de base 'base.html.twig' #}
+{% extends 'base.html.twig' %}
+
+{# Définit le titre de la page #}
+{% block title %}Inscription
+{% endblock %}
+
+{# Définit le contenu principal de la page #}
+{% block body %}
+	{# Parcourt et affiche tous les messages d'erreur liés à la vérification de l'email #}
+	{% for flash_error in app.flashes('verify_email_error') %}
+		<div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+	{% endfor %}
+
+	<div
+		class="container mt-5">
+
+		{# Affiche le titre de la page #}
+		<h1>Créer un compte</h1>
+
+		{# Affiche les erreurs de validation liées à l'ensemble du formulaire #}
+		{{ form_errors(registrationForm) }}
+
+		{# Commence le formulaire #}
+		{{ form_start(registrationForm) }}
+		{# Affiche le champ alias (pseudo) avec ses erreurs éventuelles #}
+		{{ form_row(registrationForm.alias) }}
+		{# Affiche le champ email avec ses erreurs éventuelles #}
+		{{ form_row(registrationForm.email) }}
+        <p class="italic">
+			Un courriel est nécessaire pour récupérer votre compte en cas de perte de votre mot de passe
+		</p>
+		{# Affiche le champ du mot de passe avec ses erreurs éventuelles #}
+		{{ form_row(registrationForm.plainPassword.first) }}
+		{# Affiche le champ de confirmation du mot de passe avec ses erreurs éventuelles #}
+		{{ form_row(registrationForm.plainPassword.second) }}
+        <p class="italic">
+			Il est recommandé d’utiliser un mot de passe unique que vous n’utilisez sur aucun autre site web.
+		</p>
+		{# Affiche la case à cocher pour accepter les conditions avec ses erreurs éventuelles #}
+		{{ form_row(registrationForm.agreeTerms) }}
+
+		{# Affiche le bouton pour soumettre le formulaire #}
+		<button type="submit" class="btn btn-primary mt-3">S'inscrire</button>
+		{# Termine le formulaire #}
+		{{ form_end(registrationForm) }}
+	</div>
+
+	{# <div class="container mt-5">
+
+		<form action="#" id="bloc-compte" class="col-12 col-md-5 col-xl-5">
+
+			<h1>Créer un compte</h1>
+
+			<label for="validationCustomUsername" class="form-label d-flex justify-content-between align-items-center">
+				<span>Nom d'utilisateur</span>
+				<a class="aide" href="#">aidez-moi à choisir *</a>
+			</label>
+
+
+			<div> #}
+				<!-- <span class="input-group-text" id="inputGroupPrepend">@</span> -->
+				{# <input type="text" name="alias" class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" placeholder="Saisissez votre nom d’utilisateur" required> #}
+                
+			{# </div>
+
+
+			<div>
+				<label for="exampleFormControlInput2" class="form-label d-flex justify-content-between align-items-center">
+					<span>Adresse e-mail</span>
+					<a class="obligatoire" href="#">obligatoire *</a>
+				</label>
+
+				<input type="email" name="email" class="form-control" id="exampleFormControlInput2" placeholder="Entrez votre adresse de courriel">
+			</div>
+
+
+			<p class="italic">
+				Un courriel est nécessaire pour récupérer votre compte en cas de
+				<br>
+				perte de votre mot de passe
+			</p> #}
+
+			{# <div>
+				<label for="inputPassword5" class="form-label">Mot de passe</label>
+				<input type="password" name="password" id="inputPassword5" class="form-control" aria-labelledby="passwordHelpBlock" placeholder="Entrez votre mot de passe">
+			</div>
+
+			<div id="passwordHelpBlock" class="form-text"></div>
+			<p class="italic">
+				Il est recommandé d’utiliser un mot de passe unique que vous
+				<br>
+				n’utilisez sur aucun autre site web.
+			</p>
+
+			<div>
+				<label for="inputPassword5" class="form-label">Confirmez le mot de passe</label>
+				<input type="password" id="inputPassword5" class="form-control" aria-labelledby="passwordHelpBlock" placeholder="Entrez à nouveau le mot de passe">
+				<div id="passwordHelpBlock" class="form-text"></div>
+			</div>
+
+			<div class="bouton">
+				<button class="btn btn-primary" type="submit">S'inscrire</button>
+			</div>
+		</form> #}
+	{# </div> #}
+{% endblock %}
