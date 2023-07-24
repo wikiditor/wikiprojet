@@ -27,7 +27,9 @@
                     <a href="{{ path('app_login') }}" title='se connecter'><img class="icone" src="assets/img/profil.svg" alt="profil"></a>
                     <a href="{{ path('app_register') }}" class='btn btn-primary' >S'inscrire</a>
                     {% endif %}
+                    {% if is_granted('ROLE_ADMIN') %}
                     <a href="{{ path('app_admin_user') }}" title='administrer'><img class="icone" src="assets/img/option.svg" alt="options"></a>
+                    {% endif %}
                  </div>
 
 
