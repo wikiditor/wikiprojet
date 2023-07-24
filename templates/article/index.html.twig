@@ -9,9 +9,9 @@
 
 {% block body %}
  {# charge le contenu de l'article récupéré via l'api #}
-  
-        <div class="cutpage">
-	        <div class="widthpage">
+    <div class="container-fluid">
+        <div class="cutpage row">
+	        <div class="widthpage col-5">
 		        <article class="pagearticle">
 			        <h1 id="title">
 				        {{ title }}
@@ -42,7 +42,7 @@
 
 	
             {# page de l'éditeur de texte #}
-            <div class="widthpage">
+            <div class="widthpage col-5">
 	            <article class="pagewikiditor">
     
                     <!--header de la page wikiditor editeur de texte-->
@@ -50,12 +50,12 @@
                         <div class="container-fluid">
                             <button type="button" class="btn-close" aria-label="Close"></button>
                             <div class="navbar-nav">
-                                <a href="#"><img src="../../images/logowiki.png" alt="logowiki"></a>
+                                <a href="#"><img src="/assets/img/logowiki.png" alt="logowiki"></a>
                             </div>
-                            <div class="navbar-nav">
-                                <a href="#"><img src="../../images/profil.png" alt="profils"></a>
-                                <a href="#"><img src="../../images/sizing.png" alt="sizing"></a>
-                            </div>
+                            <!--<div class="navbar-nav">
+                                <a href="#"><img src="/assets/img/profil.png" alt="profils"></a>
+                                <a href="#"><img src="/assets/img/sizing.png" alt="sizing"></a>
+                            </div>-->
                         </div>
                     </nav>
 
@@ -71,7 +71,7 @@
                                     <a href="{{path('app_file_list')}}"><span class="button-title">Projets</span></a>
                                 </button>
 
-                                <svg class="add-circle" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="blue" class="bi bi-plus" viewbox="0 0 16 16">
+                          <!--      <svg class="add-circle" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="blue" class="bi bi-plus" viewbox="0 0 16 16">
                                     <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
                                 </svg>
 
@@ -93,7 +93,7 @@
                                         <path d="M13.5 16.2656V4.39062M13.5 4.39062L17.0625 7.95312M13.5 4.39062L9.9375 7.95312" stroke="#190207" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>
 
-                                </div>
+                                </div>  -->
                             </div>
                         </div>
                     </nav>
@@ -111,7 +111,7 @@
                 </article>
             </div>
         </div>
-         
+     </div>    
 <script src="/assets/js/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
 <script>
 	tinymce.init({selector: '#wikiditor #file_content'});

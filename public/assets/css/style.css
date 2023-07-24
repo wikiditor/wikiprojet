@@ -1,9 +1,3 @@
-/* header
- */
-
-/*  body{
-    
- } */
 
 #logo {
     align-items: center;
@@ -40,11 +34,12 @@
 
 .cutpage{ 
     display: flex ;
-    justify-content: space-between ;
+    justify-content: space-around ;
+
 }
 
 .widthpage{
-    width: 45%;
+    /*width: 47%;*/
    
 }
 
@@ -52,3 +47,4 @@
     position: fixed;
    
 }
+
