@@ -102,6 +102,7 @@ window.location.replace(`/article/${searchTerm}/${language}`);
 			</script>
 
 			<!--footer-->
+	{% block footer %}
 
 			<footer>
 				<div class="texte-footer">
@@ -138,5 +139,6 @@ window.location.replace(`/article/${searchTerm}/${language}`);
 					</div>
 				</div>
 			</footer>
+			{% endblock %}
 		</body>
 	</html>

@@ -69,7 +69,10 @@
 
 .button-title {
     vertical-align: middle;
+    text-decoration: none;
+    color: white;
 }
+
 
 .separator-bar {
     height: 0.1rem;
