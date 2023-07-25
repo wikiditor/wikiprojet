@@ -1,0 +1,431 @@
+/* HEADER */
+
+.navbar {
+    border-bottom: 0.25rem solid #E3E7E9;
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
+}
+
+.navbar-toggler {
+    border: 0;
+    margin-left: -2.625rem;
+}
+
+.navbar-toggler:focus {
+
+    box-shadow: none;
+}
+
+#search {
+    height: 3.125rem;
+    background-color: #F4F4F4;
+    background-image: url(../img/search.svg);
+    background-repeat: no-repeat;
+    background-position: left 0.625rem center;
+    padding-left: 3.125rem;
+    margin-bottom: 0rem;
+}
+
+.icone {
+    margin-top: 0.3125rem;
+    margin-right: -0.625rem;
+}
+
+
+/* MAIN PAGE CONNEXTION INSCRIPTION */
+main {
+    
+        padding-top: 5rem;
+        padding-bottom: 7.5rem;
+    
+}
+
+
+
+
+
+
+form h1 {
+    padding-top: 3.125rem;
+    padding-bottom: 2.125rem;
+    border-bottom: 0.0625rem solid #6E6F72;
+}
+
+.form-label {
+    margin: 1.875rem 0.625rem 0.625rem 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.125rem;
+    font-weight: bold;
+}
+
+.form-control {
+    margin: 0.3125rem 0.625rem 0.9375rem 0;
+    color: #190207;
+    background: #F4F4F4;
+    background-clip: padding-box;
+    border: 0;
+    width: 100%;
+    height: 4.375rem;
+    appearance: none;
+    border-radius: 0;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.form-control::placeholder {
+    color: #6E6F72;
+}
+
+.form-control:focus {
+
+    background: #F4F4F4;
+
+}
+
+.btn-primary {
+    font-family: "vastago-bold";
+    background: var(--blue-wiki, #1653FF);
+
+    width: 15.625rem;
+    height: 2.8125rem;
+    padding: 0.625rem;
+
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+    flex-shrink: 0;
+    border-radius: 0%;
+}
+
+.bouton {
+    text-align: right !important;
+    margin-top: 3.125rem;
+}
+
+
+.liengauche {
+    color: var(--grey-intermediate, rgba(110, 111, 114, 0.94));
+    font-family: Arial;
+    font-size: 1rem;
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1.65625rem;
+    /* 165.625% */
+    text-decoration-line: underline;
+    margin: 0.625rem 0 0.625rem 0;
+}
+
+.aide {
+    color: var(--grey-intermediate, rgba(110, 111, 114, 0.94));
+    font-family: Arial;
+    font-size: 1rem;
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1.65625rem;
+    text-decoration-line: underline;
+    margin: 0.625rem 0 0.625rem 0;
+}
+
+.obligatoire {
+    color: var(--grey-intermediate, rgba(110, 111, 114, 0.94));
+    font-family: Arial;
+    font-size: 1rem;
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1.65625rem;
+    text-decoration-line: underline;
+    margin: 0.625rem 0 0.625rem 0;
+}
+
+.italic {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.875rem;
+    font-style: italic;
+    color: #6E6F72;
+}
+
+
+/* PAGE ACCUEIL */
+.container {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+/* MOT WIKIPEDIA */
+.premier-titre-wikipedia {
+    margin: -1.4375rem 0 -2.4375rem 0;
+}
+
+/* MENU ACCUEIL-DISCUSSION-MODIFIER */
+.nav-underline .nav-link.nav-item-active {
+    font-family: "vastago-semi-bold";
+    font-size: 1rem;
+    color: #190207;
+    border-bottom-color: #1653FF;
+    border-bottom-width: 0.1875rem;
+    padding-bottom: 0.3125rem;
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+.nav-underline .nav-link.nav-item-inactive {
+    font-family: "vastago-medium";
+
+    color: #6E6F72;
+    border-bottom-color: #E3E7E9;
+    border-bottom-width: 0.1875rem;
+    padding-bottom: 0.375rem;
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+/* MENUE LANGUE */
+.navbar-langue {
+    margin: 3.75rem 0 1.875rem 0;
+}
+
+.bouton-langue {
+    font-family: "vastago-bold";
+    color: #190207;
+    background-color: #E3E7E9;
+    border: none;
+    border-radius: 0;
+    padding: 0.375rem 1.5625rem 0.375rem 1.875rem;
+
+}
+
+/* BANNER */
+#bienvenue {
+    margin: 1.25rem 0 1.25rem 0;
+}
+
+.bg-wiki {
+    background-image: url(../img/img-banner.png);
+    background-size: cover;
+    padding: 2.8125rem 0 5rem 0;
+
+}
+
+.banner {
+
+    width: 33%;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+/* BIENVENUE SUR WIKIPEDIA DANS LE BANNER*/
+.banner-titre {
+    text-align: left;
+}
+
+/* PETIT TEXTE GRIS DANS LE BANNER*/
+.texte-banner {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #6E6F72;
+
+}
+
+/* QUATRE LIENS DANS LE BANNER*/
+.d-block {
+    font-family: "vastago-bold";
+    font-size: 1rem;
+    color: #3E5D9D;
+    text-decoration: none;
+    margin-right: -2.3125rem;
+}
+
+/* SECTION 1 PAGE ACCUEIL */
+
+.article-labellise-acceuil {
+    border: 0.0625rem solid #6E6F72;
+    padding: 1.5625rem 1.4375rem 2.1875rem 1.75rem;
+    margin-top: 2.5rem;
+}
+
+.titre-article-labellise {
+    font-weight: 600;
+    margin-bottom: 1.25rem;
+    margin-top: 0.3125rem;
+}
+
+/* liens  */
+.titre-article-labellise a {
+    color: #1653FF;
+}
+
+
+/* CARD AUJOURD4HUI WIKIPEDIA COMPTE */
+
+.article-compte-accueil {
+    background-color: #F4F4F4;
+    margin-top: 2.5rem;
+    padding: 0.625rem;
+}
+
+.article-compte {
+    /* margin-left: 8.125rem; */
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.titre-article-compte {
+    text-align: center;
+    font-family: "vastago-bold";
+    font-size: 1rem;
+    color: #190207;
+    margin-top: 1rem;
+}
+
+.lien-article-compte {
+    text-decoration: none;
+    color: #3E5D9D;
+}
+
+.chiffre {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-decoration: none;
+    color: #1653FF;
+}
+
+.paragraphe-compte {
+    padding: -0.25rem;
+}
+
+/* ARTICLE PRESENTATION */
+
+.article-presentation-accueil {
+    margin: 1.625rem 1.875rem 0.9375rem 1.25rem;
+}
+
+.titre-article-presentation {
+
+    margin-top: 3.625rem;
+    padding-bottom: 0.125rem;
+}
+
+/* SECTION COMMENT CONTRIBUER */
+
+.comment-contribuer {
+    background-color: #F4F4F4;
+    padding: 1.500rem 1.875rem 1.500rem 1.875rem;
+    margin: 3.4375rem 0 3.4375rem 0;
+
+}
+.titre-comment-contribuer{
+    margin: 0.625rem 0 1.875rem 0;
+}
+
+
+/* SECTION DEX IMAGES */
+
+/* ARTICLE EPHIMERE */
+
+.titre-ephemeride{
+    margin-top: 0.3125rem;
+    margin-bottom: 1.5625rem;
+}
+.texte-ephemeride{
+    margin-bottom: 0;
+    padding-right: 0.625rem;
+}
+.texte-ephemeride a{
+    color: #1653FF;
+}
+
+
+/* ARTICLE IMAGE DU JOUR */
+
+.image-du-jour p{
+    font-family: Arial, Helvetica, sans-serif;
+    font-style: italic;
+    font-size: 0.875rem;
+    color: #6E6F72;
+    margin: 0.3125rem 0 0.3125rem 0;
+}
+.photo-image-du-jour{
+    height: 18rem;
+    width: 100%;
+    
+}
+.titre-image-du-jour{
+    margin-top: 0.3125rem;
+    margin-bottom: 1.5625rem;
+}
+
+
+/* SECTION ACTUALITES */
+
+.titre-actualite{
+    margin-top: 2.5rem;
+    margin-bottom: 3.5rem;
+}
+/* ARTICLE SHAVKAT */
+
+.float-start{
+    margin: 0px 25px 13px 0px;
+    width: 40%;
+}
+
+/* ARTICLE LE SAVIEZ-VOUS */
+.titre-saviez-vous{
+   margin-bottom: 1.875rem; 
+}
+.saviez-vous{
+    border: 0.0625rem solid #6E6F72;
+    padding: 1.875rem 1.25rem 1.875rem 1.6875rem;
+}
+
+/* SECTION LOGOTYPES */
+
+/* ------o------- */
+hr {
+    margin-top: 5.3125rem;
+    color: #6E6F72;
+    border-top-width: 0.125rem;
+}
+.logo-milieux{
+    width: 4.625rem;
+    margin-top: -3.4375rem;
+    position: relative;
+    z-index: 100;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+/* paragraphe de texte */
+.texte-section-logotype{
+    text-align: center;
+    margin-top: 1.875rem;
+}
+ 
+.justify-content-evenly {
+    justify-content: space-evenly!important;
+    margin-top: 55px;
+}
+
+
+
+
+
+
+/* FOOTER */
+
+footer {
+    border-top: 0.25rem solid #E3E7E9;
+    padding-top: 0.9375rem;
+    padding-bottom: 1.25rem;
+}
+
+/* LIGNE DE LIENS */
+footer a {
+    padding-right: 0.9375rem;
+}
+
+.texte-footer {
+    margin-left: 16.58rem;
+    margin-right: 12.625rem;
+}

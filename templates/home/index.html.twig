@@ -10,10 +10,13 @@
         <script src="https://kit.fontawesome.com/859cb7a22b.js" crossorigin="anonymous"></script>
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
         <link rel="stylesheet" href="/assets/css/style.css">
-        <link rel="stylesheet" href="/assets/css/styleArticle.css">
+
     </head>
 
     <body>
+    {% block stylesheets %}
+    <link rel="stylesheet" href="/assets/css/styleHome.css">
+    {% endblock %}
       <!-- HEADER -->
 
     <header>
