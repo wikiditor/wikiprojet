@@ -8,6 +8,7 @@
 
 
 {% block body %}
+
  {# charge le contenu de l'article récupéré via l'api #}
     <div class="container-fluid">
         <div class="cutpage row">
@@ -44,7 +45,7 @@
             {# page de l'éditeur de texte #}
             <div class="widthpage col-5">
             
-	            <article class="pagewikiditor">
+	            <article>
     
                     <!--header de la page wikiditor editeur de texte-->
                     <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -112,12 +113,17 @@
                 </article>
             </div>
         </div>
-     </div>    
-<script src="/assets/js/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
-<script>
-	tinymce.init({selector: '#wikiditor #file_content'});
+     </div>
+<div  class="pagewikiditor">
+    <script src="/assets/js/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({selector: '#wikiditor #file_content', resize: 'both',
 
-</script>
+        });
+        
+    </script>
+</div>   
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+
 {% endblock %}
  
