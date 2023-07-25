@@ -160,7 +160,7 @@ class ArticleController extends AbstractController
                     'label' => $link->title,
                 ];
             }
-
+            //retourne la page de l'article si elle existe
             $title = $article->title;
             return [
                 'title' => $title,
@@ -170,7 +170,7 @@ class ArticleController extends AbstractController
                 'links' => $links
             ];
         }
-
+            //retourne a la page 404 error si l'article n'existe pas
         return [
             'title' => 'Nous n\'avons pas compris votre requête.',
             'extract' => 'Cette page n\'existe pas.',

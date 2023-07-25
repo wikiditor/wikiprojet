@@ -1,0 +1,84 @@
+/* CSS COMMUN */
+
+
+
+
+/* CSS HEADER */
+
+
+.navbar {
+    border-bottom: 0.25rem solid #E3E7E9;
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem; 
+ }
+ 
+ .navbar-toggler {
+     border: 0;
+     margin-left: -2.625rem;
+ }
+ 
+ .navbar-toggler:focus {
+ 
+     box-shadow: none;
+ }
+ 
+ #search {
+     height: 3.125rem;
+     background-color: #F4F4F4;
+     background-image: url(../img/search.svg);
+     background-repeat: no-repeat;
+     background-position: left 0.625rem center;
+     padding-left: 3.125rem;
+     margin-bottom: 0rem;
+ }
+ 
+ .icone{
+     margin-top: 0.3125rem;
+     margin-right: -0.625rem;
+ }
+
+
+
+
+/* CSS MAIN */
+
+
+h1
+{
+    font-size: 7rem;
+}
+
+h2
+{
+    font-size: 3rem;
+}
+
+.text-container p
+{
+    font-size: 1.7rem;
+}
+
+.text-container
+{
+    padding: 0;
+    margin-bottom: 10rem;
+    margin-right: 13rem;
+}
+
+/* CSS FOOTER */
+
+footer {
+    border-top: 0.25rem solid #E3E7E9;
+    padding-top: 0.9375rem;
+    padding-bottom: 1.25rem;
+}
+
+/* LIGNE DE LIENS */
+footer a {
+    padding-right: 0.9375rem;
+}
+
+.texte-footer {
+    margin-left: 16.58rem;
+    margin-right: 12.625rem;
+}
