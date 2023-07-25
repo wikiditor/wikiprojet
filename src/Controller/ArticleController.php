@@ -165,6 +165,7 @@ class ArticleController extends AbstractController
             return [
                 'title' => $title,
                 'extract' => $extract,
+                'error' => 'no',
                 'images' => $images,
                 'links' => $links
             ];
@@ -173,6 +174,7 @@ class ArticleController extends AbstractController
         return [
             'title' => 'Nous n\'avons pas compris votre requête.',
             'extract' => 'Cette page n\'existe pas.',
+            'error' => '404',
             'images' => [],
             'links' => []
         ];

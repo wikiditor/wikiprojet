@@ -15,7 +15,6 @@
 
     <body>
       <!-- HEADER -->
-
     <header>
         <nav class="navbar">
             <!--  <div class="container-fluid flex-row-reverse justify-content-center "> -->
@@ -71,89 +70,74 @@
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="#">Langues</a>
                         </li>
-
-
-                        </li>
                     </ul>
-
                 </div>
-
-
             </div>
         </nav>
-
     </header>
+
         {% block body %}{% endblock %}
-    </body>
-</html>
+ 
+        <script>
+            // vérifie qu'on a bien chargé toute la page
+            document.addEventListener("DOMContentLoaded", (e) => {
+                // cherche le bouton dans le html
+                const input = document.getElementById('searchTerm');       
+                // détecte la touche entrée du clavier
+                input.addEventListener('keyup', (e) => {          
+                    if(event.code == 'Enter' ){
+                        e.preventDefault();
+                        // RÉCUPÈRE les données saisies par l'utilisateur
+                        const searchTerm = e.target.value;
+                        // const language = document.getElementById('language').value;
+                        const language = 'fr';
+                        // redirection vers la page demandée
+                        window.location.replace(`/article/${searchTerm}/${language}`);
+                        /*https://'+ language +'.wikipedia.org/w/api.php?action=query&titles=' + searchTerm + 
+                                '&prop=extracts|images|links*/ 
+                    }
+                });
+            });
+        </script>
 
-<script>
-    // vérifie qu'on a bien chargé toute la page
-    document.addEventListener("DOMContentLoaded", (e) => {
-        // cherche le bouton dans le html
-        const input = document.getElementById('searchTerm');       
-        // détecte la touche entrée du clavier
-        input.addEventListener('keyup', (e) => {          
-            if(event.code == 'Enter' ){
-                e.preventDefault();
-                // RÉCUPÈRE les données saisies par l'utilisateur
-                const searchTerm = e.target.value;
-                // const language = document.getElementById('language').value;
-                const language = 'fr';
-                // redirection vers la page demandée
-                window.location.replace(`/article/${searchTerm}/${language}`);
-                /*https://'+ language +'.wikipedia.org/w/api.php?action=query&titles=' + searchTerm + 
-                        '&prop=extracts|images|links*/ 
-            }
-        });
-    });
-</script>
+        <!--footer-->
 
+                <footer>
+                        <div class="texte-footer">
+                            <p>
+                                La dernière modification de cette page a été faite le 4 janvier 2023 à 13:23.
+                            </p>
+                            <p>
+                                Droit d'auteur : les textes sont disponibles sous licence Creative Commons attribution, partage dans les
+                                mêmes conditions ; d’autres conditions peuvent s’appliquer. Voyez les conditions d’utilisation pour plus
+                                de détails, ainsi que les crédits graphiques. En cas de réutilisation des textes de cette page, voyez
+                                comment citer les auteurs et mentionner la licence. Wikipedia® est une marque déposée de la Wikimedia
+                                Foundation, Inc., organisation de bienfaisance régie par le paragraphe 501(c)(3) du code fiscal des
+                                États-Unis.
+                            </p>
+                        </div>
+                        <div class="container-fluid">
+                            <div class="d-flex justify-content-center">
+                                <span>
+                                    <a href="#">Politique de confidentialité</a>
+                                    <a href="#">À propos de Wikipédia</a>
+                                    <a href="#">Avertissements</a>
+                                    <a href="#">Contact</a>
+                                    <a href="#">Code de conduite</a>
+                                    <a href="#">Version mobile</a>
+                                    <a href="#">Développeurs</a>
+                                    <a href="#">Statistiques</a>
+                                    <a href="#">Cookies</a>
+                                    <span>
+                                        <a href="#"><img src="/assets/img/wikimedia.svg"
+                                                alt="Bouton Logo Wikimedia"></a>
+                                        <a href="#"><img src="/assets/img/mediawiki.svg"
+                                                alt="Bouton Logo Mediawiki"></a>
 
-
-
-
-<!--footer-->
-
- <footer>
-        <div class="texte-footer">
-            <p>
-                La dernière modification de cette page a été faite le 4 janvier 2023 à 13:23.
-            </p>
-            <p>
-                Droit d'auteur : les textes sont disponibles sous licence Creative Commons attribution, partage dans les
-                mêmes conditions ; d’autres conditions peuvent s’appliquer. Voyez les conditions d’utilisation pour plus
-                de détails, ainsi que les crédits graphiques. En cas de réutilisation des textes de cette page, voyez
-                comment citer les auteurs et mentionner la licence. Wikipedia® est une marque déposée de la Wikimedia
-                Foundation, Inc., organisation de bienfaisance régie par le paragraphe 501(c)(3) du code fiscal des
-                États-Unis.
-
-            </p>
-
-        </div>
-        <div class="container-fluid">
-            <div class="d-flex justify-content-center">
-                <span>
-                    <a href="#">Politique de confidentialité</a>
-                    <a href="#">À propos de Wikipédia</a>
-                    <a href="#">Avertissements</a>
-                    <a href="#">Contact</a>
-                    <a href="#">Code de conduite</a>
-                    <a href="#">Version mobile</a>
-                    <a href="#">Développeurs</a>
-                    <a href="#">Statistiques</a>
-                    <a href="#">Cookies</a>
-                    <span>
-                        <a href="#"><img src="/assets/img/wikimedia.svg"
-                                alt="Bouton Logo Wikimedia"></a>
-                        <a href="#"><img src="/assets/img/mediawiki.svg"
-                                alt="Bouton Logo Mediawiki"></a>
-
-                    </span>
-                </span>
-
-
-            </div>
-
-        </div>
-    </footer>
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+                    </footer>
+                </body>
+            </html>
