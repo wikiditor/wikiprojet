@@ -1,49 +1,43 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Connexio..{% endblock %}
+{% block title %}Connexio..
+{% endblock %}
 
+{% block stylesheets %}
+	<link rel="stylesheet" href="/assets/css/styleLogin.css">
+{% endblock %}
 
 {% block body %}
 
-    {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
+	{% if error %}
+		<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+	{% endif %}
 
-    {% if app.user %}
-        <div class="mb-3">
-            Vous êtes connecté en tant que {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
-        </div>
-    {% endif %}
+	
 
-    <div class="d-flex justify-content-center vh-100">
+	<div class="d-flex justify-content-center vh-100">
 
-        <div class="container mt-5">
-                
-            <form method="post" >
-                       
+		<form method="POST" class="col-12 col-md-5 col-xl-5">
 
-                <h1>Se connecter</h1>
+			<h1>Se connecter</h1>
 
-                <label for="inputEmail" class="form-label">Adresse e-mail</label>
-                <input type="email" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus placeholder="Entrez votre adresse de courriel">
 
-                <label for="inputPassword" class="form-label">Mot de passe</label>
-                <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required placeholder="Entrez votre mot de passe">
+			<label for="exampleFormControlInput1" class="form-label">Adresse e-mail</label>
+			<input type="email" name="email" id="inputEmail" class="form-control" id="exampleFormControlInput1" placeholder="Entrez votre adresse de courriel">
+			<label for="inputPassword5" class="form-label">Mot de passe</label>
+			<input type="password" name="password" id="inputPassword" class="form-control" aria-labelledby="passwordHelpBlock" placeholder="Entrez votre mot de passe">
+			<div id="passwordHelpBlock" class="form-text"></div>
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+			<p class="text-end">
+				<a class="liengauche" href="#">Mot de passe oublié?</a>
+			</p>
+			<div class="bouton">
+				<button class="btn btn-primary" type="submit">Se connecter</button>
 
-                <p class="text-end">
-                    <a class="liengauche" href="#">Mot de passe oublié?</a>
-                </p>
+			</div>
+		</form>
 
-                <div class="bouton">
-                    <button class="btn btn-primary" type="submit">Se connecter</button>
-                </div>
-                       
-            </form> 
-         </div>
+	</div>
 
-    </div>                  
-     
 {% endblock %}
-
