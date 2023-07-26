@@ -92,7 +92,7 @@ class FileController extends AbstractController
             // Gérer le cas où l'utilisateur n'est pas authentifié
         }
 
-        if ($user->getId() !== $file->getUserId()) {
+        if ($user->getId() !== $file->getUser()->getId()) {
             // L'utilisateur actuel n'est pas autorisé à mettre à jour ce fichier
             throw $this->createAccessDeniedException('Vous n\'êtes pas autorisé à modifier ce fichier');
         }
@@ -133,7 +133,7 @@ class FileController extends AbstractController
             // Gérer le cas où l'utilisateur n'est pas authentifié
         }
 
-        if ($user->getId() !== $file->getUserId()) {
+        if ($user->getId() !== $file->getUser()->getId()) {
             // L'utilisateur actuel n'est pas autorisé à supprimer ce fichier
             throw $this->createAccessDeniedException('Vous n\'êtes pas autorisé à supprimer ce fichier');
         }
