@@ -39,8 +39,10 @@
 										{% endif %}		
                  				</div>
 
-							<form class="d-flex col-6" role="search" method="get" id="search-form">
-								<input id="searchTerm" name="searchTerm" class="form-control" type="search" placeholder="Rechercher sur Wikipédia" aria-label="Search">
+							<form class="col-6" role="search" method="get" id="search-form">
+								<input id="searchTerm" name="searchTerm" class="form-control" type="search" placeholder="Rechercher sur Wikipédia" aria-label="Search" autocomplete="off">
+							
+								<ul id="suggestionsTarget"></ul>
 							</form>
 
 							<a class="navbar-brand col-3" href="{{ path('app_home') }}"><img src="/assets/img/logo-wikipedia.png" alt="logo-wikiditor"></a>
@@ -91,23 +93,24 @@
 
 			<script>
 				// vérifie qu'on a bien chargé toute la page
-document.addEventListener("DOMContentLoaded", (e) => { // cherche le bouton dans le html
-const input = document.getElementById('searchTerm');
-// détecte la touche entrée du clavier
-input.addEventListener('keyup', (e) => {
-if (event.code == 'Enter') {
-e.preventDefault();
-// RÉCUPÈRE les données saisies par l'utilisateur
-const searchTerm = e.target.value;
-// const language = document.getElementById('language').value;
-const language = 'fr';
-// redirection vers la page demandée
-window.location.replace(`/article/${searchTerm}/${language}`);
-/*https://'+ language +'.wikipedia.org/w/api.php?action=query&titles=' + searchTerm + 
-                                '&prop=extracts|images|links*/
-}
-});
-});
+			document.addEventListener("DOMContentLoaded", (e) => { // cherche le bouton dans le html
+
+				const input = document.getElementById('searchTerm');
+				// détecte la touche entrée du clavier
+				input.addEventListener('keyup', (e) => {
+					if (event.code == 'Enter') {
+						e.preventDefault();
+						// RÉCUPÈRE les données saisies par l'utilisateur
+						const searchTerm = e.target.value;
+						// const language = document.getElementById('language').value;
+						const language = 'fr';
+						// redirection vers la page demandée
+						window.location.replace(`/article/${searchTerm}/${language}`);
+						/*https://'+ language +'.wikipedia.org/w/api.php?action=query&titles=' + searchTerm + 
+														'&prop=extracts|images|links*/
+					}
+				});
+			});
 			</script>
 
 			<!--footer-->
@@ -149,5 +152,7 @@ window.location.replace(`/article/${searchTerm}/${language}`);
 				</div>
 			</footer>
 			{% endblock %}
+
+			<script src="/assets/js/autocomp.js"></script>
 		</body>
 	</html>
