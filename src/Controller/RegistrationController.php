@@ -9,6 +9,7 @@ use App\Form\RegistrationFormType;
 use Doctrine\ODM\MongoDB\DocumentManager as DocumentManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
@@ -18,7 +19,7 @@ class RegistrationController extends AbstractController
    
     // Route pour l'inscription d'un nouvel utilisateur.
     #[Route('/register', name: 'app_register')]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, DocumentManager $dm, UserRepository $userRepository): Response
+    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, DocumentManager $dm, UserRepository $userRepository, RequestStack $requestStack): Response
     {
         // Création d'une nouvelle instance d'User et de son formulaire associé.
         $user = new User();
@@ -35,9 +36,8 @@ class RegistrationController extends AbstractController
             );
 
             // Ajout de l'utilisateur à la base de données.
-            $userRepository->addUser($user);        
-
-
+            $userRepository->addUser($user);  
+            
             // Redirection vers la page de connexion.
             return $this->redirectToRoute('app_login');
         }
