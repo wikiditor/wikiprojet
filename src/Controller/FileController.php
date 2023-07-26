@@ -7,12 +7,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\FileRepository;
-use App\Document\File;
 use App\Form\FileType;
 use DateTime;
 use DateTimeZone;
-use Doctrine\ODM\MongoDB\DocumentManager;
-use Knp\Snappy\Pdf;
 use Symfony\Component\Security\Core\Security;
 
 #[Route('/file')]
