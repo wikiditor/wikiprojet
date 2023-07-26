@@ -59,6 +59,61 @@ class ArticleController extends AbstractController
         return $this->render('article/index.html.twig', $twigVars);
     }
 
+    #[Route('/article/create-or-update/{id}/{update}', name: 'app_article_create_or_update', methods: ['POST', 'GET'])]
+    public function createOrUpdate(Request $request, FileRepository $fileRepository, Security $security, ?string $id = null, ?string $update = null): Response
+    {
+        $user = $security->getUser();
+
+        if (!$user) {
+            // Gérer le cas où l'utilisateur n'est pas authentifié
+            return $this->redirectToRoute('app_login');
+        }
+
+        if ($id) {
+            // Update
+            $file = $fileRepository->find($id);
+
+            if (!$file) {
+                throw $this->createNotFoundException('Le fichier n\'existe pas');
+            }
+
+            // Ici, on vérifie si l'utilisateur connecté est bien le propriétaire du fichier à modifier
+            if ($user !== $file->getUser()) {
+                // L'utilisateur actuel n'est pas autorisé à mettre à jour ce fichier
+                throw $this->createAccessDeniedException('Vous n\'êtes pas autorisé à modifier ce fichier');
+            }
+        } else {
+            // Create
+            $file = new File();
+            // On ajoute l'utilisateur connecté qui a créé le document
+            $file->setUser($user);
+        }
+
+        $form = $this->createForm(FileType::class, $file);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Définir la date de création et de dernière modification actuelle si c'est une création, sinon on met à jour la date de dernière modification
+            $timezone = new DateTimeZone('Europe/Paris');
+            $now = new DateTime('now', $timezone);
+            if (!$id) {
+                $file->setCreationDate($now);
+            }
+            $file->setLastUpdate($now);
+
+            // Sauvegarder le fichier dans la base de données
+            $fileRepository->saveFile($file);
+
+            return $this->redirectToRoute('app_file_list');
+        }
+
+
+        return $this->render('article/update.html.twig', [
+            'controller_name' => 'FileController',
+            'form' => $form->createView(),
+        ]);
+    }
+
     #[Route('/article/fake', name: 'app_article_fake')]
     /**
      * Récupère un article prédéfini de Wikipédia via l'API
