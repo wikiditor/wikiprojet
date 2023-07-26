@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Form\FileType;
 use DateTime;
 use DateTimeZone;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class ArticleController extends AbstractController
 {
@@ -178,5 +179,35 @@ class ArticleController extends AbstractController
             'images' => [],
             'links' => []
         ];
+    }
+
+
+    /**
+     * Route d'api de recherche d'article pour l'autocompletion
+     *
+     * @param string $searchTerm
+     * @return JsonResponse
+     */
+    #[Route('/API/article/{searchTerm}', name: 'app_api_article')]
+    public function getArticleJson(string $searchTerm, ): JsonResponse
+    {
+        $datas = [
+            'searchTerm' => $searchTerm,
+            'datas' => []
+        ];
+
+        $httpClient = HttpClient::create();
+        $response = $httpClient->request('GET', 'https://fr.wikipedia.org/w/api.php?action=query&generator=search&gsrsearch=' . $searchTerm . '&exintro=&format=json');
+
+        // Récupère le contenu de la réponse et convertit le JSON en une variable php
+        $content = json_decode($response->getContent());
+
+        if (isset($content->query)) {
+            foreach ($content->query->pages as $page) {
+                $datas['suggestions'][] = $page->title;
+            }
+        }
+
+        return new JsonResponse($datas);
     }
 }
