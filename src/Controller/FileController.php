@@ -16,42 +16,42 @@ use Symfony\Component\Security\Core\Security;
 #[Route('/file')]
 class FileController extends AbstractController
 {
-    #[Route('/', name: 'app_file')]
-    public function index(Request $request, FileRepository $fileRepository, Security $security): Response
-    {
-        $file = new File();
-        $user = $security->getUser();
+    // #[Route('/', name: 'app_file')]
+    // public function index(Request $request, FileRepository $fileRepository, Security $security): Response
+    // {
+    //     $file = new File();
+    //     $user = $security->getUser();
 
-        if (!$user) {
-            // Gérer le cas où l'utilisateur n'est pas authentifié
-            return $this->redirectToRoute('app_login');
-        }
+    //     if (!$user) {
+    //         // Gérer le cas où l'utilisateur n'est pas authentifié
+    //         return $this->redirectToRoute('app_login');
+    //     }
 
-        // Crée le formulaire de création de fichier
-        $form = $this->createForm(FileType::class, $file);
-        $form->handleRequest($request);
+    //     // Crée le formulaire de création de fichier
+    //     $form = $this->createForm(FileType::class, $file);
+    //     $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            // Définir la date de création et de dernière modification actuelle
-            $timezone = new DateTimeZone('Europe/Paris');
-            $now = new DateTime('now', $timezone);
-            $file->setCreationDate($now);
-            $file->setLastUpdate($now);
+    //     if ($form->isSubmitted() && $form->isValid()) {
+    //         // Définir la date de création et de dernière modification actuelle
+    //         $timezone = new DateTimeZone('Europe/Paris');
+    //         $now = new DateTime('now', $timezone);
+    //         $file->setCreationDate($now);
+    //         $file->setLastUpdate($now);
 
-            // On ajoute l'utilisateur connecté qui a créé le document
-            $file->setUser($user);
+    //         // On ajoute l'utilisateur connecté qui a créé le document
+    //         $file->setUser($user);
 
-            // Sauvegarder le fichier dans la base de données
-            $fileRepository->saveFile($file);
+    //         // Sauvegarder le fichier dans la base de données
+    //         $fileRepository->saveFile($file);
 
-            return $this->redirectToRoute('app_file_list');
-        }
+    //         return $this->redirectToRoute('app_file_list');
+    //     }
 
-        return $this->render('file/index.html.twig', [
-            'controller_name' => 'FileController',
-            'form' => $form->createView(),
-        ]);
-    }
+    //     return $this->render('file/index.html.twig', [
+    //         'controller_name' => 'FileController',
+    //         'form' => $form->createView(),
+    //     ]);
+    // }
 
     #[Route('/list', name: 'app_file_list')]
     public function getListFiles(FileRepository $fileRepository, Security $security): Response
