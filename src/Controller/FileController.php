@@ -128,10 +128,6 @@ class FileController extends AbstractController
 
         $user = $security->getUser();
 
-        if (!$user) {
-            // Gérer le cas où l'utilisateur n'est pas authentifié
-        }
-
         if ($user->getId() !== $file->getUser()->getId()) {
             // L'utilisateur actuel n'est pas autorisé à supprimer ce fichier
             throw $this->createAccessDeniedException('Vous n\'êtes pas autorisé à supprimer ce fichier');

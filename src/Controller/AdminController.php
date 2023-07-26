@@ -84,8 +84,6 @@ class AdminController extends AbstractController
         return $this->redirectToRoute('app_admin_user');
     }   
     
-
-
     #[Route('/delete/{id}', name: 'app_admin_user_delete')]
     public function delete(string $id, UserRepository $userRepository): Response
     {     
