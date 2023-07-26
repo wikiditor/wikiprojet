@@ -238,7 +238,9 @@ footer a {
     gap: 0.625rem;
     flex-shrink: 0;
     border-radius: 0%;
+    border-radius: 8%;
 }
+
 #suggestionsTarget{
   
     background-color: #fff;
