@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Form\FileType;
 use DateTime;
 use DateTimeZone;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 class ArticleController extends AbstractController
@@ -27,8 +28,12 @@ class ArticleController extends AbstractController
      * @return Response
      * @todo changer le nom de l'article dans l'url de l'api (pour ne pas qu'il soit en dur)
      */
-    public function getDefaultArticle(Request $request, FileRepository $fileRepository, Security $security): Response
+    public function getDefaultArticle(Request $request, FileRepository $fileRepository, Security $security, RequestStack $requestStack): Response
     {
+   
+        // Enregistrez l'URL précédente dans la session
+        $requestStack->getSession()->set('referer_url', $request->attributes->get('_route'));
+        
         $twigVars = $this->getArticleHTML('Stanley Kubrick',  'fr');
         $twigVars['form'] = $this->buildAndProcessFileForm($request, $fileRepository, $security);
         return $this->render('article/index.html.twig', $twigVars);
@@ -42,8 +47,13 @@ class ArticleController extends AbstractController
      * @param [type] $language
      * @return void
      */
-    public function getArticle($searchTerm, $language, Request $request, FileRepository $fileRepository, Security $security)
+    public function getArticle($searchTerm, $language, Request $request, FileRepository $fileRepository, Security $security, RequestStack $requestStack)
     {
+        // Enregistrez l'URL précédente dans la session
+        $requestStack->getSession()->set('referer_url', $request->attributes->get('_route'));
+        $requestStack->getSession()->set('searchTerm', $searchTerm);
+        $requestStack->getSession()->set('language', $language);
+        
         $twigVars = $this->getArticleHTML($searchTerm,  $language);
         $twigVars['form'] = $this->buildAndProcessFileForm($request, $fileRepository, $security);
         return $this->render('article/index.html.twig', $twigVars);

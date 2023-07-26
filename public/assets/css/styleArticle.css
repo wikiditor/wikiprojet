@@ -225,3 +225,17 @@ footer a {
         top: 0;
 }
 
+.btn-primary {
+    font-family: "vastago-bold";
+    background: var(--blue-wiki, #1653FF);
+
+    width: 15.625rem;
+    height: 2.8125rem;
+    padding: 0.625rem;
+
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+    flex-shrink: 0;
+    border-radius: 0%;
+}

@@ -4,6 +4,8 @@ namespace App\Controller;
 
 // Import des classes et interfaces nécessaires.
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -45,5 +47,24 @@ class SecurityController extends AbstractController
     public function logout(): void
     {
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
+    }
+
+    // Définition de la route pour la déconnexion.
+    #[Route(path: '/redirect', name: 'app_redirect')]
+    /**
+     * déconnecte l'utilisateur
+     *
+     * @return redirect
+     */
+    public function redirectRouter(RequestStack $requestStack):Response
+    {
+        if(!empty($requestStack->getSession()->get('referer_url'))){
+            return $this->redirectToRoute($requestStack->getSession()->get('referer_url'), [
+                'searchTerm' => $requestStack->getSession()->get('searchTerm'),
+                'language' => $requestStack->getSession()->get('language')
+            ]);
+        }else{
+            return $this->redirectToRoute('app_article');
+        }
     }
 }

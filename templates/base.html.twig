@@ -25,10 +25,19 @@
 						class="navbar">
 						<!--  <div class="container-fluid flex-row-reverse justify-content-center "> -->
 						<div class="container flex-row-reverse ">
-							<div class="col-2 text-end">
-								<a href="#"><img class="icone" src="/assets/img/profil.svg" alt="profil"></a>
-								<a href="#"><img class="icone" src="/assets/img/option.svg" alt="options"></a>
-							</div>
+							    <div class="col-2 text-end">                  
+									{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+									<a href="{{ path('app_logout') }}">Déconnexion</a>
+									{% else %}
+									<a href="{{ path('app_login') }}" title='se connecter'><img class="icone" src="/assets/img/profil.svg" alt="profil"></a>
+									
+									<a href="{{ path('app_register') }}" class="text-decoration-none btn-primary btn-sm text-white">S'inscrire</a>
+									
+									{% endif %}
+									{% if is_granted('ROLE_ADMIN') %}
+									<a href="{{ path('app_admin_user') }}" title='administrer'><img class="icone" src="/assets/img/option.svg" alt="options"></a>
+										{% endif %}		
+                 				</div>
 
 							<form class="col-6" role="search" method="get" id="search-form">
 								<input id="searchTerm" name="searchTerm" class="form-control" type="search" placeholder="Rechercher sur Wikipédia" aria-label="Search" autocomplete="off">
@@ -36,7 +45,7 @@
 								<ul id="suggestionsTarget"></ul>
 							</form>
 
-							<a class="navbar-brand col-3" href="{{ path('app_article') }}"><img src="/assets/img/logo-wikipedia.png" alt="logo-wikiditor"></a>
+							<a class="navbar-brand col-3" href="{{ path('app_home') }}"><img src="/assets/img/logo-wikipedia.png" alt="logo-wikiditor"></a>
 
 							<button class="navbar-toggler col-1" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 								<span class="navbar-toggler-icon"></span>
