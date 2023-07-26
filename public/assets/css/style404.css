@@ -82,3 +82,17 @@ footer a {
     margin-left: 16.58rem;
     margin-right: 12.625rem;
 }
+#suggestionsTarget{
+  
+    background-color: #fff;
+    box-sizing: border-box;
+    /*list-style-type: none;*/
+    border: 1px solid #a2a9b1;
+    border-radius: 0 0 2px 2px;
+    box-shadow: 0 2px 2px rgba(0,0,0,.2);
+  }
+
+  #suggestionsTarget li:hover{
+    cursor: pointer;
+    color:#1653FF;
+  }
