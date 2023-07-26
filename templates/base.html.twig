@@ -42,7 +42,8 @@
 							<form class="col-6" role="search" method="get" id="search-form">
 								<input id="searchTerm" name="searchTerm" class="form-control" type="search" placeholder="Rechercher sur Wikipédia" aria-label="Search" autocomplete="off">
 							
-								<ul id="suggestionsTarget"></ul>
+									<ul id="suggestionsTarget" style="position:absolute;z-index:100;" class="col-4"></ul>
+					
 							</form>
 
 							<a class="navbar-brand col-3" href="{{ path('app_home') }}"><img src="/assets/img/logo-wikipedia.png" alt="logo-wikiditor"></a>
