@@ -1,4 +1,0 @@
-# Wikiditor
-
-## test
-### ok

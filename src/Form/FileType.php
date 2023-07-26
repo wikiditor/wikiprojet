@@ -17,7 +17,7 @@ class FileType extends AbstractType
     {
         $builder
             ->add('title', TypeTextType::class, [
-                'attr' => ['value' => 'test']
+                'attr' => ['value' => '']
             ])
             ->add('content', TextareaType::class, [
                 'attr' => ['rows' => 5, 'value' => 'test']

@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Document\File;
 use App\Repository\FileRepository;
-use PhpParser\Node\Expr\Isset_;
 use ReflectionClass;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -126,7 +125,7 @@ class ArticleController extends AbstractController
     private function buildAndProcessFileForm(Request $request, FileRepository $fileRepository, Security $security)
     {
         $request->get('wikiditor');
-        // ICI remettre le code de création du form
+        
         $file = new File();
         $user = $security->getUser();
 
