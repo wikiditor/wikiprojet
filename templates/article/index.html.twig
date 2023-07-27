@@ -125,7 +125,8 @@
 <script src="/assets/js/fr_FR.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', (e) => {
-    tinymce.init({selector: '#wikiditor #file_content'});
+    tinymce.init({selector: '#wikiditor #file_content',
+    language: 'fr_FR'});
     tiny.triggerSave();
 });
 
