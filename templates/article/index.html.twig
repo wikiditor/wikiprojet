@@ -135,7 +135,9 @@ document.addEventListener('DOMContentLoaded', (e) => {
 {% endif %}
 {% endblock %}
 
-	{# tinymce.init({selector: '#wikiditor #file_content',
+    {# ajout de plugins tinymce
+
+	tinymce.init({selector: '#wikiditor #file_content',
     width: '100%',
     resize: 'both',
     plugins: 'autosave emoticons autolink help wordcount searchreplace visualblocks directionality fullscreen quickbars',
