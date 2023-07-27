@@ -3,8 +3,20 @@ document.addEventListener('DOMContentLoaded', (e) => {
     // ajout evenement keyup sur la barre de recherche
     document.getElementById('searchTerm').addEventListener('keyup', (e) =>{
 
+        // récupération de l'element HTML dans lequel il faut injecter les suggestions (ul sous la barre de recherche)
+        const targetUl = document.getElementById('suggestionsTarget');
+            
         // récupération du contenu de la barre de recherche
         let searchTerm = e.target.value;
+
+        // si recherche vide
+        if (searchTerm == ''){
+            // vidage de la ul si recherche précédente
+            targetUl.innerHTML = '';
+            // on quitte
+            return;
+        }
+
 
         // lancementr de la requête à l'api de recherche de suggestions (pour l'autocompletion)
         fetch('/API/article/' + searchTerm)
@@ -15,10 +27,6 @@ document.addEventListener('DOMContentLoaded', (e) => {
 
             // récupération des suggestions
             const suggestions = JSON.parse(json).suggestions;
-
-            // récupération de l'element HTML dans lequel il faut injecter les suggestions (ul sous la barre de recherche)
-            const targetUl = document.getElementById('suggestionsTarget');
-
 
             // si la ul de destination existe bel et bien
             if (targetUl) {

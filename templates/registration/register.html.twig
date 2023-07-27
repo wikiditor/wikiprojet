@@ -51,6 +51,9 @@
 			{# Affiche le champ du mot de passe avec ses erreurs éventuelles #}
 			{{ form_widget(registrationForm.plainPassword.first) }}
 		</div>
+		<p class="italic">
+			Votre mot de passe doit contenir au minimum 6 caractères.
+		</p>
 		<div>
 			<label for="inputPassword5" class="form-label">Confirmez le mot de passe</label>
 			{# Affiche le champ de confirmation du mot de passe avec ses erreurs éventuelles #}
