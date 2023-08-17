@@ -4,7 +4,7 @@
 
 Ce projet est une refonte du site Wikipédia avec l'ajout de plusieurs fonctionnalités; la principale étant l’intégration aux articles Wikipédia d’un **outil de prise de notes, le wikiditor.**
 
-![présentation du wikiditor](images_readme\wikiditor.jpg)
+![présentation du wikiditor](public\assets\img\wikiditor.jpg)
 
 ## Environnement
 
