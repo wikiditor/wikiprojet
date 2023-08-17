@@ -63,13 +63,13 @@ Le code de l’application est organisé selon l’architecture **MVC**.
 
 Les modèles encapsulent les données que l'application utilise. Il s’agit des documents de la base de données MongoDB : ***User.php*** et ***File.php***
 
-![Modèle User.php](images_readme\Modele_User.png)
+![Modèle User.php](public\assets\img\Modele_User.png)
 
 ### Les Repository (intermédiaire entre le modèle et le controlleur)
 
 Les Repository fournissent des méthodes pour effectuer des opérations sur les documents. Ils fournissent ainsi les méthodes pour ajouter, mettre à jour, consulter ou supprimer un document de la collection MongoDB. Il s’agit de ***UserRepositery.php*** et ***FileRepository.php***
 
-![Repository UserRepository.php](images_readme\Repo_UserRepository.png)
+![Repository UserRepository.php](public\assets\img\Repo_UserRepository.png)
 
 ### Les Contrôleurs
 
@@ -82,7 +82,7 @@ Le contrôleur fait le lien entre la vue et le modèle. Le projet contient 6 Con
 5. **ArticleController.php** qui interagit avec le modèle File.php. Il récupère les données fournies par l’API Wikipédia et crée le formulaire pour la rédaction du fichier par l’utilisateur.
 6. **FileController.php** qui interagit avec le modèle File*.php.* Il récupère la liste des fichiers rédigés par l’utilisateur et permet également de supprimer des fichiers de la base de données.
 
-![Controlleur articleController.php](images_readme\ArticleController.jpg)
+![Controlleur articleController.php](public\assets\img\ArticleController.jpg)
 
 ### Les routes et les vues associées
 
